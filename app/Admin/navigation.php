@@ -21,8 +21,8 @@ use SleepingOwl\Admin\Navigation\Page;
 // // or
 //
 
-AdminSection::addMenuPage(\App\Model\User::class)->setIcon("fa fa-user");
-AdminSection::addMenuPage(\App\Model\Product::class)->setIcon("fa fa-cart");
+// AdminSection::addMenuPage(\App\Model\User::class)->setIcon("fa fa-user");
+// AdminSection::addMenuPage(\App\Model\Product::class)->setIcon("fa fa-cart");
 
 return [
     [
@@ -34,6 +34,13 @@ return [
         'title' => 'Information',
         'icon'  => 'fa fa-exclamation-circle',
         'url'   => route('admin.information'),
+    ],
+    [
+        'title' => 'Tienda',
+        'pages' => [
+            (new Page(\App\Model\Product::class))->setTitle('Productos'),
+            (new Page(\App\Model\Reference::class))->setTitle('Referencias'),
+        ]
     ],
 
     // Examples

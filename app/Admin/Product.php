@@ -13,21 +13,18 @@ AdminSection::registerModel(Product::class, function (ModelConfiguration $model)
             $query->orderBy('created_at', 'desc');
         })->setColumns([
             AdminColumn::text('title')->setLabel('Producto'),
-            AdminColumn::text('thumbnail')->setLabel('Imagen')
-            // AdminColumn::datetime('date')->setLabel('Date')->setFormat('d.m.Y')->setWidth('150px'),
-            // AdminColumnEditable::checkbox('published')->setLabel('Published'),
+            AdminColumn::text('thumbnail')->setLabel('Imagen'),
+            AdminColumn::datetime('date')->setLabel('Date')->setFormat('d.m.Y')->setWidth('150px'),
         ])->paginate(5);
     });
+
     // Create And Edit
     $model->onCreateAndEdit(function() {
         $form = AdminForm::form()->setItems([
             AdminFormElement::text('title', 'Producto')->required(),
-            AdminFormElement::text('reference', 'Referencia')->required()->unique(),
             AdminFormElement::text('subtitle', 'Subtitulo')->required(),
             AdminFormElement::select('category_id', 'Categoria')->setModelForOptions('App\Model\Category')->setDisplay('name')->required(),
-            AdminFormElement::text('tags', 'Serie')
-            // AdminFormElement::checkbox('published', 'Published'),
-            // AdminFormElement::wysiwyg('text', 'Text'),
+            AdminFormElement::wysiwyg('description', 'Descripción', 'tinymce')
         ]);
         $form->getButtons()
             ->setSaveButtonText('Guardar')
