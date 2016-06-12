@@ -17,6 +17,7 @@ AdminSection::registerModel(Product::class, function (ModelConfiguration $model)
         })->setColumns([
             AdminColumn::text('title')->setLabel('Producto'),
             AdminColumn::text('thumbnail')->setLabel('Imagen'),
+            AdminColumn::text('qty')->setLabel('Stock'),
             AdminColumn::count('references')
                 ->setLabel('Referencias')
                 ->setWidth('100px')

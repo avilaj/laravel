@@ -56,5 +56,11 @@ class Product extends Model
         $url = "/productos/{$this->category->slug}/{$this->slug}";
         return $url;
     }
+    public function stock() {
+        return $this->hasManyThrough('\App\Model\Stock', '\App\Model\Reference');
+    }
 
+    public function getQtyAttribute() {
+        return $this->stock()->sum('qty');
+    }
 }

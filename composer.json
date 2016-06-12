@@ -8,7 +8,8 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
         "laravelrus/sleepingowl": "4.*@dev",
-        "cviebrock/eloquent-sluggable": "~4.0@dev"
+        "cviebrock/eloquent-sluggable": "~4.0@dev",
+        "mercadopago/sdk": "0.5.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

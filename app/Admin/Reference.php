@@ -23,6 +23,7 @@ AdminSection::registerModel(Reference::class, function (ModelConfiguration $mode
         ]);
         $display->setColumns([
             AdminColumn::text('reference')->setLabel('Código de referencia'),
+            AdminColumn::text('qty')->setLabel('Stock'),
             AdminColumn::relatedLink('product_id')
                 ->setModel(new Product)
                 ->setLabel('Producto')
