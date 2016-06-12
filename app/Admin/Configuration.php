@@ -1,32 +1,33 @@
 <?php
 
 use App\Model\Configuration;
-use SleepingOwl\Admin\Model\ModelConfiguration;
+use SleepingOwl\Admin\Model\ModelConfiguration as ModConf;
 
-AdminSection::registerModel(Configuration::class, function (ModelConfiguration $model) {
-    $model->setTitle('Form Items');
+AdminSection::registerModel(Configuration::class, function (ModConf $model)
+{
+    $model->setTitle('Configuracion');
+    // $model->setAlias('configuration');
     // Display
-    $model->onDisplay(function () {
-        $display = AdminDisplay::table();
-        return $display;
-    });
     // Create And Edit
-    $model->onCreateAndEdit(function($id = null) {
-        $form = AdminForm::panel()
-            ->addBody([
+    $model->onEdit(function ($id = 1)
+    {
+        $form = AdminForm::form();
+        // $form->setAction('/admin/settings/save');
+        $form->setItems([
                 AdminFormElement::text('collection_title', 'Título'),
-                AdminFormElement::text('collection_subtitle', 'Subtítulo'),
+                AdminFormElement::text('home_products', 'Prductos'),
                 AdminFormElement::text('collection_description', 'Descripción'),
-            ])
-            ->addBody([
-                // AdminFormElement::text('home_products', 'Productos destacados'),
-            ])
-            ->addBody([
-                // AdminFormElement::images('home_slider', 'Slider'),
             ]);
+            // ->addBody([
+            //     // AdminFormElement::text('home_products', 'Productos destacados'),
+            // ])
+            // ->addBody([
+            //     // AdminFormElement::images('home_slider', 'Slider'),
+            // ])
         $form->getButtons()
             ->setSaveButtonText('Guardar')
-            ->hideSaveAndCloseButton();
+            ->hideSaveAndCloseButton()
+            ->hideSaveAndCreateButton();
         return $form;
     });
 });

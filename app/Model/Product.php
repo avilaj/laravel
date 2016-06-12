@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Model;
-
+use Log;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 
@@ -21,7 +21,10 @@ class Product extends Model
                             'images',
                             'price',
                             'category_id'];
-
+    public function find($algo) {
+        Log::info("find");
+        parent::find($algo);
+    }
     public function sluggable () {
         return [
             'slug' => [
