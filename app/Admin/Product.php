@@ -5,15 +5,22 @@
  * For full list see documentation.
  */
 use App\Model\Product;
+use App\Model\Reference;
+
 use SleepingOwl\Admin\Model\ModelConfiguration;
 AdminSection::registerModel(Product::class, function (ModelConfiguration $model) {
     $model->setTitle("Productos");
+    $model->setAlias('products');
     $model->onDisplay(function () {
         return AdminDisplay::table()->setApply(function($query) {
             $query->orderBy('created_at', 'desc');
         })->setColumns([
             AdminColumn::text('title')->setLabel('Producto'),
             AdminColumn::text('thumbnail')->setLabel('Imagen'),
+            AdminColumn::count('references')
+                ->setLabel('Referencias')
+                ->setWidth('100px')
+                ->setHtmlAttribute('class', 'text-center'),
             AdminColumn::datetime('date')->setLabel('Date')->setFormat('d.m.Y')->setWidth('150px'),
         ])->paginate(5);
     });

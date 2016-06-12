@@ -37,7 +37,7 @@ class Product extends Model
 
     public function references ()
     {
-        return $this->hasMany('App\Models\Reference');
+        return $this->hasMany('App\Model\Reference');
     }
 
     public function setPriceAttribute ($value)

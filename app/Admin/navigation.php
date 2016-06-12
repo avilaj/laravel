@@ -42,6 +42,11 @@ return [
             (new Page(\App\Model\Reference::class))->setTitle('Referencias'),
         ]
     ],
+    [
+        'title' => 'Configuración',
+        'icon' => 'fa fa-cog',
+        'url' => route('admin.settings')
+    ]
 
     // Examples
     // [

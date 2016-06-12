@@ -8,6 +8,7 @@ use App\Model\User;
 use SleepingOwl\Admin\Model\ModelConfiguration;
 AdminSection::registerModel(User::class, function (ModelConfiguration $model) {
     $model->setTitle("Usuarios");
+    $model->setAlias("users");
     $model->onDisplay(function () {
         return AdminDisplay::table()->setApply(function($query) {
             $query->orderBy('created_at', 'desc');

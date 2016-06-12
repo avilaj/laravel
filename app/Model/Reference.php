@@ -12,7 +12,7 @@ class Reference extends Model
 
     public function product ()
     {
-        return $this->belongsTo('App\Model\Product');
+        return $this->belongsTo('App\Model\Product', 'product_id');
     }
 
 }
