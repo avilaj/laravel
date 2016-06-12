@@ -1,0 +1,1 @@
+{!! AdminSection::getModel('App\Model\Configuration')->fireFullEdit(1) !!}
