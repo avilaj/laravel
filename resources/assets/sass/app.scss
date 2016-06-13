@@ -1,2 +1,7 @@
 // @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
+.productBox {
+	&__title {
+		font-size: 3rem;
+	}
+}
