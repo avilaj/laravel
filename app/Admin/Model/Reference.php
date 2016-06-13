@@ -24,19 +24,33 @@ AdminSection::registerModel(Reference::class, function (ModelConfiguration $mode
         $display->setColumns([
             AdminColumn::text('reference')->setLabel('Código de referencia'),
             AdminColumn::text('qty')->setLabel('Stock'),
-            AdminColumn::relatedLink('product_id')
-                ->setModel(new Product)
-                ->setLabel('Producto')
-                ->append(
-                    AdminColumn::filter('product_id')->setModel(new Product)
-                )
+            AdminColumn::custom()
+                ->setLabel("Producto")
+                ->setCallback(function ($instance) {
+                    return "<a href='".url('admin/products/'.$instance->product_id.'/edit')."'>".$instance->product_id."</a>";
+                })
         ]);
         $display->paginate(5);
         return $display;
     });
-
+    $model->onCreate(function () {
+        $form = AdminForm::form()->setItems([
+            AdminFormElement::text('reference', 'Código de referencia')
+                ->required(),
+            AdminFormElement::select('product_id', 'Producto')
+                ->setModelForOptions('App\Model\Product')
+                ->setDisplay('title')
+                ->setDefaultValue(Request::input('product_id'))
+                ->required(),
+            AdminFormElement::text('specs', 'Especificaciones')
+        ]);
+        $form->getButtons()
+            ->setSaveButtonText('Guardar')
+            ->hideSaveAndCloseButton();
+        return $form;
+    });
     // Create And Edit
-    $model->onCreateAndEdit(function() {
+    $model->onEdit(function() {
         $form = AdminForm::form()->setItems([
             AdminFormElement::text('reference', 'Código de referencia')
                 ->required(),

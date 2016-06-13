@@ -12,18 +12,28 @@ AdminSection::registerModel(Product::class, function (ModelConfiguration $model)
     $model->setTitle("Productos");
     $model->setAlias('products');
     $model->onDisplay(function () {
-        return AdminDisplay::table()->setApply(function($query) {
+        $display = AdminDisplay::table();
+        $display->setApply(function($query) {
             $query->orderBy('created_at', 'desc');
-        })->setColumns([
+        });
+        $display->setColumns([
             AdminColumn::text('title')->setLabel('Producto'),
-            AdminColumn::text('thumbnail')->setLabel('Imagen'),
             AdminColumn::text('qty')->setLabel('Stock'),
-            AdminColumn::count('references')
-                ->setLabel('Referencias')
-                ->setWidth('100px')
-                ->setHtmlAttribute('class', 'text-center'),
-            AdminColumn::datetime('date')->setLabel('Date')->setFormat('d.m.Y')->setWidth('150px'),
-        ])->paginate(5);
+            AdminColumn::custom()
+                ->setLabel("Referencias")
+                ->setCallback(function ($instance) {
+                    $link  = url("admin/references?product_id=".$instance->id);
+                    $label = $instance->references->count();
+                    if ($label < 1 ) {
+                        $label = $label . " <small>(Añadir)</small>";
+                    }
+                    return '<a href="'.$link.'">'.$label.'</a>';
+                }),
+            AdminColumn::datetime('created_at')->setLabel('Date')->setFormat('d.m.Y')->setWidth('150px'),
+        ]);
+        $display->paginate(5);
+        $display->with('references');
+        return $display;
     });
 
     // Create And Edit
@@ -31,6 +41,7 @@ AdminSection::registerModel(Product::class, function (ModelConfiguration $model)
         $form = AdminForm::form()->setItems([
             AdminFormElement::text('title', 'Producto')->required(),
             AdminFormElement::text('subtitle', 'Subtitulo')->required(),
+            AdminFormElement::jsonField('references', 'Referencias'),
             AdminFormElement::select('category_id', 'Categoria')->setModelForOptions('App\Model\Category')->setDisplay('name')->required(),
             AdminFormElement::wysiwyg('description', 'Descripción', 'tinymce')
         ]);
