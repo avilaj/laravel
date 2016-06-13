@@ -9,42 +9,42 @@
             <strong class="productBox__title">Titulo del producto</strong>
             <span class="productBox__price">$320.</span>
         </li>
-        <li class="productBox-container">
+        <li class="productBox">
             <img class="productBox__image" src="http://placehold.it/240x300" alt="titulo de producto">
             <strong class="productBox__title">Titulo del producto</strong>
             <span class="productBox__price">$320.</span>
         </li>
-        <li class="productBox-container">
+        <li class="productBox">
             <img class="productBox__image" src="http://placehold.it/240x300" alt="titulo de producto">
             <strong class="productBox__title">Titulo del producto</strong>
             <span class="productBox__price">$320.</span>
         </li>
-        <li class="productBox-container">
+        <li class="productBox">
             <img class="productBox__image" src="http://placehold.it/240x300" alt="titulo de producto">
             <strong class="productBox__title">Titulo del producto</strong>
             <span class="productBox__price">$320.</span>
         </li>
-        <li class="productBox-container">
+        <li class="productBox">
             <img class="productBox__image" src="http://placehold.it/240x300" alt="titulo de producto">
             <strong class="productBox__title">Titulo del producto</strong>
             <span class="productBox__price">$320.</span>
         </li>
-        <li class="productBox-container">
+        <li class="productBox">
             <img class="productBox__image" src="http://placehold.it/240x300" alt="titulo de producto">
             <strong class="productBox__title">Titulo del producto</strong>
             <span class="productBox__price">$320.</span>
         </li>
-        <li class="productBox-container">
+        <li class="productBox">
             <img class="productBox__image" src="http://placehold.it/240x300" alt="titulo de producto">
             <strong class="productBox__title">Titulo del producto</strong>
             <span class="productBox__price">$320.</span>
         </li>
-        <li class="productBox-container">
+        <li class="productBox">
             <img class="productBox__image" src="http://placehold.it/240x300" alt="titulo de producto">
             <strong class="productBox__title">Titulo del producto</strong>
             <span class="productBox__price">$320.</span>
         </li>
-        <li class="productBox-container">
+        <li class="productBox">
             <img class="productBox__image" src="http://placehold.it/240x300" alt="titulo de producto">
             <strong class="productBox__title">Titulo del producto</strong>
             <span class="productBox__price">$320.</span>

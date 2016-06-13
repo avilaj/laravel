@@ -1,7 +1,31 @@
 // @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+.slider {
+  &__title {
+    text-align: center;
+    text-transform: uppercase;
+  }
+}
 
 .productBox {
-	&__title {
-		font-size: 3rem;
-	}
+  $background: #fff;
+  background: $background;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  width: 20%;
+
+  &__image {
+    display: inline-block;
+    height: auto;
+    margin: 0;
+    width: 100%;
+  }
+
+  &__title {
+    display: inline-block;
+    font-size: 1rem;
+    text-transform: uppercase;
+    width: 100%;
+  }
 }
