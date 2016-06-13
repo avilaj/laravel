@@ -1,19 +1,31 @@
 // @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "node_modules/bourbon/app/assets/stylesheets/bourbon";
+@import "node_modules/bourbon-neat/app/assets/stylesheets/neat";
+
 .slider {
+  @include outer-container();
+
   &__title {
     text-align: center;
     text-transform: uppercase;
   }
+
+  &__list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
 }
 
 .productBox {
+  @include span-columns(12/5);
+  @include omega(5n);
   $background: #fff;
   background: $background;
   display: inline-block;
-  margin: 0;
-  padding: 0;
+  padding-bottom: 1rem;
+  // margin: 0;
   text-align: center;
-  width: 20%;
 
   &__image {
     display: inline-block;
@@ -23,9 +35,26 @@
   }
 
   &__title {
+    @include ellipsis(100%);
     display: inline-block;
     font-size: 1rem;
     text-transform: uppercase;
     width: 100%;
+  }
+}
+
+#footer {
+  &:before {
+    background: #333;
+    content: ' ';
+    display: block;
+  }
+
+  @include outer-container;
+  color: #fff;
+
+  .section {
+    @include span-columns(12/5);
+    @include omega(5n);
   }
 }
