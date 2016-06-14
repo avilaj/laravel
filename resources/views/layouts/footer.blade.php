@@ -1,7 +1,9 @@
 <section id="footer">
+
     <div class="section">
-        {LOGO_MARK}
+        <img src="http://placehold.it/150x90" alt="">
     </div>
+
     <div class="section">
         <ul>
             <li><strong>Mapa del sitio</strong></li>
@@ -13,6 +15,7 @@
             <li><a href="/contacto">Contacto</a></li>
         </ul>
     </div>
+
     <div class="section">
         <ul>
             <li><strong>Mi cuenta</strong></li>
@@ -24,6 +27,7 @@
             <li><a href="/contacto">Contacto</a></li>
         </ul>
     </div>
+
     <div class="section">
         <ul>
             <li><strong>Servicio al cliente</strong></li>
@@ -33,18 +37,19 @@
             <li><a href="/check-out">Check Out</a></li>
         </ul>
     </div>
+
     <div class="section">
         <ul>
             <li><strong>Seguinos en</strong></li>
-            <li><a href="#">Facebook</a></li>
-            <li><a href="#">Twitter</a></li>
-            <li><a href="#">Instagram</a></li>
-            <li><a href="#">Youtube</a></li>
+            <li><a href="#"><a href="#" class="topnav__followus__link"><i class="fa fa-facebook"></i></a></a></li>
+            <li><a href="#"><a href="#" class="topnav__followus__link"><i class="fa fa-twitter"></i></a></a></li>
+            <li><a href="#"><a href="#" class="topnav__followus__link"><i class="fa fa-instagram"></i></a></a></li>
+            <li><a href="#"><a href="#" class="topnav__followus__link"><i class="fa fa-youtube"></i></a></a></li>
         </ul>
         <ul>
             <li><strong>Contactanos</strong></li>
             <li><a href="#"> <i class="fa fa-phone"></i> 011 4776-8082</a></li>
-            <li><a href="#"><i class="fa fa-mail"></i> info@markshop.com.ar</a></li>
+            <li><a href="#"><i class="fa fa-envelope"></i> info@markshop.com.ar</a></li>
         </ul>
     </div>
 

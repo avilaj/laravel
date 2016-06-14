@@ -6,15 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Document</title>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.5/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.5/assets/owl.theme.default.min.css">
     <link href="{{ elixir('css/app.css') }}" rel="stylesheet">
-
 </head>
 <body>
     @include("layouts.header")
-    <ul class="nav navbar-nav">
-        <li><a href="{{ url('/home') }}">Home</a></li>
-        <li><a href="{{ url('/admin') }}">Admin</a></li>
-    </ul>
     @yield("content")
     @include("layouts.footer")
 </body>

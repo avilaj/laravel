@@ -1,9 +1,32 @@
 // @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
-@import "node_modules/bourbon/app/assets/stylesheets/bourbon";
-@import "node_modules/bourbon-neat/app/assets/stylesheets/neat";
+@import 'node_modules/bourbon/app/assets/stylesheets/bourbon';
+@import 'node_modules/bourbon-neat/app/assets/stylesheets/neat';
+
+.home-news {
+  @include outer-container;
+}
+
+.news {
+
+  &__box {
+    // @include span-columns(3);
+    text-align: center;
+    &.item {
+      // width: 100%;
+    }
+    &__picture img {
+      height: auto;
+      width: 100%;
+    }
+
+    &__title {
+      text-transform: uppercase;
+    }
+  }
+}
 
 .slider {
-  @include outer-container();
+  @include outer-container;
 
   &__title {
     text-align: center;
@@ -18,13 +41,12 @@
 }
 
 .productBox {
-  @include span-columns(12/5);
-  @include omega(5n);
+  // @include span-columns(12/5);
+  // @include omega(5n);
   $background: #fff;
   background: $background;
   display: inline-block;
   padding-bottom: 1rem;
-  // margin: 0;
   text-align: center;
 
   &__image {
@@ -44,17 +66,55 @@
 }
 
 #footer {
-  &:before {
-    background: #333;
-    content: ' ';
-    display: block;
-  }
-
   @include outer-container;
-  color: #fff;
+  background: #333;
+  color: #ccc;
+
+  a {
+    color: #ccc;
+  }
 
   .section {
     @include span-columns(12/5);
     @include omega(5n);
+  }
+}
+
+#header {
+  background: #ccc;
+  width: 100%;
+}
+
+.topnav {
+  @include outer-container;
+  text-align: justify;
+
+  &__account,
+  &__followus {
+    @include span-columns(3);
+    @include pad(0);
+
+  }
+  &__account {
+    @include omega;
+    text-align: right;
+    text-transform: uppercase;
+  }
+
+  &__pages {
+    @include span-columns(6);
+    @include pad(0);
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  &__list {
+    display: inline-block;
+    list-style-type: none;
+    white-space: nowrap;
+  }
+
+  &__item {
+    display: inline-block;
   }
 }
