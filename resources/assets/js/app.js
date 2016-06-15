@@ -29,4 +29,7 @@ jQuery(document).ready(function ($) {
             }
         }
     });
+    $('.product-displayer__view').zoom({
+        url: 'http://placehold.it/600x900/09f/fff?text=product+view'
+    });
 });

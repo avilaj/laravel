@@ -95,6 +95,7 @@
     @include pad(0);
 
   }
+
   &__account {
     @include omega;
     text-align: right;
@@ -116,5 +117,17 @@
 
   &__item {
     display: inline-block;
+  }
+}
+
+.product-displayer {
+  @include span-columns(6);
+  @include pad(0);
+  background: #ccc;
+
+  &__view {
+    background-color: purple;
+    display: inline-block;
+    line-height: 0;
   }
 }
