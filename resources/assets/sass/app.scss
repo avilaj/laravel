@@ -1,51 +1,47 @@
-// @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 @import 'node_modules/bourbon/app/assets/stylesheets/bourbon';
 @import 'node_modules/bourbon-neat/app/assets/stylesheets/neat';
 
-.home-news {
-  @include outer-container;
-}
-
+@import 'home';
+@import 'carousel';
+@import 'footer';
 .news {
-
   &__box {
-    // @include span-columns(3);
+    font-size: .75rem;
     text-align: center;
-    &.item {
-      // width: 100%;
+
+    &__picture {
+      margin-bottom: .5rem;
+      display: inline-block;
+      width: 100%;
     }
+
     &__picture img {
       height: auto;
       width: 100%;
     }
 
     &__title {
+      @include ellipsis;
       text-transform: uppercase;
+      white-space: nowrap;
+      font-weight: 700;
+      display: inline-block;
+      width: 100%;
+    }
+
+    &__subtitle {
+      @include ellipsis;
+      white-space: nowrap;
+      display: inline-block;
     }
   }
 }
 
-.slider {
-  @include outer-container;
-
-  &__title {
-    text-align: center;
-    text-transform: uppercase;
-  }
-
-  &__list {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
-}
-
 .productBox {
-  // @include span-columns(12/5);
-  // @include omega(5n);
   $background: #fff;
   background: $background;
   display: inline-block;
+  font-size: .75rem;
   padding-bottom: 1rem;
   text-align: center;
 
@@ -54,39 +50,39 @@
     height: auto;
     margin: 0;
     width: 100%;
+    margin-bottom: .5rem;
   }
 
   &__title {
-    @include ellipsis(100%);
+    @include ellipsis;
     display: inline-block;
-    font-size: 1rem;
+    font-weight: 700;
     text-transform: uppercase;
+    white-space: nowrap;
     width: 100%;
   }
-}
 
-#footer {
-  @include outer-container;
-  background: #333;
-  color: #ccc;
-
-  a {
+  &__price {
     color: #ccc;
-  }
-
-  .section {
-    @include span-columns(12/5);
-    @include omega(5n);
+    font-weight: 700;
   }
 }
 
 #header {
   background: #ccc;
   width: 100%;
+  font-size: .75rem;
+  @include pad;
+  padding-top: 0;
+  padding-bottom: 0;
+  a {
+    text-decoration: none;
+  }
 }
 
 .topnav {
-  @include outer-container;
+  @include ellipsis;
+  width: 100%;
   text-align: justify;
 
   &__account,
@@ -96,10 +92,23 @@
 
   }
 
+  &__followus{
+    &__link {
+      padding: 0 .5rem;
+      font-size: 1rem;
+      line-height: .75rem;
+    }
+  }
+
   &__account {
     @include omega;
     text-align: right;
     text-transform: uppercase;
+    &__link {
+      font-weight: 700;
+      display: inline-block;
+      padding: 0 .5rem;
+    }
   }
 
   &__pages {
@@ -107,6 +116,11 @@
     @include pad(0);
     text-align: center;
     text-transform: uppercase;
+    &__link {
+      font-weight: 700;
+      display: inline-block;
+      padding: 0 .5rem;
+    }
   }
 
   &__list {

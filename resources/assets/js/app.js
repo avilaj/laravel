@@ -1,35 +1,40 @@
-jQuery(document).ready(function ($) {
-    var news = $("#news-slider");
-    news.owlCarousel({
-        items:4,
-        loop:true,
-        margin:10,
-        merge:true,
-        responsive:{
-            678:{
-                mergeFit:true
-            },
-            1000:{
-                mergeFit:false
-            }
-        }
+    $(document).ready(function () {
+        var news = $("#news-slider");
+        news.owlCarousel({
+            margin: 10,
+            nav: true,
+            navClass: ['owl-prev fa fa-angle-left', 'owl-next fa fa-angle-right'],
+            navText: false,
+            loop: true,
+            responsive: {
+              0: {
+                items: 2
+              },
+              1000: {
+                items: 4
+              }
+          }
+        });
+        var product = $(".home-product-slider");
+        product.owlCarousel({
+            margin: 10,
+            nav: true,
+            navClass: ['owl-prev fa fa-angle-left', 'owl-next fa fa-angle-right'],
+            navText: false,
+            loop: true,
+            responsive: {
+              0: {
+                items: 1
+              },
+              600: {
+                items: 3
+              },
+              1000: {
+                items: 5
+              }}
+        });
+
+        // $('.product-displayer__view').zoom({
+        //     url: 'http://placehold.it/600x900/09f/fff?text=product+view'
+        // });
     });
-    var product = $("#product-slider");
-    product.owlCarousel({
-        items:5,
-        loop:true,
-        margin:10,
-        merge:true,
-        responsive:{
-            678:{
-                mergeFit:true
-            },
-            1000:{
-                mergeFit:false
-            }
-        }
-    });
-    $('.product-displayer__view').zoom({
-        url: 'http://placehold.it/600x900/09f/fff?text=product+view'
-    });
-});
