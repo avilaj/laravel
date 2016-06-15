@@ -1,0 +1,41 @@
+#footer {
+  @include outer-container;
+  color: #ccc;
+  padding: 1rem;
+  text-transform: uppercase;
+  font-size: .75rem;
+
+  a {
+    color: #ccc;
+  }
+
+  .section {
+    @include span-columns(12/5);
+    @include omega(5n);
+    @include ellipsis;
+    &--contact {
+      ul {
+        margin-bottom: 1rem;
+      }
+    }
+    &__title {
+      margin-bottom: .75rem;
+    }
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  li {
+    padding: 0;
+    margin: 0;
+    line-height: 1.5rem;
+  }
+  a {
+    text-decoration: none;
+  }
+}
+.footer-background {
+  background: #333;
+}

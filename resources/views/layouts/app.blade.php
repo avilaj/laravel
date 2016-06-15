@@ -10,10 +10,14 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.5/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.5/assets/owl.theme.default.min.css">
     <link href="{{ elixir('css/app.css') }}" rel="stylesheet">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.0/owl.carousel.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-zoom/1.7.15/jquery.zoom.min.js"></script>
 </head>
 <body>
     @include("layouts.header")
     @yield("content")
     @include("layouts.footer")
+    <script src="{{ elixir('js/all.js') }}"></script>
 </body>
 </html>

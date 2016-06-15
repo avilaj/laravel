@@ -1,0 +1,88 @@
+.home {
+  &-section {
+    @include outer-container;
+  }
+
+  &-brands {
+    @include outer-container(70%);
+
+    &__item {
+      @include span-columns(12/9);
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+
+  &-section__title {
+    font-size: .75rem;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  &-news {
+    @include outer-container(70%);
+  }
+
+
+
+  &-stores {
+    text-align: center;
+    vertical-align: middle;
+
+    &__cta {
+      $color: #fff;
+      border: 2px solid $color;
+      color: $color;
+      display: inline-block;
+      font-weight: 700;
+      margin: auto;
+      padding: 1rem 2rem;
+      text-decoration: none;
+    }
+  }
+  &-newsletter {
+    &__headline,
+    &__subline {
+      margin-bottom: .75rem;
+    }
+    &__input {
+      background: white;
+      display: inline-block;
+      position: relative;
+      input {
+        background: transparent;
+        border: 0;
+        font-size: .75rem;
+        padding: 1rem 2rem;
+      }
+      .fa {
+        pointer-events: none;
+        position: relative;
+        left: -1rem;
+      }
+    }
+  }
+}
+
+.home {
+  &-section {
+    &-newsletter-n-local {
+      @include row(table);
+      margin-bottom: 1rem;
+
+      .home-newsletter,
+      .home-stores {
+        @include span-columns(6);
+        @include pad(3rem);
+        background: #ccc;
+        font-size: .75rem;
+        text-transform: uppercase;
+      }
+    }
+  }
+  @include reset-display;
+}
