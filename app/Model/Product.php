@@ -43,6 +43,10 @@ class Product extends Model
         return $this->hasMany('App\Model\Reference');
     }
 
+    // public function orders () {
+    //     return $this->hasManyThrough('App\Model\OrderItem', 'App\Model\OrderItem');
+    // }
+
     public function setPriceAttribute ($value)
     {
         if(empty($value)) {

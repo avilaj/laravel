@@ -35,6 +35,7 @@ return [
         'icon'  => 'fa fa-exclamation-circle',
         'url'   => route('admin.information'),
     ],
+    (new Page(\App\Model\Order::class))->setTitle('Ordenes de compra'),
     [
         'title' => 'Tienda',
         'pages' => [

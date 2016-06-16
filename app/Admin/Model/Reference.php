@@ -19,7 +19,8 @@ AdminSection::registerModel(Reference::class, function (ModelConfiguration $mode
         });
         $display->setFilters([
             AdminDisplayFilter::related('product_id')
-                ->setModel(Product::class)
+                ->setModel(Product::class),
+            AdminDisplayFilter::field('id')->setTitle('Busqueda por referencia')
         ]);
         $display->setColumns([
             AdminColumn::text('reference')->setLabel('Código de referencia'),

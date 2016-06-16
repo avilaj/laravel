@@ -19,8 +19,8 @@
         </ul>
 
         <ul class="topnav__list topnav__account">
-            <li class="topnav__item"><a href="#" class="topnav__account__link">Registrarse</a></li>
-            <li class="topnav__item"><a href="#" class="topnav__account__link">Ingresar</a></li>
+            <li class="topnav__item"><a href="/registrarse" class="topnav__account__link">Registrarse</a></li>
+            <li class="topnav__item"><a href="/login" class="topnav__account__link">Ingresar</a></li>
             <li class="topnav__item"><a href="#" class="topnav__account__link">Mi carrito <span id="cart-amount">(0)</span> <i class="fa fa-shopping-cart"></i></a></li>
         </ul>
     </nav>

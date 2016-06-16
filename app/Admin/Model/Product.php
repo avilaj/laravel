@@ -29,7 +29,10 @@ AdminSection::registerModel(Product::class, function (ModelConfiguration $model)
                     }
                     return '<a href="'.$link.'">'.$label.'</a>';
                 }),
-            AdminColumn::datetime('created_at')->setLabel('Date')->setFormat('d.m.Y')->setWidth('150px'),
+            AdminColumn::datetime('created_at')
+                                    ->setLabel('Date')
+                                    ->setFormat('d.m.Y')
+                                    ->setWidth('150px'),
         ]);
         $display->paginate(5);
         $display->with('references');
@@ -41,8 +44,18 @@ AdminSection::registerModel(Product::class, function (ModelConfiguration $model)
         $form = AdminForm::form()->setItems([
             AdminFormElement::text('title', 'Producto')->required(),
             AdminFormElement::text('subtitle', 'Subtitulo')->required(),
-            AdminFormElement::jsonField('references', 'Referencias'),
-            AdminFormElement::select('category_id', 'Categoria')->setModelForOptions('App\Model\Category')->setDisplay('name')->required(),
+            AdminFormElement::text('price', 'Precio')->required(),
+            AdminFormElement::select('gender', 'Genero')
+                                    ->setOptions([
+                                        'F'=>'Femenino',
+                                        'M'=>'Masculino',
+                                        'U'=>'Unisex'])
+                                    ->setDefaultValue('M'),
+            AdminFormElement::select('category_id', 'Categoria')
+                                    ->setModelForOptions('App\Model\Category')
+                                    ->setDisplay('name')
+                                    ->setDefaultValue(Request::input('category_id'))
+                                    ->required(),
             AdminFormElement::wysiwyg('description', 'Descripción', 'tinymce')
         ]);
         $form->getButtons()
