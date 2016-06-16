@@ -16,6 +16,7 @@ class Order extends Model
                            'updated_at'];
 
     public function user() {
+        return $this->belongsTo('App\Model\User', 'customer_id');
     }
 
     public function orderItems() {
