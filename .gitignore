@@ -2,9 +2,7 @@
 /node_modules
 /public/storage
 /public/packages/*
-/public/css/*.css*
-/public/js/*.js*
-/public/build/*
+
 
 Homestead.yaml
 Homestead.json
