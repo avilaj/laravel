@@ -13,16 +13,16 @@ class CreateGalleriesTable extends Migration
     public function up()
     {
         //
-        Schema::create('galleries', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('title')->nullable();
-            $table->string('subtitle')->nullable();
-            $table->text('description')->nullable();
-            $table->text('images')->nullable();
-            $table->text('videos')->nullable();
-            $table->string('tag')->nullable();
-            $table->timestamps();
-        });
+        // Schema::create('galleries', function (Blueprint $table) {
+        //     $table->increments('id');
+        //     $table->string('title')->nullable();
+        //     $table->string('subtitle')->nullable();
+        //     $table->text('description')->nullable();
+        //     $table->text('images')->nullable();
+        //     $table->text('videos')->nullable();
+        //     $table->string('tag')->nullable();
+        //     $table->timestamps();
+        // });
     }
 
     /**
@@ -33,6 +33,6 @@ class CreateGalleriesTable extends Migration
     public function down()
     {
         //
-        Schema::drop('galleries');
+        // Schema::drop('galleries');
     }
 }

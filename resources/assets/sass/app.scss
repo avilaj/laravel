@@ -4,10 +4,16 @@
 @import 'home';
 @import 'carousel';
 @import 'footer';
+body {
+  background: #000 url('/images/woods.jpg') repeat-y;
+  background-size: 100%;
+}
 .news {
   &__box {
     font-size: .75rem;
     text-align: center;
+    background: #fff;
+    @include pad(10px);
 
     &__picture {
       margin-bottom: .5rem;
@@ -22,6 +28,7 @@
 
     &__title {
       @include ellipsis;
+      color: #5a5a5a;
       text-transform: uppercase;
       white-space: nowrap;
       font-weight: 700;
@@ -31,6 +38,7 @@
 
     &__subtitle {
       @include ellipsis;
+      color: #919191;
       white-space: nowrap;
       display: inline-block;
     }
@@ -44,8 +52,14 @@
   font-size: .75rem;
   padding-bottom: 1rem;
   text-align: center;
+  width: 100%;
 
-  &__image {
+  &__link {
+    display: inline-block;
+    width: 100%;
+  }
+
+  & &__image {
     display: inline-block;
     height: auto;
     margin: 0;
@@ -55,6 +69,7 @@
 
   &__title {
     @include ellipsis;
+    color: #5a5a5a;
     display: inline-block;
     font-weight: 700;
     text-transform: uppercase;
@@ -63,18 +78,29 @@
   }
 
   &__price {
-    color: #ccc;
+    color: #919191;
     font-weight: 700;
   }
 }
-
+.markshop-logo {
+  text-align: center;
+  img {
+    position: relative;
+    width: 18rem;
+    height: auto;
+    line-height: 0;
+    bottom: -0.5rem;
+  }
+}
 #header {
-  background: #ccc;
+  @include pad;
+  background: #1e1e1c;
+  color: #787878;
   width: 100%;
   font-size: .75rem;
-  @include pad;
   padding-top: 0;
   padding-bottom: 0;
+  margin-bottom: 2rem;
   a {
     text-decoration: none;
   }
@@ -97,6 +123,7 @@
       padding: 0 .5rem;
       font-size: 1rem;
       line-height: .75rem;
+      color: #787878;
     }
   }
 
@@ -107,6 +134,7 @@
     &__link {
       font-weight: 700;
       display: inline-block;
+      color: #787878;
       padding: 0 .5rem;
     }
   }
@@ -117,6 +145,7 @@
     text-align: center;
     text-transform: uppercase;
     &__link {
+      color: #fff;
       font-weight: 700;
       display: inline-block;
       padding: 0 .5rem;

@@ -17,7 +17,7 @@ class OrderItem extends Model
                            'updated_at'];
 
     public function order() {
-        return $this->belongsTo('App\Model\Order');
+        return $this->belongsTo('App\Model\Order')->withPivot('price', 'qty');
     }
 
     public function reference() {

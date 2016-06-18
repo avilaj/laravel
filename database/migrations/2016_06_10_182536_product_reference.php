@@ -15,7 +15,8 @@ class ProductReference extends Migration
         Schema::create('references', function (Blueprint $table) {
             $table->increments('id');
             $table->string('reference');
-            $table->text('specs')->nullable();
+            $table->string('color')->nullable();
+            $table->string('size')->nullable();
             $table->integer('product_id')->references('id')->on('products');
             $table->softDeletes();
             $table->timestamps();

@@ -8,7 +8,7 @@ class Reference extends Model
 {
 
     protected $table = 'references';
-    protected $fillable = ['reference', 'product_id', 'specs'];
+    protected $fillable = ['reference', 'product_id', 'color', 'size'];
 
     public function product ()
     {

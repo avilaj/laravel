@@ -1,3 +1,6 @@
+<div class="markshop-logo">
+    <img src="/images/markshop.png" alt="Markshop">
+</div>
 <header id="header">
     <nav class="topnav">
 

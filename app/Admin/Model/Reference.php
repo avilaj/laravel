@@ -14,6 +14,7 @@ AdminSection::registerModel(Reference::class, function (ModelConfiguration $mode
     $model->onDisplay(function () {
         $display = AdminDisplay::table();
         $display->with('product');
+        $display->groupBy('color');
         $display->setApply(function ($query) {
             $query->orderBy('created_at', 'desc');
         });

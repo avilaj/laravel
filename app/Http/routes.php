@@ -12,7 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome', [
+    	'products' => \App\Model\Product::with('category')->get()]);
 });
 
 Route::auth();

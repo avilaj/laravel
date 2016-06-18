@@ -3,33 +3,33 @@
 @section('content')
 <main class="home">
     <section class="home-section home-news news">
-        <h3 class="home-section__title">Novedades recientes</h3>
+        <h3 class="home-section__title"><span>Novedades recientes</span></h3>
         <div id="news-slider" class="owl-carousel">
             <div class="news__box item">
                 <a href="#">
-                    <div class="news__box__picture"><img src="http://placehold.it/250x120" alt=""></div>
+                    <div class="news__box__picture"><img src="http://placehold.it/330x190" alt=""></div>
                     <div class="news__box__title">Tony Alba en Buenos Aires</div>
                     <div class="news__box__subtitle">La leyenda del skate visita nuestro local.</div>
                 </a>
             </div>
             <div class="news__box item">
-                <div class="news__box__picture"><img src="http://placehold.it/250x120" alt=""></div>
+                <div class="news__box__picture"><img src="http://placehold.it/330x190" alt=""></div>
                 <div class="news__box__title">Tony Alba en Buenos Aires</div>
                 <div class="news__box__subtitle">La leyenda del skate visita nuestro local.</div>
             </div>
             <div class="news__box item">
-                <div class="news__box__picture"><img src="http://placehold.it/250x120" alt=""></div>
+                <div class="news__box__picture"><img src="http://placehold.it/330x190" alt=""></div>
                 <div class="news__box__title">Tony Alba en Buenos Aires</div>
                 <div class="news__box__subtitle">La leyenda del skate visita nuestro local.</div>
             </div>
             <div class="news__box item">
-                <div class="news__box__picture"><img src="http://placehold.it/250x120" alt=""></div>
+                <div class="news__box__picture"><img src="http://placehold.it/330x190" alt=""></div>
                 <div class="news__box__title">Tony Alba en Buenos Aires</div>
                 <div class="news__box__subtitle">La leyenda del skate visita nuestro local.</div>
             </div>
             <div class="news__box item">
                 <a href="#">
-                    <div class="news__box__picture"><img src="http://placehold.it/250x120" alt=""></div>
+                    <div class="news__box__picture"><img src="http://placehold.it/330x190" alt=""></div>
                     <div class="news__box__title">Tony Alba en Buenos Aires</div>
                     <div class="news__box__subtitle">La leyenda del skate visita nuestro local.</div>
                 </a>
@@ -48,105 +48,67 @@
         <div class="home-brands__item"><img src="http://placehold.it/150x70/ccc/fff?text=brand" alt=""></div>
     </section>
     <section class="home-section home-products">
-        <h3 class="home-section__title">Productos destacados</h3>
+        <h3 class="home-section__title"><span>Productos destacados</span></h3>
         <div class="home-product-slider owl-carousel">
-            <div class="productBox item">
-                <a href="#">
-                    <img class="productBox__image" src="http://placehold.it/240x300" alt="titulo de producto">
-                    <strong class="productBox__title">Titulo del producto</strong>
-                    <span class="productBox__price">$320.</span>
-                </a>
-            </div>
-            <div class="productBox item">
-                <img class="productBox__image" src="http://placehold.it/240x300" alt="titulo de producto">
-                <strong class="productBox__title">Titulo del producto</strong>
-                <span class="productBox__price">$320.</span>
-            </div>
-            <div class="productBox item">
-                <img class="productBox__image" src="http://placehold.it/240x300" alt="titulo de producto">
-                <strong class="productBox__title">Titulo del producto</strong>
-                <span class="productBox__price">$320.</span>
-            </div>
-            <div class="productBox item">
-                <img class="productBox__image" src="http://placehold.it/240x300" alt="titulo de producto">
-                <strong class="productBox__title">Titulo del producto</strong>
-                <span class="productBox__price">$320.</span>
-            </div>
-            <div class="productBox item">
-                <img class="productBox__image" src="http://placehold.it/240x300" alt="titulo de producto">
-                <strong class="productBox__title">Titulo del producto</strong>
-                <span class="productBox__price">$320.</span>
-            </div>
-            <div class="productBox item">
-                <img class="productBox__image" src="http://placehold.it/240x300" alt="titulo de producto">
-                <strong class="productBox__title">Titulo del producto</strong>
-                <span class="productBox__price">$320.</span>
-            </div>
-            <div class="productBox item">
-                <img class="productBox__image" src="http://placehold.it/240x300" alt="titulo de producto">
-                <strong class="productBox__title">Titulo del producto</strong>
-                <span class="productBox__price">$320.</span>
-            </div>
-            <div class="productBox item">
-                <img class="productBox__image" src="http://placehold.it/240x300" alt="titulo de producto">
-                <strong class="productBox__title">Titulo del producto</strong>
-                <span class="productBox__price">$320.</span>
-            </div>
-            <div class="productBox item">
-                <img class="productBox__image" src="http://placehold.it/240x300" alt="titulo de producto">
-                <strong class="productBox__title">Titulo del producto</strong>
-                <span class="productBox__price">$320.</span>
-            </div>
+            @foreach ($products as $product)
+                <div class="productBox item">
+                    <a class="productBox__link" href="/catalogo/{{ $product->slug }}" title="{{ $product->title }}">
+                        <img class="productBox__image" src="http://placehold.it/300x370" alt="{{ $product->title }}">
+                        <strong class="productBox__title">{{ $product->title }}</strong>
+                        <span class="productBox__price">${{ $product->price }}.</span>
+                    </a>
+                </div>
+            @endforeach
         </div>
     </section>
 
     <section class="home-section home-products">
-        <h3 class="home-section__title">Productos nuevos</h3>
+        <h3 class="home-section__title"><span>Productos nuevos</span></h3>
         <div class="home-product-slider owl-carousel">
             <div class="productBox item">
                 <a href="#">
-                    <img class="productBox__image" src="http://placehold.it/240x300" alt="titulo de producto">
+                    <img class="productBox__image" src="http://placehold.it/300x370" alt="titulo de producto">
                     <strong class="productBox__title">Titulo del producto</strong>
                     <span class="productBox__price">$320.</span>
                 </a>
             </div>
             <div class="productBox item">
-                <img class="productBox__image" src="http://placehold.it/240x300" alt="titulo de producto">
+                <img class="productBox__image" src="http://placehold.it/300x370" alt="titulo de producto">
                 <strong class="productBox__title">Titulo del producto</strong>
                 <span class="productBox__price">$320.</span>
             </div>
             <div class="productBox item">
-                <img class="productBox__image" src="http://placehold.it/240x300" alt="titulo de producto">
+                <img class="productBox__image" src="http://placehold.it/300x370" alt="titulo de producto">
                 <strong class="productBox__title">Titulo del producto</strong>
                 <span class="productBox__price">$320.</span>
             </div>
             <div class="productBox item">
-                <img class="productBox__image" src="http://placehold.it/240x300" alt="titulo de producto">
+                <img class="productBox__image" src="http://placehold.it/300x370" alt="titulo de producto">
                 <strong class="productBox__title">Titulo del producto</strong>
                 <span class="productBox__price">$320.</span>
             </div>
             <div class="productBox item">
-                <img class="productBox__image" src="http://placehold.it/240x300" alt="titulo de producto">
+                <img class="productBox__image" src="http://placehold.it/300x370" alt="titulo de producto">
                 <strong class="productBox__title">Titulo del producto</strong>
                 <span class="productBox__price">$320.</span>
             </div>
             <div class="productBox item">
-                <img class="productBox__image" src="http://placehold.it/240x300" alt="titulo de producto">
+                <img class="productBox__image" src="http://placehold.it/300x370" alt="titulo de producto">
                 <strong class="productBox__title">Titulo del producto</strong>
                 <span class="productBox__price">$320.</span>
             </div>
             <div class="productBox item">
-                <img class="productBox__image" src="http://placehold.it/240x300" alt="titulo de producto">
+                <img class="productBox__image" src="http://placehold.it/300x370" alt="titulo de producto">
                 <strong class="productBox__title">Titulo del producto</strong>
                 <span class="productBox__price">$320.</span>
             </div>
             <div class="productBox item">
-                <img class="productBox__image" src="http://placehold.it/240x300" alt="titulo de producto">
+                <img class="productBox__image" src="http://placehold.it/300x370" alt="titulo de producto">
                 <strong class="productBox__title">Titulo del producto</strong>
                 <span class="productBox__price">$320.</span>
             </div>
             <div class="productBox item">
-                <img class="productBox__image" src="http://placehold.it/240x300" alt="titulo de producto">
+                <img class="productBox__image" src="http://placehold.it/300x370" alt="titulo de producto">
                 <strong class="productBox__title">Titulo del producto</strong>
                 <span class="productBox__price">$320.</span>
             </div>

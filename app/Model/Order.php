@@ -20,7 +20,7 @@ class Order extends Model
     }
 
     public function orderItems() {
-      return $this->hasMany('App\Model\OrderItem')->withPivot('price', 'qty');
+      return $this->hasMany('App\Model\OrderItem');
     }
 
     public function references ()
@@ -29,5 +29,11 @@ class Order extends Model
                               'cart_reference',
                               'cart_id',
                               'reference_id');
+    }
+
+    public function updatePrice() {
+      $total = $this->orderItems()->sum(\DB::raw('price*qty'));
+      $this->price = $total;
+      $this->save();
     }
 }

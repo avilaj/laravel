@@ -12,18 +12,18 @@ class CreatePersonsTable extends Migration
      */
     public function up()
     {
-        Schema::create('persons', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('activity');
-            $table->text('bio');
-            $table->string('facebook')->nullable();
-            $table->string('instagram')->nullable();
-            $table->string('twitter')->nullable();
-            $table->string('youtube')->nullable();
-            $table->integer('gallery_id')->nullable();
-            $table->timestamps();
-        });
+        // Schema::create('persons', function (Blueprint $table) {
+        //     $table->increments('id');
+        //     $table->string('name');
+        //     $table->string('activity');
+        //     $table->text('bio');
+        //     $table->string('facebook')->nullable();
+        //     $table->string('instagram')->nullable();
+        //     $table->string('twitter')->nullable();
+        //     $table->string('youtube')->nullable();
+        //     $table->integer('gallery_id')->nullable();
+        //     $table->timestamps();
+        // });
     }
 
     /**
@@ -34,6 +34,6 @@ class CreatePersonsTable extends Migration
     public function down()
     {
         //
-        Schema::drop('persons');
+        // Schema::drop('persons');
     }
 }

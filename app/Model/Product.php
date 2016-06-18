@@ -4,7 +4,8 @@ namespace App\Model;
 use Log;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
-
+use App\Model\Reference;
+use App\Model\Color;
 
 
 class Product extends Model
@@ -17,7 +18,6 @@ class Product extends Model
                             'thumbnail',
                             'description',
                             'specs',
-                            'details',
                             'images',
                             'price',
                             'category_id'];
@@ -36,6 +36,19 @@ class Product extends Model
     public function category ()
     {
     	return $this->belongsTo('App\Model\Category');
+    }
+
+    public function sizes() {
+        return [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46];
+    }
+    public function generateReference($color) {
+        foreach ($this->sizes() as $value) {
+            Reference::create([
+                'product_id' => $this->attributes['id'],
+                'color' => $color,
+                'size' => $value
+            ]);
+        }
     }
 
     public function references ()

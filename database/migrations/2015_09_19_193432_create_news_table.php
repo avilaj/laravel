@@ -19,7 +19,7 @@ class CreateNewsTable extends Migration
                 $table->string('title');
                 $table->string('short_text')->nullable();
                 $table->text('text')->nullable();
-                $table->integer('gallery_id')->nullable();
+                $table->text('gallery')->nullable();
                 $table->boolean('pin', false);
                 $table->timestamps();
         });

@@ -12,11 +12,11 @@ class CreateProductColorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_colors', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('product_id');
-            $table->integer('color_id');
-        });
+        // Schema::create('product_colors', function (Blueprint $table) {
+        //     $table->increments('id');
+        //     $table->integer('product_id');
+        //     $table->integer('color_id');
+        // });
     }
 
     /**
@@ -26,6 +26,6 @@ class CreateProductColorsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('product_colors');
+        // Schema::drop('product_colors');
     }
 }

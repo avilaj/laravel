@@ -12,19 +12,19 @@ class Cart extends Migration
      */
     public function up()
     {
-        Schema::create('carts', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('customer_id')->references('id')->on('users');
-            $table->string('details')->nullable();
-            $table->timestamps();
-            $table->softDeletes();
-        });
-        Schema::create('carts_reference', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('cart_id')->references('id')->on('carts');
-            $table->integer('reference_id')->references('id')->on('references');
-            $table->integer('qty');
-        });
+        // Schema::create('carts', function (Blueprint $table) {
+        //     $table->increments('id');
+        //     $table->integer('customer_id')->references('id')->on('users');
+        //     $table->string('details')->nullable();
+        //     $table->timestamps();
+        //     $table->softDeletes();
+        // });
+        // Schema::create('carts_reference', function (Blueprint $table) {
+        //     $table->increments('id');
+        //     $table->integer('cart_id')->references('id')->on('carts');
+        //     $table->integer('reference_id')->references('id')->on('references');
+        //     $table->integer('qty');
+        // });
     }
 
     /**
@@ -34,7 +34,7 @@ class Cart extends Migration
      */
     public function down()
     {
-        Schema::drop('carts');
-        Schema::drop('carts_reference');
+        // Schema::drop('carts');
+        // Schema::drop('carts_reference');
     }
 }

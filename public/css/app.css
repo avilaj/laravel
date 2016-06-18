@@ -36,16 +36,51 @@ html {
   font-size: .75rem;
   font-weight: 700;
   text-align: center;
-  text-transform: uppercase; }
+  text-transform: uppercase;
+  color: #fff;
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  box-align: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
+  align-items: center;
+  -ms-flex-align: center; }
+  .home-section__title:before, .home-section__title:after {
+    content: "";
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+    vertical-align: center;
+    -ms-flex: 1;
+    flex: 1; }
+  .home-section__title span {
+    align-self: center;
+    -ms-flex-item-align: center;
+    padding: 0 10px; }
 
 .home-news {
   max-width: 70%;
   margin-left: auto;
-  margin-right: auto; }
+  margin-right: auto;
+  margin-bottom: 2rem;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 10px; }
   .home-news::after {
     clear: both;
     content: "";
     display: table; }
+
+.home-brands {
+  margin-bottom: 2rem; }
+
+.home-products {
+  margin-bottom: 2rem; }
+
+.home-section-newsletter-n-local {
+  margin-bottom: 2rem; }
 
 .home-stores {
   text-align: center;
@@ -79,8 +114,7 @@ html {
 .home-section-newsletter-n-local {
   display: table;
   width: 100%;
-  table-layout: fixed;
-  margin-bottom: 1rem; }
+  table-layout: fixed; }
   .home-section-newsletter-n-local .home-newsletter,
   .home-section-newsletter-n-local .home-stores {
     display: table-cell;
@@ -95,7 +129,8 @@ html {
   position: absolute;
   right: 0;
   top: 50%;
-  left: 0; }
+  left: 0;
+  color: rgba(255, 255, 255, 0.5); }
 
 .owl-carousel .owl-prev,
 .owl-carousel .owl-next {
@@ -160,9 +195,15 @@ html {
 .footer-background {
   background: #333; }
 
+body {
+  background: #000 url("/images/woods.jpg") repeat-y;
+  background-size: 100%; }
+
 .news__box {
   font-size: .75rem;
-  text-align: center; }
+  text-align: center;
+  background: #fff;
+  padding: 10px; }
   .news__box__picture {
     margin-bottom: .5rem;
     display: inline-block;
@@ -177,6 +218,7 @@ html {
     text-overflow: ellipsis;
     white-space: nowrap;
     word-wrap: normal;
+    color: #5a5a5a;
     text-transform: uppercase;
     white-space: nowrap;
     font-weight: 700;
@@ -189,6 +231,7 @@ html {
     text-overflow: ellipsis;
     white-space: nowrap;
     word-wrap: normal;
+    color: #919191;
     white-space: nowrap;
     display: inline-block; }
 
@@ -197,8 +240,12 @@ html {
   display: inline-block;
   font-size: .75rem;
   padding-bottom: 1rem;
-  text-align: center; }
-  .productBox__image {
+  text-align: center;
+  width: 100%; }
+  .productBox__link {
+    display: inline-block;
+    width: 100%; }
+  .productBox .productBox__image {
     display: inline-block;
     height: auto;
     margin: 0;
@@ -211,22 +258,34 @@ html {
     text-overflow: ellipsis;
     white-space: nowrap;
     word-wrap: normal;
+    color: #5a5a5a;
     display: inline-block;
     font-weight: 700;
     text-transform: uppercase;
     white-space: nowrap;
     width: 100%; }
   .productBox__price {
-    color: #ccc;
+    color: #919191;
     font-weight: 700; }
 
+.markshop-logo {
+  text-align: center; }
+  .markshop-logo img {
+    position: relative;
+    width: 18rem;
+    height: auto;
+    line-height: 0;
+    bottom: -0.5rem; }
+
 #header {
-  background: #ccc;
+  padding: 2.3576515979%;
+  background: #1e1e1c;
+  color: #787878;
   width: 100%;
   font-size: .75rem;
-  padding: 2.3576515979%;
   padding-top: 0;
-  padding-bottom: 0; }
+  padding-bottom: 0;
+  margin-bottom: 2rem; }
   #header a {
     text-decoration: none; }
 
@@ -250,7 +309,8 @@ html {
   .topnav__followus__link {
     padding: 0 .5rem;
     font-size: 1rem;
-    line-height: .75rem; }
+    line-height: .75rem;
+    color: #787878; }
   .topnav__account {
     margin-right: 0;
     text-align: right;
@@ -258,6 +318,7 @@ html {
     .topnav__account__link {
       font-weight: 700;
       display: inline-block;
+      color: #787878;
       padding: 0 .5rem; }
   .topnav__pages {
     float: left;
@@ -270,6 +331,7 @@ html {
     .topnav__pages:last-child {
       margin-right: 0; }
     .topnav__pages__link {
+      color: #fff;
       font-weight: 700;
       display: inline-block;
       padding: 0 .5rem; }
