@@ -42,8 +42,7 @@ class Category extends Model
         return $this->hasMany('App\Model\Product');
     }
     public function getUrlAttribute () {
-        $slug = str_slug($this->name);
-        $url = "/productos/{$this->getSlug()}";
+        $url = "/catalogo/{$this->slug}";
         return $url;
     }
     public function getBannerCleanedAttribute() {

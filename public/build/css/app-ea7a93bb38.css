@@ -195,6 +195,86 @@ html {
 .footer-background {
   background: #333; }
 
+.mk-catalog {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto; }
+  .mk-catalog::after {
+    clear: both;
+    content: "";
+    display: table; }
+  .mk-catalog__categories {
+    background: #1e1e1c;
+    float: left;
+    display: block;
+    margin-right: 2.3576515979%;
+    width: 23.2317613015%;
+    font-size: .75rem; }
+    .mk-catalog__categories:last-child {
+      margin-right: 0; }
+    .mk-catalog__categories ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0; }
+    .mk-catalog__categories li a {
+      color: #919191;
+      text-decoration: none;
+      padding: .5rem 1rem;
+      display: inline-block;
+      width: 100%; }
+  .mk-catalog__products {
+    float: left;
+    display: block;
+    margin-right: 2.3576515979%;
+    width: 74.4105871005%;
+    margin: 0 auto; }
+    .mk-catalog__products:last-child {
+      margin-right: 0; }
+    .mk-catalog__products .productBox {
+      float: left;
+      display: block;
+      margin-right: 2.3576515979%;
+      width: 31.7615656014%;
+      margin-bottom: 2rem; }
+      .mk-catalog__products .productBox:last-child {
+        margin-right: 0; }
+      .mk-catalog__products .productBox:nth-child(3n) {
+        margin-right: 0; }
+      .mk-catalog__products .productBox:nth-child(3n+1) {
+        clear: left; }
+
+.mk-paginator {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: right;
+  background: #fff;
+  padding: .5rem 1rem;
+  font-size: .75rem;
+  margin-bottom: 2rem;
+  color: #919191; }
+  .mk-paginator::after {
+    clear: both;
+    content: "";
+    display: table; }
+  .mk-paginator a {
+    text-decoration: none;
+    color: #919191;
+    padding: .5rem; }
+  .mk-paginator .disabled {
+    display: none; }
+  .mk-paginator .active {
+    font-weight: 700;
+    padding: .5rem;
+    color: #5a5a5a; }
+  .mk-paginator__amount {
+    @display : inline-block; }
+  .mk-paginator ul, .mk-paginator li {
+    display: inline-block;
+    list-style-type: none;
+    padding: 0;
+    margin: 0; }
+
 body {
   background: #000 url("/images/woods.jpg") repeat-y;
   background-size: 100%; }

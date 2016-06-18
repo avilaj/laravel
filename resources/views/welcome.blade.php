@@ -52,7 +52,7 @@
         <div class="home-product-slider owl-carousel">
             @foreach ($products as $product)
                 <div class="productBox item">
-                    <a class="productBox__link" href="/catalogo/{{ $product->slug }}" title="{{ $product->title }}">
+                    <a class="productBox__link" href="{{ $product->url }}" title="{{ $product->title }}">
                         <img class="productBox__image" src="http://placehold.it/300x370" alt="{{ $product->title }}">
                         <strong class="productBox__title">{{ $product->title }}</strong>
                         <span class="productBox__price">${{ $product->price }}.</span>

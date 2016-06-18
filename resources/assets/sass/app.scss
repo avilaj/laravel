@@ -1,13 +1,19 @@
 @import 'node_modules/bourbon/app/assets/stylesheets/bourbon';
 @import 'node_modules/bourbon-neat/app/assets/stylesheets/neat';
+$dark: #1e1e1c;
+$gray: #5a5a5a;
+$light-gray: #919191;
 
 @import 'home';
 @import 'carousel';
 @import 'footer';
+@import 'catalog';
+
 body {
   background: #000 url('/images/woods.jpg') repeat-y;
   background-size: 100%;
 }
+
 .news {
   &__box {
     font-size: .75rem;
@@ -28,7 +34,7 @@ body {
 
     &__title {
       @include ellipsis;
-      color: #5a5a5a;
+      color: $gray;
       text-transform: uppercase;
       white-space: nowrap;
       font-weight: 700;
@@ -38,7 +44,7 @@ body {
 
     &__subtitle {
       @include ellipsis;
-      color: #919191;
+      color: $light-gray;
       white-space: nowrap;
       display: inline-block;
     }
@@ -69,7 +75,7 @@ body {
 
   &__title {
     @include ellipsis;
-    color: #5a5a5a;
+    color: $gray;
     display: inline-block;
     font-weight: 700;
     text-transform: uppercase;
@@ -78,7 +84,7 @@ body {
   }
 
   &__price {
-    color: #919191;
+    color: $light-gray;
     font-weight: 700;
   }
 }
@@ -94,7 +100,7 @@ body {
 }
 #header {
   @include pad;
-  background: #1e1e1c;
+  background: $dark;
   color: #787878;
   width: 100%;
   font-size: .75rem;

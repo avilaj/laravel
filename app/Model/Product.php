@@ -41,6 +41,7 @@ class Product extends Model
     public function sizes() {
         return [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46];
     }
+
     public function generateReference($color) {
         foreach ($this->sizes() as $value) {
             Reference::create([
@@ -70,7 +71,7 @@ class Product extends Model
 
     public function getUrlAttribute ()
     {
-        $url = "/productos/{$this->category->slug}/{$this->slug}";
+        $url = "/catalogo/{$this->category->slug}/{$this->slug}";
         return $url;
     }
     public function stock() {
