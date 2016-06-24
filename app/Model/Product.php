@@ -17,14 +17,12 @@ class Product extends Model
                             'subtitle',
                             'thumbnail',
                             'description',
+                            'type_id',
                             'specs',
                             'images',
                             'price',
                             'category_id'];
-    public function find($algo) {
-        Log::info("find");
-        parent::find($algo);
-    }
+
     public function sluggable () {
         return [
             'slug' => [
@@ -35,27 +33,38 @@ class Product extends Model
 
     public function category ()
     {
-    	return $this->belongsTo('App\Model\Category');
+        return $this->belongsTo('App\Model\Category');
     }
 
-    public function sizes() {
-        return [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46];
+    public function type () {
+        return $this->belongsTo('\App\Model\Size');
     }
 
-    public function generateReference($color) {
-        foreach ($this->sizes() as $value) {
-            Reference::create([
-                'product_id' => $this->attributes['id'],
-                'color' => $color,
-                'size' => $value
-            ]);
-        }
+    public function sizes () {
+        return $this->hasManyThrough('\App\Model\Size', '\App\Model\Type');
     }
 
     public function references ()
     {
         return $this->hasMany('App\Model\Reference');
     }
+
+    public function stock() {
+        return $this->hasManyThrough('\App\Model\Stock', '\App\Model\Reference');
+    }
+
+    public function generateReference($colorId) {
+        $this->references()->create([
+            'color_id' => $colorId
+        ]);
+        foreach ($this->sizes() as $size) {
+            
+        }
+    }
+
+    // public function setColorsAttribute($value) {
+    //     $this->attributes['specs'] = $value;
+    // }
 
     // public function orders () {
     //     return $this->hasManyThrough('App\Model\OrderItem', 'App\Model\OrderItem');
@@ -73,9 +82,6 @@ class Product extends Model
     {
         $url = "/catalogo/{$this->category->slug}/{$this->slug}";
         return $url;
-    }
-    public function stock() {
-        return $this->hasManyThrough('\App\Model\Stock', '\App\Model\Reference');
     }
 
     public function getQtyAttribute() {

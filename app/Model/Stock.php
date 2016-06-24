@@ -8,7 +8,7 @@ class Stock extends Model
 {
 
     protected $table = 'stocks';
-    protected $fillable = ['reference', 'qty', 'message'];
+    protected $fillable = ['reference_id', 'size_id', 'qty', 'message'];
 
     public function reference ()
     {

@@ -28,8 +28,8 @@ class CategoriesTableSeeder extends Seeder
         foreach ($categorias as $categoria) {
             # code...
             $data = [
-                'name' => $categoria,
-                'description' => $faker->text()
+                'name' => $categoria
+                // 'description' => $faker->text()
             ];
             Category::create($data);
         }

@@ -15,18 +15,13 @@ class ProductsTableSeeder extends Seeder
     {
         $faker = Faker::create();
         $categories = DB::table('categories')->pluck('id');
-        $colores = [
-            'AZUL',
-            'MARRON',
-            'AMARILLO',
-            'BLANCO',
-            'VIOLETA',
-            'ROJO',
-            'NEGRO'
-        ];
+        $types = DB::table('types')->pluck('id');
+        $colores = DB::table('colors')->pluck('id');
+
         foreach (range(1, 40) as $index) {
             $data = [
                 'category_id' => $faker->randomElement($categories),
+                'type_id' => $faker->randomElement($types),
                 'title' => $faker->sentence($faker->numberBetween(3,7)),
                 'subtitle' => $faker->sentence($faker->numberBetween(5,9)),
                 'description' => $faker->text,
@@ -38,5 +33,11 @@ class ProductsTableSeeder extends Seeder
             $product->generateReference($faker->randomElement($colores));
             $product->generateReference($faker->randomElement($colores));
         }
+        $references = Reference::all();
+
+        foreach ($references as $reference) {
+            $reference->addStock($faker->numberBetween(0, 10) , 'Precarga desde generador');
+        }
+
     }
 }

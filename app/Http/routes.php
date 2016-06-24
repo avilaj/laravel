@@ -20,27 +20,34 @@ Route::get('/', function ()
 
 Route::get('/catalogo', function (Request $request)
 {
-    $products = \App\Model\Product::paginate(12);
-    return view('catalog', [
+    $products = Product::paginate(12);
+    return view('catalog.list', [
         'products' => $products
     ])->render();
 });
 
-Route::get('/catalogo/{category_slug}', function (Request $request,
-                                                  $categorySlug)
-{
-    $products = Product::whereHas('category',
-        function ($query) use ($categorySlug) {
-            $query->where('slug', $categorySlug) ;
-        })
-        ->paginate(12);
+Route::get('/catalogo/{category_slug}',
+    function (Request $request, $categorySlug) {
+        $products = Product::whereHas('category',
+            function ($query) use ($categorySlug)
+            {
+                $query->where('slug', $categorySlug) ;
+            })
+            ->paginate(12);
 
-    return view('catalog',
-        [
-            'products' => $products
-        ])
-        ->render();
+        return view('catalog.list', ['products' => $products])->render();
 });
+
+Route::get('/catalogo/{category_slug}/{product_slug}',
+    function (Request $request, $categorySlug, $productSlug) {
+        $product = Product::where('slug', $productSlug)->first();
+        $references = $product->references->with('total')->groupBy('color');
+        return view('catalog.product', [
+            'product'=> $product,
+            'references' => $references
+        ]);
+});
+
 Route::auth();
 
 Route::get('/home', 'HomeController@index');

@@ -27,7 +27,7 @@ class CreateProductsTable extends Migration
             $table->string('tags')->nullable();
             $table->float('price')->nullable();
             $table->string('link')->nullable();
-            $table->integer('category_id')->nullable();
+            $table->integer('category_id')->references('id')->on('categories');
             $table->timestamps();
         });
     }
