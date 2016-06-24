@@ -19,7 +19,7 @@ class Order extends Model
         return $this->belongsTo('App\Model\User', 'customer_id');
     }
 
-    public function orderItems() {
+    public function items() {
       return $this->hasMany('App\Model\OrderItem');
     }
 
@@ -32,7 +32,7 @@ class Order extends Model
     }
 
     public function updatePrice() {
-      $total = $this->orderItems()->sum(\DB::raw('price*qty'));
+      $total = $this->items()->sum(\DB::raw('price*qty'));
       $this->price = $total;
       $this->save();
     }

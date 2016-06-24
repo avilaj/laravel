@@ -51,6 +51,11 @@ AdminSection::registerModel(Product::class, function (ModelConfiguration $model)
                                         'M'=>'Masculino',
                                         'U'=>'Unisex'])
                                     ->setDefaultValue('M'),
+            AdminFormElement::select('type_id', 'Tipo')
+                                    ->setModelForOptions('App\Model\Type')
+                                    ->setDisplay('label')
+                                    ->setDefaultValue(Request::input('type_id'))
+                                    ->required(),
             AdminFormElement::select('category_id', 'Categoria')
                                     ->setModelForOptions('App\Model\Category')
                                     ->setDisplay('name')

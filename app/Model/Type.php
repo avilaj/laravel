@@ -15,6 +15,7 @@ class Type extends Model
     }
 
     function sizes() {
-    	return $this->belongsToMany('App\Model\Size', 'types_size', 'type_id', 'size_id');
+    	// return $this->hasManyThrough('\App\Model\Size')
+    	return $this->belongsToMany('\App\Model\Size', 'types_size', 'type_id', 'size_id');
     }
 }

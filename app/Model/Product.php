@@ -37,12 +37,12 @@ class Product extends Model
     }
 
     public function type () {
-        return $this->belongsTo('\App\Model\Size');
+        return $this->belongsTo('\App\Model\Type');
     }
 
-    public function sizes () {
-        return $this->hasManyThrough('\App\Model\Size', '\App\Model\Type');
-    }
+    // public function sizes () {
+    //     return $this->hasManyThrough('\App\Model\Size', '\App\Model\Type');
+    // }
 
     public function references ()
     {
@@ -54,17 +54,17 @@ class Product extends Model
     }
 
     public function generateReference($colorId) {
-        $this->references()->create([
-            'color_id' => $colorId
-        ]);
-        foreach ($this->sizes() as $size) {
-            
+        // Log::info($this->type);
+        $sizes = $this->type->sizes;
+        // Log::info($sizes);
+        foreach ($sizes as $size) {
+            $this->references()->create([
+                'reference' => 'MK-'.$this->id.'-'.$colorId,
+                'color_id' => $colorId,
+                'size_id' => $size->id
+            ]);
         }
     }
-
-    // public function setColorsAttribute($value) {
-    //     $this->attributes['specs'] = $value;
-    // }
 
     // public function orders () {
     //     return $this->hasManyThrough('App\Model\OrderItem', 'App\Model\OrderItem');
