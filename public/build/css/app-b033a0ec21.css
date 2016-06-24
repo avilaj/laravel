@@ -195,6 +195,30 @@ html {
 .footer-background {
   background: #333; }
 
+.product-displayer {
+  float: left;
+  display: block;
+  margin-right: 2.3576515979%;
+  width: 48.821174201%;
+  padding: 0;
+  background: #ccc;
+  text-align: center; }
+  .product-displayer:last-child {
+    margin-right: 0; }
+  .product-displayer__view {
+    background-color: purple;
+    display: inline-block;
+    line-height: 0;
+    margin: 0 auto; }
+  .product-displayer__thumbnails {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto; }
+    .product-displayer__thumbnails::after {
+      clear: both;
+      content: "";
+      display: table; }
+
 .mk-catalog {
   max-width: 1200px;
   margin-left: auto;
@@ -274,6 +298,16 @@ html {
     list-style-type: none;
     padding: 0;
     margin: 0; }
+
+.mk-product-page {
+  float: left;
+  display: block;
+  margin-right: 2.3576515979%;
+  width: 74.4105871005%;
+  background: #fff;
+  margin-bottom: 2rem; }
+  .mk-product-page:last-child {
+    margin-right: 0; }
 
 body {
   background: #000 url("/images/woods.jpg") repeat-y;
@@ -421,19 +455,5 @@ body {
     white-space: nowrap; }
   .topnav__item {
     display: inline-block; }
-
-.product-displayer {
-  float: left;
-  display: block;
-  margin-right: 2.3576515979%;
-  width: 48.821174201%;
-  padding: 0;
-  background: #ccc; }
-  .product-displayer:last-child {
-    margin-right: 0; }
-  .product-displayer__view {
-    background-color: purple;
-    display: inline-block;
-    line-height: 0; }
 
 /*# sourceMappingURL=app.css.map */

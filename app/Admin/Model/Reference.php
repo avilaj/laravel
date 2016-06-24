@@ -14,8 +14,8 @@ AdminSection::registerModel(Reference::class, function (ModelConfiguration $mode
     $model->onDisplay(function () {
         $display = AdminDisplay::table();
         $display->with('product');
-        $display->groupBy('color');
         $display->setApply(function ($query) {
+            $query->byProduct();
             $query->orderBy('created_at', 'desc');
         });
         $display->setFilters([
@@ -24,15 +24,16 @@ AdminSection::registerModel(Reference::class, function (ModelConfiguration $mode
             AdminDisplayFilter::field('id')->setTitle('Busqueda por referencia')
         ]);
         $display->setColumns([
-            AdminColumn::text('reference')->setLabel('Código de referencia'),
-            AdminColumn::text('qty')->setLabel('Stock'),
+            AdminColumn::text('id')->setLabel('#'),
             AdminColumn::custom()
                 ->setLabel("Producto")
                 ->setCallback(function ($instance) {
-                    return "<a href='".url('admin/products/'.$instance->product_id.'/edit')."'>".$instance->product_id."</a>";
-                })
+                    return "<a href='".url('admin/products/'.$instance->product_id.'/edit')."'>".$instance->product->title."</a>";
+                }),
+            AdminColumn::text('color')->setLabel('Color'),
+            AdminColumn::text('qty')->setLabel('Stock')
         ]);
-        $display->paginate(5);
+        $display->paginate(20);
         return $display;
     });
     $model->onCreate(function () {
@@ -44,7 +45,11 @@ AdminSection::registerModel(Reference::class, function (ModelConfiguration $mode
                 ->setDisplay('title')
                 ->setDefaultValue(Request::input('product_id'))
                 ->required(),
-            AdminFormElement::text('specs', 'Especificaciones')
+            AdminFormElement::select('color_id', 'Color')
+                ->setModelForOptions('App\Model\Color')
+                ->setDisplay('name')
+                ->setDefaultValue(Request::input('color_id'))
+                ->required()
         ]);
         $form->getButtons()
             ->setSaveButtonText('Guardar')
@@ -56,11 +61,17 @@ AdminSection::registerModel(Reference::class, function (ModelConfiguration $mode
         $form = AdminForm::form()->setItems([
             AdminFormElement::text('reference', 'Código de referencia')
                 ->required(),
+            AdminFormElement::select('color_id', 'Color')
+                ->setModelForOptions('App\Model\Color')
+                ->setDisplay('name')
+                ->setDefaultValue(Request::input('color_id'))
+                ->required(),
+            AdminFormElement::multiselect('sizes', 'Talles')
+                ->taggable(),
             AdminFormElement::select('product_id', 'Producto')
                 ->setModelForOptions('App\Model\Product')
                 ->setDisplay('title')
-                ->required(),
-            AdminFormElement::text('specs', 'Especificaciones')
+                ->required()
         ]);
         $form->getButtons()
             ->setSaveButtonText('Guardar')

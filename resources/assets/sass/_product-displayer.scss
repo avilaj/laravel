@@ -1,0 +1,17 @@
+.product-displayer {
+  @include span-columns(6);
+  @include pad(0);
+  background: #ccc;
+  text-align: center;
+  &__view {
+    background-color: purple;
+    display: inline-block;
+    line-height: 0;
+    margin: 0 auto;
+  }
+
+  &__thumbnails {
+    @include outer-container;
+  }
+
+}
