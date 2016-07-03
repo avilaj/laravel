@@ -11,6 +11,7 @@
 |
 */
 use \App\Model\Product;
+use \App\Model\Reference;
 
 Route::get('/', function ()
 {
@@ -41,11 +42,27 @@ Route::get('/catalogo/{category_slug}',
 Route::get('/catalogo/{category_slug}/{product_slug}',
     function (Request $request, $categorySlug, $productSlug) {
         $product = Product::where('slug', $productSlug)->first();
-        $references = $product->references->with('total')->groupBy('color');
+        $colors = $product->colors->unique('id')->lists('name', 'id');
+        $references = $product->availableReferences();
         return view('catalog.product', [
             'product'=> $product,
+            'colors' => $colors,
             'references' => $references
         ]);
+});
+
+Route::get('/check-out', function () {
+  return view('checkout.index', ['cart' => Cart::content() ]);
+});
+
+Route::get('/check-out/add', function () {
+  if (! Request::input('reference_id')) {
+    return error(400);
+  }
+  $reference = Reference::with('product', 'size', 'color')->find(Request::input('reference_id'));
+  $qty = Request::input('qty', 1);
+  Cart::add($reference->id, $reference->product->title, $qty, $reference->product->price, ['color' => $reference->color->name, 'size'=> $reference->size->label]);
+  return ['products'=>Cart::count(), 'price'=>Cart::total()];
 });
 
 Route::auth();

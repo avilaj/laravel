@@ -59,12 +59,6 @@ $(document).ready(function () {
         selection.push(ref);
       }
     }
-    select.insetHTML = "";
-    var defaultOption = document.createElement("option");
-    defaultOption.value = "";
-
-    defaultOption.insetHTML = "Seleccione su talle";
-    select.appendChild(defaultOption);
     for (var i = 0; i < selection.length; i++) {
       var size = selection[i];
       var option = document.createElement("option");
@@ -80,13 +74,18 @@ $(document).ready(function () {
   }
 
   function setColor(color) {
+    $(select).html('');
+    $(select).attr('value', '');
+    $(select).append('<option> Seleccione su talle </option>')
     addSizes(color);
   }
 
   function addToCart() {
     var product = select.value;
     var quantity = qty.value;
-
-    console.log(product, quantity);
+    $.get('/check-out/add', {'reference_id': product, 'qty': quantity}).done(function (data) {
+      $(".cart-product-count").html("("+data.products+")");
+    });
   }
+  $('input:radio[name=color]:first').click();
   // function addToCart() {}
