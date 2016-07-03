@@ -42,6 +42,7 @@ return [
             (new Page(\App\Model\Product::class))->setTitle('Productos'),
             (new Page(\App\Model\Reference::class))->setTitle('Modelos'),
             (new Page(\App\Model\Stock::class))->setTitle('Stock'),
+            (new Page(\App\Model\Type::class))->setTitle('Talles'),
         ]
     ],
     [

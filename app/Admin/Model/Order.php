@@ -43,10 +43,14 @@ AdminSection::registerModel(Order::class, function (ModelConfiguration $model) {
     // Create And Edit
     $model->onCreateAndEdit(function() {
         $form = AdminForm::form()->setItems([
-            AdminFormElement::text('title', 'Producto')->required(),
-            AdminFormElement::text('subtitle', 'Subtitulo')->required(),
-            AdminFormElement::jsonField('references', 'Referencias'),
-            // AdminFormElement::select('category_id', 'Categoria')->setModelForOptions('App\Model\Category')->setDisplay('name')->required(),
+
+            AdminFormElement::select('status', 'Estado')
+                                    ->setOptions([
+                                      'PROCESANDO'=>'1 - Procesando',
+                                      'EMPACANDO'=>'2 - Empacando',
+                                      'ENVIADO'=>'3 - Enviado',
+                                      'RECIBIDO'=>'4 - Recibido'])
+                                    ->setDefaultValue('PROCESANDO'),
             AdminFormElement::wysiwyg('description', 'Descripción', 'tinymce')
         ]);
         $form->getButtons()

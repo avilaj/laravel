@@ -13,9 +13,8 @@ AdminSection::registerModel(Reference::class, function (ModelConfiguration $mode
     $model->setAlias('references');
     $model->onDisplay(function () {
         $display = AdminDisplay::datatables();
-        $display->with('product','color', 'size');
+        $display->with('color', 'size');
         $display->setApply(function ($query) {
-            // $query->byProduct();
             $query->orderBy('created_at', 'desc');
         });
         $display->setFilters([
@@ -24,9 +23,9 @@ AdminSection::registerModel(Reference::class, function (ModelConfiguration $mode
             AdminDisplayFilter::field('id')->setTitle('Busqueda por referencia')
         ]);
         $display->setColumns([
-            AdminColumn::text('id')->setLabel('#'),
+            AdminColumn::text('reference')->setLabel('#'),
             AdminColumn::custom()
-                ->setLabel("Producto")
+                ->setLabel("Ref")
                 ->setCallback(function ($instance) {
                     return "<a href='".url('admin/products/'.$instance->product_id.'/edit')."'>".$instance->product->title."</a>";
                 }),
