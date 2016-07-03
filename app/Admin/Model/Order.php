@@ -13,7 +13,7 @@ AdminSection::registerModel(Order::class, function (ModelConfiguration $model) {
     $model->setTitle("Ordenes de compra");
     $model->setAlias('orders');
     $model->onDisplay(function () {
-        $display = AdminDisplay::table();
+        $display = AdminDisplay::datatables();
         $display->with('user');
         $display->setApply(function($query) {
             $query->orderBy('created_at', 'desc');

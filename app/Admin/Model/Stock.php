@@ -12,7 +12,7 @@ AdminSection::registerModel(Stock::class, function (ModelConfiguration $model) {
     // $model->with('reference');
     $model->setAlias('stock');
     $model->onDisplay(function () {
-        return AdminDisplay::table()->setApply(function($query) {
+        return AdminDisplay::datatables()->setApply(function($query) {
             $query->orderBy('created_at', 'desc');
         })->setColumns([
             AdminColumn::text('reference.reference')->setLabel('Producto'),

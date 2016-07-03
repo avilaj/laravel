@@ -67,8 +67,10 @@ AdminSection::registerModel(Reference::class, function (ModelConfiguration $mode
                 ->setDisplay('name')
                 ->setDefaultValue(Request::input('color_id'))
                 ->required(),
-            AdminFormElement::multiselect('sizes', 'Talles')
-                ->taggable(),
+                AdminFormElement::select('size_id', 'Size')
+                    ->setModelForOptions('App\Model\Size')
+                    ->setDisplay('label')
+                    ->required(),
             AdminFormElement::select('product_id', 'Producto')
                 ->setModelForOptions('App\Model\Product')
                 ->setDisplay('title')

@@ -12,7 +12,7 @@ AdminSection::registerModel(Product::class, function (ModelConfiguration $model)
     $model->setTitle("Productos");
     $model->setAlias('products');
     $model->onDisplay(function () {
-        $display = AdminDisplay::table();
+        $display = AdminDisplay::datatables();
         $display->setApply(function($query) {
             $query->orderBy('created_at', 'desc');
         });
