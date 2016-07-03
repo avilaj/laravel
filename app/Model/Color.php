@@ -14,9 +14,9 @@ class Color extends Model
                            'updated_at'];
 
     public function products() {
-        return $this->hasManyThrough('\App\Model\Product', '\App\Model\Reference');
+        // return $this->hasManyThrough('\App\Model\Product', '\App\Model\Reference');
+        return $this->belongsToMany('\App\Model\Product', 'references', 'color_id', 'product_id');
     }
-
     public function references () {
         return $this->hasMany('App\Model\Reference');
     }

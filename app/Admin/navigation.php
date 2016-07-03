@@ -40,7 +40,7 @@ return [
         'title' => 'Tienda',
         'pages' => [
             (new Page(\App\Model\Product::class))->setTitle('Productos'),
-            (new Page(\App\Model\Reference::class))->setTitle('Referencias'),
+            (new Page(\App\Model\Reference::class))->setTitle('Modelos'),
             (new Page(\App\Model\Stock::class))->setTitle('Stock'),
         ]
     ],

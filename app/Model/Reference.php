@@ -15,6 +15,11 @@ class Reference extends Model
         return $this->belongsTo('App\Model\Product', 'product_id');
     }
 
+    public function color ()
+    {
+        return $this->belongsTo('App\Model\Color');
+    }
+
     public function size () {
         return $this->belongsTo('\App\Model\Size');
     }
@@ -49,8 +54,14 @@ class Reference extends Model
     public function getQtyAttribute() {
     	return $this->stock()->sum('qty');
     }
+
     public function total() {
         return $this->stock()->sum('qty');
     }
 
+    // public function save(array $params = array()) {
+    //     \Log::info("Guardar la concha de tu madre");
+    //     $sizes = $this->product()->type()->sizes();
+    //     parent::save($params);
+    // }
 }

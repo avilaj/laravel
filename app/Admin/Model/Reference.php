@@ -9,18 +9,18 @@ use App\Model\Product;
 use SleepingOwl\Admin\Model\ModelConfiguration;
 use SleepingOwl\Admin\Display\Filter\FilterBase;
 AdminSection::registerModel(Reference::class, function (ModelConfiguration $model) {
-    $model->setTitle("Referencias");
+    $model->setTitle("Modelos");
     $model->setAlias('references');
     $model->onDisplay(function () {
-        $display = AdminDisplay::table();
-        $display->with('product');
+        $display = AdminDisplay::datatables();
+        $display->with('product','color', 'size');
         $display->setApply(function ($query) {
-            $query->byProduct();
+            // $query->byProduct();
             $query->orderBy('created_at', 'desc');
         });
         $display->setFilters([
             AdminDisplayFilter::related('product_id')
-                ->setModel(Product::class),
+                ->setModel(Product::class)->setDisplay('title'),
             AdminDisplayFilter::field('id')->setTitle('Busqueda por referencia')
         ]);
         $display->setColumns([
@@ -30,7 +30,8 @@ AdminSection::registerModel(Reference::class, function (ModelConfiguration $mode
                 ->setCallback(function ($instance) {
                     return "<a href='".url('admin/products/'.$instance->product_id.'/edit')."'>".$instance->product->title."</a>";
                 }),
-            AdminColumn::text('color')->setLabel('Color'),
+            AdminColumn::text('color.name')->setLabel('Color'),
+            AdminColumn::text('size.label')->setLabel('Size'),
             AdminColumn::text('qty')->setLabel('Stock')
         ]);
         $display->paginate(20);

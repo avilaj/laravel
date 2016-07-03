@@ -20,12 +20,14 @@ AdminSection::registerModel(Product::class, function (ModelConfiguration $model)
             AdminColumn::text('title')->setLabel('Producto'),
             AdminColumn::text('qty')->setLabel('Stock'),
             AdminColumn::custom()
-                ->setLabel("Referencias")
+                ->setLabel("Modelos")
                 ->setCallback(function ($instance) {
                     $link  = url("admin/references?product_id=".$instance->id);
-                    $label = $instance->references->count();
+                    $label = $instance->references->unique('color_id')->count();
                     if ($label < 1 ) {
                         $label = $label . " <small>(Añadir)</small>";
+                    } else {
+                        $label = $label . " <small>(Mostrar)</small>";
                     }
                     return '<a href="'.$link.'">'.$label.'</a>';
                 }),
@@ -45,6 +47,9 @@ AdminSection::registerModel(Product::class, function (ModelConfiguration $model)
             AdminFormElement::text('title', 'Producto')->required(),
             AdminFormElement::text('subtitle', 'Subtitulo')->required(),
             AdminFormElement::text('price', 'Precio')->required(),
+            AdminFormElement::multiselect('variations', 'Variantes')
+                                    ->setOptions(\App\Model\Color::get()->lists('name', 'id')->toArray())
+                                    ->required(),
             AdminFormElement::select('gender', 'Genero')
                                     ->setOptions([
                                         'F'=>'Femenino',
