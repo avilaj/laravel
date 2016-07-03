@@ -82,6 +82,16 @@ class Product extends Model
         }
     }
 
+    public function availableReferences () {
+      return \DB::table('references')
+        ->join('sizes', 'sizes.id', '=', 'references.size_id')
+        ->join('stocks', 'references.id', '=', 'stocks.reference_id')
+        ->select('references.id as id', 'sizes.label','references.color_id', \DB::raw('SUM(stocks.qty) as total'))
+        ->groupBy('references.id')
+        ->where('references.product_id', $this->id)
+        ->get();
+    }
+
     // public function orders () {
     //     return $this->hasManyThrough('App\Model\OrderItem', 'App\Model\OrderItem');
     // }

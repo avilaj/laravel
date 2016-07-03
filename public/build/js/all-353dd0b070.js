@@ -47,34 +47,49 @@ $(document).ready(function () {
     url: 'http://placehold.it/600x900/09f/fff?text=product+view'
   });
 });
-Select.init({
-  selector: '.mk-select'
-});
+
 var cart = {};
-function addSizes(color) {
-  var options = sizes[color];
-  var el = '<option value=""> Seleccione su talle </option>';
-  $.each(sizes[color], function (e, i) {
-    var label = i.size;
-    var qty = i.qty;
-    console.log(qty);
-    if (qty < 1) {
-      label += " AGOTADO";
-    } else {
-      if (qty < 3) {
-        label += " " + qty + " unidades";
-      }
+var select = document.getElementById("product-size");
+var qty = document.getElementById("product-qty");
+
+function addSizes(colorId) {
+  var options = sizes;
+  var selection = [];
+  for (var i = 0; i < options.length; i++) {
+    var ref = options[i];
+    if (ref.color_id == colorId) {
+      selection.push(ref);
     }
-    el += '<option value="' + e + '">' + label + '</option>';
-  });
-  $("#product-size-selector").html(el);
+  }
+  select.insetHTML = "";
+  var defaultOption = document.createElement("option");
+  defaultOption.value = "";
+
+  defaultOption.insetHTML = "Seleccione su talle";
+  select.appendChild(defaultOption);
+  for (var i = 0; i < selection.length; i++) {
+    var size = selection[i];
+    var option = document.createElement("option");
+    option.value = size.id;
+    var label = size.label;
+    if (size.total == "0") {
+      label += " AGOTADO";
+      option.disabled = true;
+    }
+    option.innerText = label;
+    select.appendChild(option);
+  }
 }
-// function setProduct(ref) {}
+
 function setColor(color) {
-  console.log(color);
   addSizes(color);
 }
 
-function addToCart(amount) {}
+function addToCart() {
+  var product = select.value;
+  var quantity = qty.value;
+
+  console.log(product, quantity);
+}
 // function addToCart() {}
 //# sourceMappingURL=all.js.map

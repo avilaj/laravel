@@ -1,79 +1,92 @@
-    $(document).ready(function () {
-        var news = $("#news-slider");
-        news.owlCarousel({
-            margin: 10,
-            nav: true,
-            navClass: ['owl-prev fa fa-angle-left', 'owl-next fa fa-angle-right'],
-            navText: false,
-            loop: true,
-            responsive: {
-              0: {
-                items: 2
-              },
-              1000: {
-                items: 4
-              }
-          }
-        });
-        var product = $(".home-product-slider");
-        product.owlCarousel({
-            margin: 10,
-            nav: true,
-            navClass: ['owl-prev fa fa-angle-left', 'owl-next fa fa-angle-right'],
-            navText: false,
-            loop: true,
-            responsive: {
-              0: {
-                items: 1
-              },
-              600: {
-                items: 3
-              },
-              1000: {
-                items: 5
-              }}
-        });
-        var productThumbnails = $('.product-displayer__thumbnails');
-        productThumbnails.owlCarousel({
-          margin: 10,
-          nav: true,
-          navClass: ['owl-prev fa fa-angle-left', 'owl-next fa fa-angle-right'],
-          navText: false,
-          auto: false
-        });
-        $('.product-displayer__view').zoom({
-            url: 'http://placehold.it/600x900/09f/fff?text=product+view'
-        });
-    });
-  Select.init({
-    selector: '.mk-select'
-  });
-var cart = {};
-function addSizes(color) {
-  var options = sizes[color];
-  var el = '<option value=""> Seleccione su talle </option>';
-  $.each(sizes[color], function (e, i) {
-    var label = i.size;
-    var qty = i.qty;
-    console.log(qty);
-    if (qty < 1) {
-      label += " AGOTADO";
-    } else {
-      if (qty < 3) {
-        label += " " + qty + " unidades";
+$(document).ready(function () {
+  var news = $("#news-slider");
+  news.owlCarousel({
+    margin: 10,
+    nav: true,
+    navClass: ['owl-prev fa fa-angle-left', 'owl-next fa fa-angle-right'],
+    navText: false,
+    loop: true,
+    responsive: {
+      0: {
+        items: 2
+      },
+      1000: {
+        items: 4
       }
     }
-    el += '<option value="'+e+'">'+ label +'</option>'
   });
-  $("#product-size-selector").html(el);
-}
-// function setProduct(ref) {}
-function setColor(color) {
-  console.log(color);
-  addSizes(color);
-}
+  var product = $(".home-product-slider");
+  product.owlCarousel({
+    margin: 10,
+    nav: true,
+    navClass: ['owl-prev fa fa-angle-left', 'owl-next fa fa-angle-right'],
+    navText: false,
+    loop: true,
+    responsive: {
+      0: {
+        items: 1
+      },
+      600: {
+        items: 3
+      },
+      1000: {
+        items: 5
+      }}
+    });
+    var productThumbnails = $('.product-displayer__thumbnails');
+    productThumbnails.owlCarousel({
+      margin: 10,
+      nav: true,
+      navClass: ['owl-prev fa fa-angle-left', 'owl-next fa fa-angle-right'],
+      navText: false,
+      auto: false
+    });
+    $('.product-displayer__view').zoom({
+      url: 'http://placehold.it/600x900/09f/fff?text=product+view'
+    });
+  });
 
-function addToCart(amount) {
+  var cart = {};
+  var select = document.getElementById("product-size");
+  var qty = document.getElementById("product-qty");
 
-}
-// function addToCart() {}
+  function addSizes (colorId) {
+    var options = sizes;
+    var selection = [];
+    for (var i = 0; i < options.length; i++) {
+      var ref = options[i]
+      if (ref.color_id == colorId) {
+        selection.push(ref);
+      }
+    }
+    select.insetHTML = "";
+    var defaultOption = document.createElement("option");
+    defaultOption.value = "";
+
+    defaultOption.insetHTML = "Seleccione su talle";
+    select.appendChild(defaultOption);
+    for (var i = 0; i < selection.length; i++) {
+      var size = selection[i];
+      var option = document.createElement("option");
+      option.value = size.id;
+      var label = size.label;
+      if (size.total == "0") {
+        label += " AGOTADO";
+        option.disabled = true;
+      }
+      option.innerText = label;
+      select.appendChild(option);
+    }
+  }
+
+  function setColor(color) {
+    addSizes(color);
+  }
+
+  function addToCart() {
+    var product = select.value;
+    var quantity = qty.value;
+
+    console.log(product, quantity);
+  }
+  // function addToCart() {}
