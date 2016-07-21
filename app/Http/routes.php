@@ -42,7 +42,7 @@ Route::get('/catalogo/{category_slug}',
 Route::get('/catalogo/{category_slug}/{product_slug}',
     function (Request $request, $categorySlug, $productSlug) {
         $product = Product::where('slug', $productSlug)->first();
-        $colors = $product->colors->unique('id')->lists('name', 'id');
+        $colors = $product->colors->unique('id')->values()->all();
         $references = $product->availableReferences();
         return view('catalog.product', [
             'product'=> $product,
@@ -52,17 +52,55 @@ Route::get('/catalogo/{category_slug}/{product_slug}',
 });
 
 Route::get('/check-out', function () {
-  return view('checkout.index', ['cart' => Cart::content() ]);
+  $cart = App\Model\Order::currentCart();
+  return view('checkout.index', [
+    'items' => $cart->content(),
+    'total' => $cart->total()
+  ]);
 });
+Route::get('/check-out/proceed', function () {
+  $cart = App\Model\Order::currentCart();
+  $payment = App\Model\Order::CreatePayment();
+  // dd($payment);
+  return view('checkout.proceed', [
+    'payment_link' => $payment["response"]["sandbox_init_point"],
+    'items' => $cart->content(),
+    'total' => $cart->total()
+  ]);
+});
+Route::get('/check-out/set', function () {
+  $reference_id = (int) Request::input('reference_id');
+  $qty = (int) Request::input('qty', 1);
 
-Route::get('/check-out/add', function () {
-  if (! Request::input('reference_id')) {
-    return error(400);
+  if (! $reference_id) {
+    return abort(400, 'Faltan parámetros.');
   }
-  $reference = Reference::with('product', 'size', 'color')->find(Request::input('reference_id'));
-  $qty = Request::input('qty', 1);
-  Cart::add($reference->id, $reference->product->title, $qty, $reference->product->price, ['color' => $reference->color->name, 'size'=> $reference->size->label]);
-  return ['products'=>Cart::count(), 'price'=>Cart::total()];
+  $cart = App\Model\Order::currentCart();
+  $exists = $cart->search(function ($item) use ($reference_id) {
+    return $item->id == $reference_id;
+  });
+
+  if (!($exists instanceof Illuminate\Support\Collection)) {
+    $cart->update($exists->rowId, $qty);
+  } else {
+    if ($qty > 0) {
+      $reference = Reference::with('product', 'size', 'color')->find($reference_id);
+      $cart->add($reference->id,
+        $reference->product->title,
+        $qty,
+        $reference->product->price,
+        [
+          'color' => $reference->color->name,
+          'size'=> $reference->size->label
+        ]
+      );
+    }
+  }
+  // if ($qty > 0) {
+  // } else {
+  //   $cart->remove($exists->rowId);
+  // }
+  return ['products'=>$cart->count(), 'price'=>$cart->total()];
 });
 
 Route::auth();
