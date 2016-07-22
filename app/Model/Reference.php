@@ -36,17 +36,17 @@ class Reference extends Model
         return $query->groupBy('color_id');
     }
 
-    public function addStock(int $amount, string $reason) {
+    public function addStock($amount, $reason) {
     	$stock = new Stock([
                     'message' => $reason,
-                    'qty' => $amount,
+                    'qty' => (int) $amount,
                     'reference_id' => $this->attributes['id']]);
     	$stock->save();
     }
-    public function takeStock(int $amount, string $reason) {
+    public function takeStock($amount, $reason) {
     	$stock = new Stock([
                     'message' => $reason,
-                    'qty' => $amount * -1,
+                    'qty' => (int) $amount * -1,
                     'reference_id' => $this->attributes['id']]);
     	$stock->save();
     }
