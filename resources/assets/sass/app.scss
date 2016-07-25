@@ -91,6 +91,9 @@ body {
 }
 .markshop-logo {
   text-align: center;
+  background: transparent url('/images/header.jpg') no-repeat;
+  background-position: center center;
+  background-size: cover;
   img {
     position: relative;
     width: 18rem;

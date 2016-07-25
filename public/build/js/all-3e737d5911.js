@@ -123,13 +123,40 @@ $(document).ready(function () {
 //   $('input:radio[name=color]:first').click();
 //   // function addToCart() {}
 //
+// angular.module('filtering', [])
+//   .controller('filteringCtrl', ['$scope','$location', function ($scope, $location) {
+//     console.log($location);
+//     let defaults = {
+//       'price': '0-3000',
+//       'brand': null,
+//       'search': null
+//     };
+//     this.applyFilter = () => {
+//       let params = {};
+//       params.price = this.minprice + '-' + this.maxprice;
+//       params.brand = this.brand;
+//     }
+//     this.brand = null;
+//     this.minprice = 70;
+//     this.maxprice = 3000;
+//   }])
+//   .component('priceFilter', {
+//     template: ''
+//   });
 
-angular.module('mkcart', []).service('Product', function ($http, $window) {
+angular.module('mkcart', []).service('Product', ['$http', '$window', '$rootScope', function ($http, $window, $scope) {
   var _this = this;
 
   this.count = $window.mkStore.productCount || 0;
+  $scope.$watch(function () {
+    return $window.mkStore.productCount;
+  }, function (value) {
+    return _this.count = value;
+  });
   this.setCount = function (amount) {
-    return _this.count = amount;
+    $window.mkStore = $window.mkStore || {};
+    $window.mkStore.productCount = amount;
+    _this.count = amount;
   };
   this.getCount = function () {
     console.log('devuelve', this.count);
@@ -144,14 +171,14 @@ angular.module('mkcart', []).service('Product', function ($http, $window) {
       return _this.setCount(res.data.products);
     });
   };
-}).controller('ProductController', function ($window, Product) {
+}]).controller('ProductController', ['$window', 'Product', function ($window, Product) {
   var self = this;
   this.colors = $window.mkStore.colors;
   this.sizes = $window.mkStore.sizes;
   this.addToCart = function (reference, qty) {
     Product.add(reference.id, qty);
   };
-}).controller('CartController', function ($window, $http) {
+}]).controller('CartController', ['$window', 'Product', function ($window, $http) {
   var self = this;
   this.products = $window.cartProducts;
   this.total = 0;
@@ -180,25 +207,28 @@ angular.module('mkcart', []).service('Product', function ($http, $window) {
     return self.total;
   };
   this.updateTotal();
-});
-
-angular.module('mkCartTotal', ['mkcart']).service('Cart', function (Product) {
-  this.total = function () {
-    return Product.getCount();
-  };
-}).controller('TotalController', function (Product, Cart, $scope) {
+}]).controller('TotalController', ['Product', function (Product) {
   var self = this;
-  this.total = Cart.total();
-  this.cart = Cart;
-  $scope.$watch(function () {
-    return self.total;
-  }, function (value, el) {
-    console.log('cambio', value);
-  });
-}).component('cartTotal', {
+  // this.total = Cart.total();
+  this.cart = Product;
+  // $scope.$watch(function () {
+  //   return self.total
+  // }, function (value, el) {
+  //   console.log('cambio', value);
+  // })
+}]).component('cartTotal', {
   template: "({{ cart.cart.total() }})",
   controller: "TotalController",
   controllerAs: 'cart'
 });
-angular.bootstrap(document.querySelector('.cart-product-count'), ['mkCartTotal']);
+
+// angular.
+//   module('mkCartTotal', ['mkcart'])
+//   .service('Cart', function (Product) {
+//     this.total = function () {
+//       return Product.getCount();
+//     }
+//   })
+angular.bootstrap(document.querySelector('.cart-product-count'), ['mkcart']);
+// angular.bootstrap(document.getElementById('filtering'), ['filtering']);
 //# sourceMappingURL=all.js.map

@@ -15,40 +15,136 @@ use \App\Model\Reference;
 
 Route::get('/', function ()
 {
-    return view('welcome', [
-        'products' => \App\Model\Product::with('category')->get()]);
+  return view('welcome', [
+    'products' => \App\Model\Product::with('category')->get()]);
 });
 
-Route::get('/catalogo', function (Request $request)
-{
-    $products = Product::paginate(12);
+
+Route::group(['prefix' => 'catalogo'], function () {
+  $prices = [
+    '0-100' => '$0 - $100',
+    '100-500' => '$100 - $500',
+    '500-1000' => '$500 - $1000',
+    '1000-2000' => '$1000 - $2000',
+    '2000-3000' => '$2000 - $3000',
+    '3000-9999' => 'más de $3000'
+  ];
+
+  $appliedFilter = function () use ($prices) {
+    $filters = [];
+    $currentRoute = url()->current();
+    if (Request::route()->hasParameter('category_slug')) {
+
+      $category_slug = Request::route()
+        ->getParameter('category_slug');
+
+      $category = \App\Model\Category::whereSlug($category_slug)
+        ->first();
+
+      if ($category) {
+        $filters['category'] = (object) [
+          'label' => $category->name,
+          'link' =>
+            url('/catalog')
+            .'?'
+            .http_build_query(Request::query())
+        ];
+      }
+    }
+
+    if(Request::has('brand')) {
+      $brand = \App\Model\Brand::find(Request::input('brand'));
+
+      if ($brand) {
+        $filters['brand'] = (object) [
+        'label' => $brand->name,
+        'link' => $currentRoute.'?'.http_build_query(Request::except('brand'))
+        ];
+      }
+    }
+
+    if(Request::has('price')) {
+      $filters['price'] = (object) [
+        'label' => $prices[Request::input('price')],
+        'link' => $currentRoute.'?'.http_build_query(Request::except('price'))
+      ];
+    }
+    if(Request::has('search')) {
+      $filters['search'] = (object) [
+        'label' => Request::input('search'),
+        'link' => $currentRoute.'?'.http_build_query(Request::except('search'))
+      ];
+    }
+    return $filters;
+  };
+
+  $filter = function ($query) {
+    if (Request::has('brand')) {
+      $query->ofBrand(Request::input('brand'));
+    }
+
+    if (Request::has('price')) {
+      $price = Request::input('price');
+      $price = explode('-', $price);
+      if (count($price) === 2) {
+        $query->priceBetween($price);
+      }
+    }
+
+    if (Request::has('search')) {
+      $query->search(Request::input('search'));
+    }
+  };
+
+  $brands = \App\Model\Brand::all();
+
+  Route::get('/', function (Request $request)
+    use ($filter, $prices, $brands, $appliedFilter)
+  {
+    $products = Product::where($filter)->paginate(12);
     return view('catalog.list', [
+      'filters' => $appliedFilter(),
+      'prices' => $prices,
+      'brands' => $brands,
+      'products' => $products
+      ])->render();
+  });
+
+  Route::get('/{category_slug}',
+    function (Request $request, $categorySlug)
+      use ($filter, $prices, $brands, $appliedFilter)
+    {
+      $products = Product::whereHas('category',
+        function ($query) use ($categorySlug)
+        {
+          $query->where('slug', $categorySlug) ;
+        })
+      ->where($filter)
+      ->paginate(12);
+
+      return view('catalog.list', [
+        'filters' => $appliedFilter(),
+        'prices' => $prices,
+        'brands' => $brands,
         'products' => $products
-    ])->render();
-});
+        ])->render();
+    });
 
-Route::get('/catalogo/{category_slug}',
-    function (Request $request, $categorySlug) {
-        $products = Product::whereHas('category',
-            function ($query) use ($categorySlug)
-            {
-                $query->where('slug', $categorySlug) ;
-            })
-            ->paginate(12);
-
-        return view('catalog.list', ['products' => $products])->render();
-});
-
-Route::get('/catalogo/{category_slug}/{product_slug}',
-    function (Request $request, $categorySlug, $productSlug) {
-        $product = Product::where('slug', $productSlug)->first();
-        $colors = $product->colors->unique('id')->values()->all();
-        $references = $product->availableReferences();
-        return view('catalog.product', [
-            'product'=> $product,
-            'colors' => $colors,
-            'references' => $references
+  Route::get('/{category_slug}/{product_slug}',
+    function (Request $request, $categorySlug, $productSlug)
+      use ($prices, $brands)
+    {
+      $product = Product::where('slug', $productSlug)->first();
+      $colors = $product->colors->unique('id')->values()->all();
+      $references = $product->availableReferences();
+      return view('catalog.product', [
+        'prices' => $prices,
+        'brands' => $brands,
+        'product'=> $product,
+        'colors' => $colors,
+        'references' => $references
         ]);
+    });
 });
 
 Route::get('/check-out', function () {
@@ -56,7 +152,7 @@ Route::get('/check-out', function () {
   return view('checkout.index', [
     'items' => $cart->content(),
     'total' => $cart->total()
-  ]);
+    ]);
 });
 Route::get('/check-out/proceed', function () {
   $cart = App\Model\Order::currentCart();
@@ -66,7 +162,7 @@ Route::get('/check-out/proceed', function () {
     'payment_link' => $payment["response"]["sandbox_init_point"],
     'items' => $cart->content(),
     'total' => $cart->total()
-  ]);
+    ]);
 });
 Route::get('/check-out/set', function () {
   $reference_id = (int) Request::input('reference_id');
@@ -90,10 +186,10 @@ Route::get('/check-out/set', function () {
         $qty,
         $reference->product->price,
         [
-          'color' => $reference->color->name,
-          'size'=> $reference->size->label
+        'color' => $reference->color->name,
+        'size'=> $reference->size->label
         ]
-      );
+        );
     }
   }
   // if ($qty > 0) {

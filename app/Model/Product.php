@@ -19,6 +19,7 @@ class Product extends Model
                             'description',
                             'variations',
                             'type_id',
+                            'brand_id',
                             'specs',
                             'images',
                             'price',
@@ -30,6 +31,10 @@ class Product extends Model
                 'source' => 'title'
             ]
         ];
+    }
+
+    public function brand () {
+        return $this->belongsTo('\App\Model\Brand');
     }
 
     public function category ()
@@ -52,6 +57,20 @@ class Product extends Model
 
     public function colors () {
         return $this->belongsToMany('\App\Model\Color', 'references', 'product_id', 'color_id');
+    }
+
+    public function scopeOfBrand($query, $brand_id) {
+        return $query->where('brand_id', $brand_id);
+    }
+
+    public function scopePriceBetween($query, $range) {
+        return $query->whereBetween('price', $range);
+    }
+
+    public function scopeSearch($query, $term) {
+        return $query
+            ->where('title', 'like', '%'.$term.'%')
+            ->orWhere('subtitle', 'like', '%'.$term.'%');
     }
 
     public function setVariationsAttribute($colors) {
