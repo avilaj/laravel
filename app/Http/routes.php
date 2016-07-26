@@ -96,11 +96,11 @@ Route::group(['prefix' => 'catalogo'], function () {
     }
   };
 
-  $brands = \App\Model\Brand::all();
 
   Route::get('/', function (Request $request)
-    use ($filter, $prices, $brands, $appliedFilter)
+    use ($filter, $prices, $appliedFilter)
   {
+    $brands = \App\Model\Brand::all();
     $products = Product::where($filter)->paginate(12);
     return view('catalog.list', [
       'filters' => $appliedFilter(),
@@ -112,8 +112,9 @@ Route::group(['prefix' => 'catalogo'], function () {
 
   Route::get('/{category_slug}',
     function (Request $request, $categorySlug)
-      use ($filter, $prices, $brands, $appliedFilter)
+      use ($filter, $prices, $appliedFilter)
     {
+      $brands = \App\Model\Brand::all();
       $products = Product::whereHas('category',
         function ($query) use ($categorySlug)
         {
@@ -132,8 +133,9 @@ Route::group(['prefix' => 'catalogo'], function () {
 
   Route::get('/{category_slug}/{product_slug}',
     function (Request $request, $categorySlug, $productSlug)
-      use ($prices, $brands)
+      use ($prices)
     {
+      $brands = \App\Model\Brand::all();
       $product = Product::where('slug', $productSlug)->first();
       $colors = $product->colors->unique('id')->values()->all();
       $references = $product->availableReferences();
