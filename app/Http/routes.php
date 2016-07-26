@@ -45,7 +45,7 @@ Route::group(['prefix' => 'catalogo'], function () {
         $filters['category'] = (object) [
           'label' => $category->name,
           'link' =>
-            url('/catalog')
+            url('/catalogo')
             .'?'
             .http_build_query(Request::query())
         ];
