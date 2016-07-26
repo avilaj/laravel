@@ -1,7 +1,7 @@
 <section class="mk-catalog__categories">
     <pre>
     </pre>
-  @if ($filters)
+  @if (isset($filters))
     <h3>Filtros</h3>
     <ul>
       @foreach($filters as $filter)
@@ -14,7 +14,7 @@
       @endforeach
     </ul>
   @endif
-    @if ($categories && !@$filters['category'])
+    @if (isset($categories) && !@$filters['category'])
     <h3>Categorías</h3>
     <ul>
         @foreach($categories as $category)
@@ -27,7 +27,7 @@
         @endforeach
     </ul>
     @endif
-    @if ($brands && !@$filters['brand'])
+    @if (isset($brands) && !@$filters['brand'])
     <h3>Marcas</h3>
     <ul>
         @foreach($brands as $brand)
@@ -40,7 +40,7 @@
     </ul>
     @endif
     <div id="filtering">
-      @if ($prices && !@$filters['price'])
+      @if (isset($prices) && !@$filters['price'])
       <h3>Precio</h3>
       <ul>
         @foreach ($prices as $value => $label)
