@@ -18,13 +18,12 @@ class DatabaseSeeder extends Seeder
         $this->call(ColorsTableSeeder::class);
         $this->call(CategoriesTableSeeder::class);
         $this->call(SizesTableSeeder::class);
-        // $this->call(GalleriesTableSeeder::class);
+        $this->call(BrandsTableSeeder::class);
         $this->call(ProductsTableSeeder::class);
         // $this->call(PersonsTableSeeder::class);
         // $this->call(NewsTableSeeder::class);
         // $this->call(ConfigurationTableSeeder::class);
         $this->call(OrdersTableSeeder::class);
-        $this->call(BrandsTableSeeder::class);
 
         Model::reguard();
     }

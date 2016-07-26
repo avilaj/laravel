@@ -17,10 +17,12 @@ class ProductsTableSeeder extends Seeder
         $categories = DB::table('categories')->pluck('id');
         $types = DB::table('types')->pluck('id');
         $colores = DB::table('colors')->pluck('id');
+        $brands = DB::table('brands')->pluck('id');
 
         foreach (range(1, 40) as $index) {
             $data = [
                 'category_id' => $faker->randomElement($categories),
+                'brand_id' => $faker->randomElement($brands),
                 'type_id' => $faker->randomElement($types),
                 'title' => $faker->sentence($faker->numberBetween(3,7)),
                 'subtitle' => $faker->sentence($faker->numberBetween(5,9)),
