@@ -11,7 +11,11 @@ use App\Model\Color;
 class Product extends Model
 {
     use Sluggable;
-
+    protected $resizes = [
+      'large' => [1024, 1024],
+      'medium' => [540, 540],
+      'small' => [360, 360]
+    ];
     protected $table = 'products';
     protected $fillable = ['title',
                             'subtitle',
@@ -82,6 +86,110 @@ class Product extends Model
       }
     }
 
+    public function decode_images ($images)  {
+      if ('array' === gettype($images)) {
+        return $images;
+      }
+      try {
+        return (array) json_decode($images);
+      } catch (Exception $e) {
+        return [];
+      }
+    }
+
+    public function get_file_route ($file) {
+      $file = basename($file);
+      return config('sleeping_owl.imagesUploadDirectory').'/'.$file;
+    }
+
+    public function get_filename ($file) {
+      return basename($file);
+    }
+
+    public function getRemovedImages($images) {
+      $oldImages = $this->decode_images($this->attributes['images']);
+      $newImages = $images;
+
+      return array_diff($oldImages, $newImages);
+    }
+
+    public function getNewImages($images) {
+      $oldImages = $this->decode_images($this->attributes['images']);
+      $newImages = $images;
+
+      return array_diff($newImages, $oldImages);
+    }
+
+    public function resize_image($image) {
+      $img_route = $this->get_file_route($image);
+      $img = \Image::make($img_route);
+      $arr = explode('.',$img_route);
+
+      foreach ($this->resizes as $label => $size) {
+        $img->resize($size[0], $size[1]);
+        $img->save($arr[0].'.'.$label.'.'.$arr[1]);
+      }
+    }
+
+    public function remove_image($image) {
+      $file = $this->get_file_route($image);
+      $arr = explode('.', $file);
+      try {
+        array_map('unlink', glob($arr[0].'.*'));
+      } catch (Exception $e) {
+        // Don't do anything
+      }
+
+    }
+
+    public function setImagesAttribute($images) {
+      $images = array_map([$this, 'get_filename'], (array) $images);
+      array_map([$this, 'resize_image'], $this->getNewImages($images));
+      array_map([$this, 'remove_image'], $this->getRemovedImages($images));
+
+      $this->attributes['images'] = json_encode($images);
+    }
+
+    public function getImagesAttribute() {
+      $images = $this->decode_images($this->attributes['images']);
+      $images = array_map([$this, 'get_file_route'], $images);
+
+      return $images;
+    }
+
+    public function appender($str) {
+      return function ($image) use ($str) {
+        $arr = explode('.',$image);
+        return $arr[0].'.'.$str.'.'.$arr[1];
+
+      };
+    }
+
+    public function getSmallImagesAttribute() {
+      $images = $this->decode_images($this->images);
+      $images = array_map($this->appender('small'), $images);
+      return $images;
+    }
+
+    public function getMediumImagesAttribute() {
+      $images = $this->decode_images($this->images);
+      $images = array_map($this->appender('medium'), $images);
+      return $images;
+    }
+
+    public function getLargeImagesAttribute() {
+      $images = $this->decode_images($this->images);
+      $images = array_map($this->appender('large'), $images);
+      return $images;
+    }
+
+    public function getThumbnailAttribute() {
+      if (count($this->images) > 0) {
+        return $this->small_images[0];
+      }
+      return 'http://placehold.it/360x360';
+
+    }
     public function getVariationsAttribute() {
         return $this->colors->unique('name');
     }

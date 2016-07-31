@@ -7,7 +7,10 @@ Route::get('', ['as' => 'admin.dashboard', function () {
 
 Route::get('settings', ['as' => 'admin.settings', function () {
     $data = new \App\Model\Configuration;
-    return AdminSection::view(view('admin.configuration', ['data' => $data]), 'Configuración del sitio');
+    $products = \App\Model\Product::get()->lists('title', 'id')->toArray();
+    return AdminSection::view(view('admin.configuration',
+      ['data' => $data, 'products' => $products]
+    ), 'Configuración del sitio');
 }]);
 
 Route::post('settings/save', ['as' => 'admin.settings.save',function ($algo = null) {

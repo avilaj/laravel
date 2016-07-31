@@ -8,8 +8,6 @@
         <h2 class="mk-product-page__subtitle">{{ $product->subttitle }}</h2>
         <p class="mk-product-page__price">${{ $product->price }}.-</p>
         @include('catalog.angular-references')
-        {{ $product->thumbnail }}
-        {{ $product->images }}
         <p class="mk-product-page__description">{{ $product->description }}</p>
         {{ $product->specs }}
     </div>

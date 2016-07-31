@@ -32,9 +32,26 @@ $(document).ready(function () {
     navText: false,
     auto: false
   });
-  $('.product-displayer__view').zoom({
-    url: 'http://placehold.it/600x900/09f/fff?text=product+view'
+
+  var createImage = function createImage(src) {
+    return $('<img src=' + src + '>');
+  };
+
+  var setZoom = function setZoom(medium, large) {
+    var container = $('.product-displayer__view');
+    container.trigger('zoom.destroy');
+    container.html('');
+    container.append(createImage(medium));
+    container.zoom({
+      url: large
+    });
+  };
+
+  var productDisplayerThumbnails = $('.product-displayer__thumbnails');
+  productDisplayerThumbnails.on('click', 'img', function (ev) {
+    setZoom(ev.target.dataset.medium, ev.target.dataset.large);
   });
+  $('.product-displayer__thumbnails img').first().trigger('click');
 });
 
 // class Bag {

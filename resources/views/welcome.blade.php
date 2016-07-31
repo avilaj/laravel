@@ -50,10 +50,10 @@
     <section class="home-section home-products">
         <h3 class="home-section__title"><span>Productos destacados</span></h3>
         <div class="home-product-slider owl-carousel">
-            @foreach ($products as $product)
+            @foreach ($featured_products as $product)
                 <div class="productBox item">
                     <a class="productBox__link" href="{{ $product->url }}" title="{{ $product->title }}">
-                        <img class="productBox__image" src="http://placehold.it/300x370" alt="{{ $product->title }}">
+                        <img class="productBox__image" src="{{ $product->thumbnail }}" alt="{{ $product->title }}">
                         <strong class="productBox__title">{{ $product->title }}</strong>
                         <span class="productBox__price">${{ $product->price }}.</span>
                     </a>

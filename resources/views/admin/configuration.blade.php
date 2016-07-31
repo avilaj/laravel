@@ -6,12 +6,20 @@
         </label>
         <input class="form-control" name="collection_title" id="collection_title" value="{{ $data->collection_title }}" type="text">
     </div>
-    <div class="form-group ">
-        <label for="home_products" class="control-label">
-            Productos
-        </label>
-        <input class="form-control" name="home_products" id="home_products" value="{{ $data->home_products}}" type="text">
-    </div>
+   <div class="form-group ">
+     <label for="home_products[]" class="control-label">
+       Productos <span class="text-danger">*</span>
+     </label>
+     <select id="home_products[]"
+     class="form-control input-select"
+     multiple="multiple" name="home_products[]">
+     @foreach($products as $id => $label)
+      <option value="{{$id}}" {{ in_array($id, $data->home_products) ? 'selected' : '' }} >
+        {{$label}}
+      </option>
+     @endforeach
+   </select>
+   </div>
     <div class="form-group ">
         <label for="collection_description" class="control-label">
             Descripción
@@ -30,5 +38,3 @@
     </a>
 </div>
 </form>
-
-

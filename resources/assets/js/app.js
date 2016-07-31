@@ -1,4 +1,4 @@
-$(document).ready(()=>{
+$(document).ready( ()=> {
   let Slider = (selector, responsive) => {
     let element = $(selector);
     element.owlCarousel({
@@ -30,9 +30,26 @@ $(document).ready(()=>{
     navText: false,
     auto: false
   });
-  $('.product-displayer__view').zoom({
-    url: 'http://placehold.it/600x900/09f/fff?text=product+view'
+
+  let createImage = (src) => {
+    return $('<img src='+src+'>');
+  };
+
+  let setZoom = (medium, large) =>  {
+    let container = $('.product-displayer__view');
+    container.trigger('zoom.destroy');
+    container.html('');
+    container.append(createImage(medium));
+    container.zoom({
+      url: large
+    });
+  };
+
+  let productDisplayerThumbnails = $('.product-displayer__thumbnails');
+  productDisplayerThumbnails.on('click', 'img', (ev) => {
+    setZoom(ev.target.dataset.medium, ev.target.dataset.large);
   });
+  $('.product-displayer__thumbnails img').first().trigger('click');
 });
 
 // class Bag {

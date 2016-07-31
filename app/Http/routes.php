@@ -15,8 +15,11 @@ use \App\Model\Reference;
 
 Route::get('/', function ()
 {
+  $config = new \App\Model\Configuration;
+  $featured = \App\Model\Product::with('category')->whereIn('id', $config->home_products)->get();
   return view('welcome', [
-    'products' => \App\Model\Product::with('category')->get()]);
+    'featured_products' => $featured
+  ]);
 });
 
 

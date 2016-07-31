@@ -15,7 +15,9 @@ AdminSection::registerModel(Configuration::class, function (ModConf $model)
         // $form->setAction('/admin/settings/save');
         $form->setItems([
                 AdminFormElement::text('collection_title', 'Título'),
-                AdminFormElement::text('home_products', 'Prductos'),
+                AdminFormElement::multiselect('home_products', 'Blabla')
+                                        ->setOptions(\App\Model\Products::get()->lists('title', 'id')->toArray())
+                                        ->required(),
                 AdminFormElement::text('collection_description', 'Descripción'),
             ]);
             // ->addBody([

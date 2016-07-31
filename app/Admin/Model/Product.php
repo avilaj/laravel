@@ -42,11 +42,12 @@ AdminSection::registerModel(Product::class, function (ModelConfiguration $model)
     });
 
     // Create And Edit
-    $model->onCreateAndEdit(function() {
+    $model->onCreateAndEdit(function($id = null) {
         $form = AdminForm::form()->setItems([
             AdminFormElement::text('title', 'Producto')->required(),
             AdminFormElement::text('subtitle', 'Subtitulo')->required(),
             AdminFormElement::text('price', 'Precio')->required(),
+            AdminFormElement::images('images', 'Imágenes'),
             AdminFormElement::multiselect('variations', 'Variantes')
                                     ->setOptions(\App\Model\Color::get()->lists('name', 'id')->toArray())
                                     ->required(),
