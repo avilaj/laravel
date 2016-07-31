@@ -14,7 +14,7 @@
      class="form-control input-select"
      multiple="multiple" name="home_products[]">
      @foreach($products as $id => $label)
-      <option value="{{$id}}" {{ in_array($id, $data->home_products) ? 'selected' : '' }} >
+      <option value="{{$id}}" {{ is_array($data->home_products) && in_array($id, $data->home_products) ? 'selected' : '' }} >
         {{$label}}
       </option>
      @endforeach
