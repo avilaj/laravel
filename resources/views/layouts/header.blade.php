@@ -1,5 +1,7 @@
 <div class="markshop-logo">
+  <a href="/">
     <img src="/images/markshop.png" alt="Markshop">
+  </a>
 </div>
 <header id="header">
     <nav class="topnav">

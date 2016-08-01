@@ -1,20 +1,31 @@
 @import 'node_modules/bourbon/app/assets/stylesheets/bourbon';
 @import 'node_modules/bourbon-neat/app/assets/stylesheets/neat';
+$red: #FE0000;
 $dark: #1e1e1c;
 $gray: #5a5a5a;
 $light-gray: #919191;
-
-@import 'home';
-@import 'carousel';
-@import 'footer';
-@import 'catalog';
-@import 'checkout';
 
 body {
   background: #000 url('/images/woods.jpg') repeat-y;
   background-size: 100%;
 }
-
+.mk-btn {
+  border: 2px solid transparent;
+  padding: .5rem 1rem;
+  font-size: .75rem;
+  font-weight: bolder;
+  text-transform: uppercase;
+  i {
+    margin-right: .5rem;
+  }
+}
+.mk-select,
+.mk-input {
+  box-sizing: border-box;
+  border: 2px solid $light-gray;
+  padding: .5rem 1rem;
+  font-size: .75rem;
+}
 .news {
   &__box {
     font-size: .75rem;
@@ -172,3 +183,9 @@ body {
     display: inline-block;
   }
 }
+@import 'home';
+@import 'carousel';
+@import 'footer';
+@import 'catalog';
+@import 'checkout';
+@import 'product-buy';

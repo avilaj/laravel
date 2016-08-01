@@ -187,10 +187,33 @@ angular
     }
 
   }])
-  .controller('ProductController', ['$window', 'Product', function ($window, Product)  {
+  .controller('ProductController', ['$window', '$filter','Product', function ($window, $filter, Product)  {
     let self = this;
+
+    let sumTotal = function (anterior, actual) {
+      return anterior + parseInt(actual.total);
+    };
+
+    let isColor = function (color_id) {
+      return function (item) {
+        return item.color_id == color_id;
+      };
+    };
+
+    this.available = (color_id) => {
+      let total = this.sizes
+        .filter(isColor(color_id))
+        .reduce(sumTotal, 0);
+        return total > 0;
+    };
+    this.price = $window.mkStore.price;
     this.colors = $window.mkStore.colors;
     this.sizes = $window.mkStore.sizes;
+    this.qty = 1;
+    this.availableColors = $filter('filter')(this.colors, (color) => {
+      return this.available(color.id);
+    });
+    this.currentColor = this.availableColors[0];
     this.addToCart =  (reference, qty) => {
       Product.add(reference.id, qty);
     }
@@ -208,8 +231,8 @@ angular
     this.updateQty = function (id, qty) {
       var data = {'reference_id': id, 'qty': qty};
       self.updateTotal();
-      $http.get('/check-out/set', {params: data}).success( res => {
-        console.log(res);
+      return $http.get('/check-out/set', {params: data}).success( res => {
+        return res;
       });
     };
     let subtotal = (item) => item.price * item.qty
@@ -223,13 +246,7 @@ angular
   }])
   .controller('TotalController', ['Product', function (Product) {
     var self = this;
-    // this.total = Cart.total();
     this.cart = Product;
-    // $scope.$watch(function () {
-    //   return self.total
-    // }, function (value, el) {
-    //   console.log('cambio', value);
-    // })
   }])
   .component('cartTotal', {
     template: "({{ cart.cart.total() }})",
@@ -237,12 +254,5 @@ angular
     controllerAs: 'cart'
   });
 
-  // angular.
-  //   module('mkCartTotal', ['mkcart'])
-  //   .service('Cart', function (Product) {
-  //     this.total = function () {
-  //       return Product.getCount();
-  //     }
-  //   })
   angular.bootstrap(document.querySelector('.cart-product-count'), ['mkcart']);
   // angular.bootstrap(document.getElementById('filtering'), ['filtering']);
