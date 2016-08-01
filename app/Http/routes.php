@@ -16,9 +16,13 @@ use \App\Model\Reference;
 Route::get('/', function ()
 {
   $config = new \App\Model\Configuration;
+  $brands = \App\Model\Brand::all();
   $featured = \App\Model\Product::with('category')->whereIn('id', $config->home_products)->get();
+  $recentProducts = \App\Model\Product::with('category')->latest()->get();
   return view('welcome', [
-    'featured_products' => $featured
+    'brands' => $brands,
+    'featured_products' => $featured,
+    'recent_products' => $recentProducts
   ]);
 });
 
@@ -144,13 +148,13 @@ Route::group(['prefix' => 'catalogo'], function () {
       }
       $brands = \App\Model\Brand::all();
       $colors = $product->colors->unique('id')->values()->all();
-      $references = $product->availableReferences();
+      $sizes = $product->availableReferences();
       return view('catalog.product', [
         'prices' => $prices,
         'brands' => $brands,
         'product'=> $product,
         'colors' => $colors,
-        'references' => $references
+        'sizes' => $sizes
         ]);
     });
 });
@@ -174,36 +178,40 @@ Route::get('/check-out/proceed', function () {
 });
 Route::get('/check-out/set', function () {
   $reference_id = (int) Request::input('reference_id');
+  $size_id = (int) Request::input('size_id');
   $qty = (int) Request::input('qty', 1);
-
-  if (! $reference_id) {
+  if (! $reference_id || ! $size_id) {
     return abort(400, 'Faltan parámetros.');
   }
+
+  $identificator = md5($reference_id .'-'.$size_id);
+
   $cart = App\Model\Order::currentCart();
-  $exists = $cart->search(function ($item) use ($reference_id) {
-    return $item->id == $reference_id;
+  $exists = $cart->search(function ($item) use ($identificator) {
+    return $item->id == $identificator;
   });
 
   if (!($exists instanceof Illuminate\Support\Collection)) {
     $cart->update($exists->rowId, $qty);
   } else {
     if ($qty > 0) {
-      $reference = Reference::with('product', 'size', 'color')->find($reference_id);
-      $cart->add($reference->id,
+      $reference = Reference::with('product', 'color')->find($reference_id);
+      $size = Size::find($size_id);
+      $cart->add($identificator,
         $reference->product->title,
         $qty,
         $reference->product->price,
         [
-        'color' => $reference->color->name,
-        'size'=> $reference->size->label
+          'product_id' => $reference->product->id,
+          'reference_id' => $reference->id,
+          'color_id' => $reference->color_id,
+          'size_id' => $size_id,
+          'color' => $reference->color->name,
+          'size'=> $size->label
         ]
         );
     }
   }
-  // if ($qty > 0) {
-  // } else {
-  //   $cart->remove($exists->rowId);
-  // }
   return ['products'=>$cart->count(), 'price'=>$cart->total()];
 });
 

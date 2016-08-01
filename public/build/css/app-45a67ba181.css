@@ -4,6 +4,172 @@ html {
 *, *::after, *::before {
   box-sizing: inherit; }
 
+body {
+  background: #000 url("/images/woods.jpg") repeat-y;
+  background-size: 100%; }
+
+.mk-btn {
+  border: 2px solid transparent;
+  padding: .5rem 1rem;
+  font-size: .75rem;
+  font-weight: bolder;
+  text-transform: uppercase; }
+  .mk-btn i {
+    margin-right: .5rem; }
+
+.mk-select,
+.mk-input {
+  box-sizing: border-box;
+  border: 2px solid #919191;
+  padding: .5rem 1rem;
+  font-size: .75rem; }
+
+.news__box {
+  font-size: .75rem;
+  text-align: center;
+  background: #fff;
+  padding: 10px; }
+  .news__box__picture {
+    margin-bottom: .5rem;
+    display: inline-block;
+    width: 100%; }
+  .news__box__picture img {
+    height: auto;
+    width: 100%; }
+  .news__box__title {
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+    color: #5a5a5a;
+    text-transform: uppercase;
+    white-space: nowrap;
+    font-weight: 700;
+    display: inline-block;
+    width: 100%; }
+  .news__box__subtitle {
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+    color: #919191;
+    white-space: nowrap;
+    display: inline-block; }
+
+.productBox {
+  background: #fff;
+  display: inline-block;
+  font-size: .75rem;
+  padding-bottom: 1rem;
+  text-align: center;
+  width: 100%; }
+  .productBox__link {
+    display: inline-block;
+    width: 100%; }
+  .productBox .productBox__image {
+    display: inline-block;
+    height: auto;
+    margin: 0;
+    width: 100%;
+    margin-bottom: .5rem; }
+  .productBox__title {
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+    color: #5a5a5a;
+    display: inline-block;
+    font-weight: 700;
+    text-transform: uppercase;
+    white-space: nowrap;
+    width: 100%; }
+  .productBox__price {
+    color: #919191;
+    font-weight: 700; }
+
+.markshop-logo {
+  text-align: center;
+  background: transparent url("/images/header.jpg") no-repeat;
+  background-position: center center;
+  background-size: cover; }
+  .markshop-logo img {
+    position: relative;
+    width: 18rem;
+    height: auto;
+    line-height: 0;
+    bottom: -0.5rem; }
+
+#header {
+  padding: 2.3576515979%;
+  background: #1e1e1c;
+  color: #787878;
+  width: 100%;
+  font-size: .75rem;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-bottom: 2rem; }
+  #header a {
+    text-decoration: none; }
+
+.topnav {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;
+  width: 100%;
+  text-align: justify; }
+  .topnav__account, .topnav__followus {
+    float: left;
+    display: block;
+    margin-right: 2.3576515979%;
+    width: 23.2317613015%;
+    padding: 0; }
+    .topnav__account:last-child, .topnav__followus:last-child {
+      margin-right: 0; }
+  .topnav__followus__link {
+    padding: 0 .5rem;
+    font-size: 1rem;
+    line-height: .75rem;
+    color: #787878; }
+  .topnav__account {
+    margin-right: 0;
+    text-align: right;
+    text-transform: uppercase; }
+    .topnav__account__link {
+      font-weight: 700;
+      display: inline-block;
+      color: #787878;
+      padding: 0 .5rem; }
+  .topnav__pages {
+    float: left;
+    display: block;
+    margin-right: 2.3576515979%;
+    width: 48.821174201%;
+    padding: 0;
+    text-align: center;
+    text-transform: uppercase; }
+    .topnav__pages:last-child {
+      margin-right: 0; }
+    .topnav__pages__link {
+      color: #fff;
+      font-weight: 700;
+      display: inline-block;
+      padding: 0 .5rem; }
+  .topnav__list {
+    display: inline-block;
+    list-style-type: none;
+    white-space: nowrap; }
+  .topnav__item {
+    display: inline-block; }
+
 .home-section {
   max-width: 1200px;
   margin-left: auto;
@@ -206,7 +372,6 @@ html {
   .product-displayer:last-child {
     margin-right: 0; }
   .product-displayer__view {
-    background-color: purple;
     display: inline-block;
     line-height: 0;
     margin: 0 auto; }
@@ -335,154 +500,20 @@ html {
     text-align: right;
     font-size: 2rem; }
 
-body {
-  background: #000 url("/images/woods.jpg") repeat-y;
-  background-size: 100%; }
+.product-buy_colors {
+  text-transform: capitalize; }
+  .product-buy_colors.disabled {
+    color: #919191; }
 
-.news__box {
-  font-size: .75rem;
-  text-align: center;
-  background: #fff;
-  padding: 10px; }
-  .news__box__picture {
-    margin-bottom: .5rem;
-    display: inline-block;
-    width: 100%; }
-  .news__box__picture img {
-    height: auto;
-    width: 100%; }
-  .news__box__title {
-    display: inline-block;
-    max-width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    word-wrap: normal;
-    color: #5a5a5a;
-    text-transform: uppercase;
-    white-space: nowrap;
-    font-weight: 700;
-    display: inline-block;
-    width: 100%; }
-  .news__box__subtitle {
-    display: inline-block;
-    max-width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    word-wrap: normal;
-    color: #919191;
-    white-space: nowrap;
-    display: inline-block; }
-
-.productBox {
-  background: #fff;
-  display: inline-block;
-  font-size: .75rem;
-  padding-bottom: 1rem;
-  text-align: center;
+.product-buy_size {
   width: 100%; }
-  .productBox__link {
-    display: inline-block;
-    width: 100%; }
-  .productBox .productBox__image {
-    display: inline-block;
-    height: auto;
-    margin: 0;
-    width: 100%;
-    margin-bottom: .5rem; }
-  .productBox__title {
-    display: inline-block;
-    max-width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    word-wrap: normal;
-    color: #5a5a5a;
-    display: inline-block;
-    font-weight: 700;
-    text-transform: uppercase;
-    white-space: nowrap;
-    width: 100%; }
-  .productBox__price {
-    color: #919191;
-    font-weight: 700; }
 
-.markshop-logo {
-  text-align: center;
-  background: transparent url("/images/header.jpg") no-repeat;
-  background-position: center center;
-  background-size: cover; }
-  .markshop-logo img {
-    position: relative;
-    width: 18rem;
-    height: auto;
-    line-height: 0;
-    bottom: -0.5rem; }
+.product-buy__qty {
+  width: 4rem;
+  padding-right: 0; }
 
-#header {
-  padding: 2.3576515979%;
-  background: #1e1e1c;
-  color: #787878;
-  width: 100%;
-  font-size: .75rem;
-  padding-top: 0;
-  padding-bottom: 0;
-  margin-bottom: 2rem; }
-  #header a {
-    text-decoration: none; }
-
-.topnav {
-  display: inline-block;
-  max-width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  word-wrap: normal;
-  width: 100%;
-  text-align: justify; }
-  .topnav__account, .topnav__followus {
-    float: left;
-    display: block;
-    margin-right: 2.3576515979%;
-    width: 23.2317613015%;
-    padding: 0; }
-    .topnav__account:last-child, .topnav__followus:last-child {
-      margin-right: 0; }
-  .topnav__followus__link {
-    padding: 0 .5rem;
-    font-size: 1rem;
-    line-height: .75rem;
-    color: #787878; }
-  .topnav__account {
-    margin-right: 0;
-    text-align: right;
-    text-transform: uppercase; }
-    .topnav__account__link {
-      font-weight: 700;
-      display: inline-block;
-      color: #787878;
-      padding: 0 .5rem; }
-  .topnav__pages {
-    float: left;
-    display: block;
-    margin-right: 2.3576515979%;
-    width: 48.821174201%;
-    padding: 0;
-    text-align: center;
-    text-transform: uppercase; }
-    .topnav__pages:last-child {
-      margin-right: 0; }
-    .topnav__pages__link {
-      color: #fff;
-      font-weight: 700;
-      display: inline-block;
-      padding: 0 .5rem; }
-  .topnav__list {
-    display: inline-block;
-    list-style-type: none;
-    white-space: nowrap; }
-  .topnav__item {
-    display: inline-block; }
+.product-buy__buy {
+  background: #FE0000;
+  color: #FFF; }
 
 /*# sourceMappingURL=app.css.map */

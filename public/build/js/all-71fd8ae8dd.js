@@ -188,10 +188,33 @@ angular.module('mkcart', []).service('Product', ['$http', '$window', '$rootScope
       return _this.setCount(res.data.products);
     });
   };
-}]).controller('ProductController', ['$window', 'Product', function ($window, Product) {
+}]).controller('ProductController', ['$window', '$filter', 'Product', function ($window, $filter, Product) {
+  var _this2 = this;
+
   var self = this;
+
+  var sumTotal = function sumTotal(anterior, actual) {
+    return anterior + parseInt(actual.total);
+  };
+
+  var isColor = function isColor(color_id) {
+    return function (item) {
+      return item.color_id == color_id;
+    };
+  };
+
+  this.available = function (color_id) {
+    var total = _this2.sizes.filter(isColor(color_id)).reduce(sumTotal, 0);
+    return total > 0;
+  };
+  this.price = $window.mkStore.price;
   this.colors = $window.mkStore.colors;
   this.sizes = $window.mkStore.sizes;
+  this.qty = 1;
+  this.availableColors = $filter('filter')(this.colors, function (color) {
+    return _this2.available(color.id);
+  });
+  this.currentColor = this.availableColors[0];
   this.addToCart = function (reference, qty) {
     Product.add(reference.id, qty);
   };
@@ -208,8 +231,8 @@ angular.module('mkcart', []).service('Product', ['$http', '$window', '$rootScope
   this.updateQty = function (id, qty) {
     var data = { 'reference_id': id, 'qty': qty };
     self.updateTotal();
-    $http.get('/check-out/set', { params: data }).success(function (res) {
-      console.log(res);
+    return $http.get('/check-out/set', { params: data }).success(function (res) {
+      return res;
     });
   };
   var subtotal = function subtotal(item) {
@@ -226,26 +249,13 @@ angular.module('mkcart', []).service('Product', ['$http', '$window', '$rootScope
   this.updateTotal();
 }]).controller('TotalController', ['Product', function (Product) {
   var self = this;
-  // this.total = Cart.total();
   this.cart = Product;
-  // $scope.$watch(function () {
-  //   return self.total
-  // }, function (value, el) {
-  //   console.log('cambio', value);
-  // })
 }]).component('cartTotal', {
   template: "({{ cart.cart.total() }})",
   controller: "TotalController",
   controllerAs: 'cart'
 });
 
-// angular.
-//   module('mkCartTotal', ['mkcart'])
-//   .service('Cart', function (Product) {
-//     this.total = function () {
-//       return Product.getCount();
-//     }
-//   })
 angular.bootstrap(document.querySelector('.cart-product-count'), ['mkcart']);
 // angular.bootstrap(document.getElementById('filtering'), ['filtering']);
 //# sourceMappingURL=all.js.map

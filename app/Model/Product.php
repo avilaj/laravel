@@ -67,6 +67,12 @@ class Product extends Model
         return $query->where('brand_id', $brand_id);
     }
 
+    public function scopeRecent($query) {
+      return $query
+        ->orderBy('created_at', 'desc')
+        ->take(9);
+    }
+
     public function scopePriceBetween($query, $range) {
         return $query->whereBetween('price', $range);
     }
