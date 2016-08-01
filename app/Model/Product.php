@@ -160,25 +160,27 @@ class Product extends Model
     public function appender($str) {
       return function ($image) use ($str) {
         $arr = explode('.',$image);
-        return $arr[0].'.'.$str.'.'.$arr[1];
-
+        return '/'.$arr[0].'.'.$str.'.'.$arr[1];
       };
     }
 
     public function getSmallImagesAttribute() {
       $images = $this->decode_images($this->images);
+      if (!$this->images) return ['http://placehold.it/360x360'];
       $images = array_map($this->appender('small'), $images);
       return $images;
     }
 
     public function getMediumImagesAttribute() {
       $images = $this->decode_images($this->images);
+      if (!$this->images) return ['http://placehold.it/540x540'];
       $images = array_map($this->appender('medium'), $images);
       return $images;
     }
 
     public function getLargeImagesAttribute() {
       $images = $this->decode_images($this->images);
+      if (!$this->images) return ['http://placehold.it/1024x1024'];
       $images = array_map($this->appender('large'), $images);
       return $images;
     }
@@ -196,23 +198,22 @@ class Product extends Model
 
     public function generateReference($colorId) {
         $sizes = $this->type->sizes;
-        $existing = $this->references()->where('color_id', $colorId)->pluck('reference')->toArray();
-        foreach ($sizes as $size) {
-            $reference = 'MK-'.$this->id.'-'.$colorId;
-            if (! in_array($reference, $existing)) {
-              $this->references()->create([
-                'reference' => $reference,
-                'color_id' => $colorId,
-                'size_id' => $size->id
-              ]);
-            }
+        $existing = $this->references()->where('color_id', $colorId)->first();
+        if ($existing) {
+          return False;
         }
+        $reference = 'MK-'.$this->id.'-'.$colorId;
+        $this->references()->create([
+          'reference' => $reference,
+          'color_id' => $colorId
+        ]);
+
     }
 
     public function availableReferences () {
       return \DB::table('references')
-        ->join('sizes', 'sizes.id', '=', 'references.size_id')
         ->join('stocks', 'references.id', '=', 'stocks.reference_id')
+        ->join('sizes', 'sizes.id', '=', 'stocks.size_id')
         ->select('references.id as id', 'sizes.label','references.color_id', \DB::raw('SUM(stocks.qty) as total'))
         ->groupBy('references.id')
         ->where('references.product_id', $this->id)

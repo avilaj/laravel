@@ -138,8 +138,11 @@ Route::group(['prefix' => 'catalogo'], function () {
     function (Request $request, $categorySlug, $productSlug)
       use ($prices)
     {
-      $brands = \App\Model\Brand::all();
       $product = Product::where('slug', $productSlug)->first();
+      if (!$product) {
+        return abort(404);
+      }
+      $brands = \App\Model\Brand::all();
       $colors = $product->colors->unique('id')->values()->all();
       $references = $product->availableReferences();
       return view('catalog.product', [

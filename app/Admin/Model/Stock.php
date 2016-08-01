@@ -8,11 +8,11 @@ use App\Model\Stock;
 
 use SleepingOwl\Admin\Model\ModelConfiguration;
 AdminSection::registerModel(Stock::class, function (ModelConfiguration $model) {
-    $model->setTitle("Historico de inventario");
-    // $model->with('reference');
+    $model->setTitle("Movimientos de inventario");
     $model->setAlias('stock');
     $model->onDisplay(function () {
-        return AdminDisplay::datatables()->setApply(function($query) {
+        $display = AdminDisplay::datatables()
+        ->setApply(function($query) {
             $query->orderBy('created_at', 'desc');
         })->setColumns([
             AdminColumn::text('reference.reference')->setLabel('Producto'),
@@ -20,12 +20,20 @@ AdminSection::registerModel(Stock::class, function (ModelConfiguration $model) {
             AdminColumn::datetime('created_at')->setLabel('Date')->setFormat('d.m.Y')->setWidth('150px'),
             AdminColumn::text('message')->setLabel('Razón'),
         ])->paginate(5);
+        return $display;
     });
 
     // Create And Edit
-    $model->onCreateAndEdit(function() {
+    $model->onEdit(function() {
         $form = AdminForm::form()->setItems([
-            AdminFormElement::select('reference_id', 'Referencia')->setModelForOptions('App\Model\Reference')->setDisplay('reference')->required(),
+            AdminFormElement::select('reference_id', 'Referencia')
+              ->setModelForOptions('App\Model\Reference')
+              ->setDisplay('color.name')
+              ->required(),
+              AdminFormElement::select('size_id', 'Talle')
+                ->setModelForOptions('App\Model\Size')
+                ->setDisplay('label')
+                ->required(),
             AdminFormElement::text('qty', 'Cantidad')->required(),
             AdminFormElement::text('message', 'Razón')->required()
         ]);

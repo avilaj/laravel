@@ -28,12 +28,6 @@ class Sizes extends Migration
             $table->integer('size_id')->references('id')->on('sizes');
             $table->timestamps();
         });
-        // Schema::create('reference_size', function (Blueprint $table) {
-        //     $table->increments('id');
-        //     $table->integer('reference_id')->references('id')->on('references');
-        //     $table->integer('size_id')->references('id')->on('sizes');
-        //     $table->timestamps();
-        // });
     }
 
     /**
@@ -46,6 +40,5 @@ class Sizes extends Migration
         Schema::drop('sizes');
         Schema::drop('types');
         Schema::drop('types_size');
-        // Schema::drop('reference_size');
     }
 }

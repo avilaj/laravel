@@ -14,4 +14,9 @@ class Stock extends Model
     {
         return $this->belongsTo('App\Model\Reference', 'reference_id');
     }
+
+    public function size ()
+    {
+        return $this->belongsTo('App\Model\Size', 'size_id');
+    }
 }

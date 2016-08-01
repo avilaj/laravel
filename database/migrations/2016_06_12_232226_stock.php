@@ -15,6 +15,7 @@ class Stock extends Migration
         Schema::create('stocks', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('reference_id')->references('id')->on('references');
+            $table->integer('size_id')->references('id')->on('sizes');
             $table->integer('qty')->default(0);
             $table->string('message')->nullable();
             $table->timestamps();

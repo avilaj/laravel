@@ -36,9 +36,10 @@ class ProductsTableSeeder extends Seeder
             $product->generateReference($faker->randomElement($colores));
         }
         $references = Reference::all();
-
         foreach ($references as $reference) {
-            $reference->addStock($faker->numberBetween(0, 10) , 'Precarga desde generador');
+          foreach($reference->product->type->sizes() as $size) {
+            $reference->addStock($size->id, $faker->numberBetween(1, 10) , 'Precarga desde generador');
+          }
         }
 
     }

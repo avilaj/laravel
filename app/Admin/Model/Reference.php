@@ -13,7 +13,7 @@ AdminSection::registerModel(Reference::class, function (ModelConfiguration $mode
     $model->setAlias('references');
     $model->onDisplay(function () {
         $display = AdminDisplay::datatables();
-        $display->with('color', 'size');
+        $display->with('color');
         $display->setApply(function ($query) {
             $query->orderBy('created_at', 'desc');
         });
@@ -30,8 +30,14 @@ AdminSection::registerModel(Reference::class, function (ModelConfiguration $mode
                     return "<a href='".url('admin/products/'.$instance->product_id.'/edit')."'>".$instance->product->title."</a>";
                 }),
             AdminColumn::text('color.name')->setLabel('Color'),
-            AdminColumn::text('size.label')->setLabel('Size'),
-            AdminColumn::text('qty')->setLabel('Stock')
+            AdminColumn::custom()
+              ->setLabel('Stock')
+              ->setCallback(function ($instance) {
+                $link = route('admin.add-stock', $instance->product_id);
+                $link.='?reference_id='.$instance->id;
+                $elem = '<a href="'.$link.'">Actualizar</a>';
+                return $instance->qty .' '. $elem;
+              })
         ]);
         $display->paginate(20);
         return $display;
@@ -66,10 +72,6 @@ AdminSection::registerModel(Reference::class, function (ModelConfiguration $mode
                 ->setDisplay('name')
                 ->setDefaultValue(Request::input('color_id'))
                 ->required(),
-                AdminFormElement::select('size_id', 'Size')
-                    ->setModelForOptions('App\Model\Size')
-                    ->setDisplay('label')
-                    ->required(),
             AdminFormElement::select('product_id', 'Producto')
                 ->setModelForOptions('App\Model\Product')
                 ->setDisplay('title')

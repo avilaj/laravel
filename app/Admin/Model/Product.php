@@ -18,9 +18,15 @@ AdminSection::registerModel(Product::class, function (ModelConfiguration $model)
         });
         $display->setColumns([
             AdminColumn::text('title')->setLabel('Producto'),
-            AdminColumn::text('qty')->setLabel('Stock'),
             AdminColumn::custom()
-                ->setLabel("Modelos")
+              ->setLabel('Stock')
+              ->setCallback(function ($instance) {
+                $link = route('admin.add-stock', $instance->id);
+                $elem = '<a href="'.$link.'">Actualizar</a>';
+                return $instance->qty .' '. $elem;
+              }),
+            AdminColumn::custom()
+                ->setLabel("Colores")
                 ->setCallback(function ($instance) {
                     $link  = url("admin/references?product_id=".$instance->id);
                     $label = $instance->references->unique('color_id')->count();
@@ -48,7 +54,7 @@ AdminSection::registerModel(Product::class, function (ModelConfiguration $model)
             AdminFormElement::text('subtitle', 'Subtitulo')->required(),
             AdminFormElement::text('price', 'Precio')->required(),
             AdminFormElement::images('images', 'Imágenes'),
-            AdminFormElement::multiselect('variations', 'Variantes')
+            AdminFormElement::multiselect('variations', 'Colores')
                                     ->setOptions(\App\Model\Color::get()->lists('name', 'id')->toArray())
                                     ->required(),
             AdminFormElement::select('gender', 'Genero')
@@ -57,7 +63,7 @@ AdminSection::registerModel(Product::class, function (ModelConfiguration $model)
                                         'M'=>'Masculino',
                                         'U'=>'Unisex'])
                                     ->setDefaultValue('M'),
-            AdminFormElement::select('type_id', 'Tipo')
+            AdminFormElement::select('type_id', 'Talles')
                                     ->setModelForOptions('App\Model\Type')
                                     ->setDisplay('label')
                                     ->setDefaultValue(Request::input('type_id'))
