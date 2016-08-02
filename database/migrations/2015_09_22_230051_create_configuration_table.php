@@ -17,8 +17,6 @@ class CreateConfigurationTable extends Migration
             $table->increments('id');
             $table->string('key');
             $table->text('value')->nullable();
-            // $table->integer('owner')->nullable();
-            // $table->string('type')->nullable();
             $table->timestamps();
         });
     }

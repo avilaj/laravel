@@ -15,17 +15,16 @@ class SizesTableSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        // $references = DB::table('references')->pluck('id');
         $calzado = \App\Model\Type::create(['label'=>'calzado']);
         $vestimenta = \App\Model\Type::create(['label'=>'vestimenta']);
         foreach (range(35, 46) as $talle) {
-            # code...
             $size = ['label' => $talle];
             $calzado->sizes()->create($size);
         }
-        $clothesSizes = ['xs', 's', 'm', 'l','xl', 'xxl'];
+        $clothesSizes = ['XS', 'S', 'M', 'L','XL', 'XXL'];
         foreach ($clothesSizes as $talle) {
-            Size::create(['label' => $talle]);
+          $size = ['label' => $talle];
+          $vestimenta->sizes()->create($size);
         }
     }
 }

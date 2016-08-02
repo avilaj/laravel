@@ -1,8 +1,8 @@
-<section class="mk-catalog__categories">
+<section class="mk-catalog__categories sidebar">
     <pre>
     </pre>
   @if (isset($filters))
-    <h3>Filtros</h3>
+    <h3 class="sidebar__subtitle">Filtros</h3>
     <ul>
       @foreach($filters as $filter)
       <li>
@@ -15,7 +15,7 @@
     </ul>
   @endif
     @if (isset($categories) && !@$filters['category'])
-    <h3>Categorías</h3>
+    <h3 class="sidebar__subtitle">Categorías</h3>
     <ul>
         @foreach($categories as $category)
         <li>
@@ -28,7 +28,7 @@
     </ul>
     @endif
     @if (isset($brands) && !@$filters['brand'])
-    <h3>Marcas</h3>
+    <h3 class="sidebar__subtitle">Marcas</h3>
     <ul>
         @foreach($brands as $brand)
         <li>
@@ -41,7 +41,7 @@
     @endif
     <div id="filtering">
       @if (isset($prices) && !@$filters['price'])
-      <h3>Precio</h3>
+      <h3 class="sidebar__subtitle">Precio</h3>
       <ul>
         @foreach ($prices as $value => $label)
         <li>

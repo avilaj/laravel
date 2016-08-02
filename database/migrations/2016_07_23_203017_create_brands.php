@@ -16,20 +16,16 @@ class CreateBrands extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('slug')->unique();
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->integer('order')->default(0);
             $table->timestamps();
         });
         Schema::table('products', function (Blueprint $table) {
             $table
                 ->integer('brand_id')
-                ->nullable()
-                ->unsigned();
-
-            $table
-                ->foreign('brand_id')
                 ->references('id')
-                ->on('brands');
+                ->on('brands')
+                ->nullable();
         });
     }
 

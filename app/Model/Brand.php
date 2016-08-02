@@ -13,7 +13,6 @@ class Brand extends Model
 
     protected $table = 'brands';
     protected $fillable = ['name', 'image','order', 'slug'];
-    public $timestamps = false;
 
     public function sluggable () {
         return [

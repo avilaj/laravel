@@ -54,8 +54,13 @@ AdminSection::registerModel(Product::class, function (ModelConfiguration $model)
             AdminFormElement::text('subtitle', 'Subtitulo')->required(),
             AdminFormElement::text('price', 'Precio')->required(),
             AdminFormElement::images('images', 'Imágenes'),
-            AdminFormElement::multiselect('variations', 'Colores')
-                                    ->setOptions(\App\Model\Color::get()->lists('name', 'id')->toArray())
+            AdminFormElement::select('brand_id', 'Marca')
+              ->setModelForOptions('App\Model\Brand')
+              ->setDisplay('name'),
+            AdminFormElement::multiselect('colors', 'Colores')
+                                    ->setModelForOptions('App\Model\Color')
+                                    ->setDisplay('name')
+                                    // ->setOptions(\App\Model\Color::get()->lists('name', 'id')->toArray())
                                     ->required(),
             AdminFormElement::select('gender', 'Genero')
                                     ->setOptions([

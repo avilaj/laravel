@@ -188,10 +188,8 @@ angular.module('mkcart', []).service('Product', ['$http', '$window', '$rootScope
       return _this.setCount(res.data.products);
     });
   };
-}]).controller('ProductController', ['$window', '$filter', 'Product', function ($window, $filter, Product) {
+}]).controller('ProductController', ['$window', 'Product', function ($window, Product) {
   var _this2 = this;
-
-  var self = this;
 
   var sumTotal = function sumTotal(anterior, actual) {
     return anterior + parseInt(actual.total);
@@ -203,21 +201,47 @@ angular.module('mkcart', []).service('Product', ['$http', '$window', '$rootScope
     };
   };
 
+  var checkUniqueSize = function checkUniqueSize() {
+    if (_this2.currentColor.uniqueSize) {
+      _this2.currentSize = _this2.currentColor.sizes[0];
+    }
+  };
+
+  this.onColorChange = function () {
+    checkUniqueSize();
+  };
+
   this.available = function (color_id) {
     var total = _this2.sizes.filter(isColor(color_id)).reduce(sumTotal, 0);
     return total > 0;
   };
-  this.price = $window.mkStore.price;
-  this.colors = $window.mkStore.colors;
-  this.sizes = $window.mkStore.sizes;
-  this.qty = 1;
-  this.availableColors = $filter('filter')(this.colors, function (color) {
-    return _this2.available(color.id);
-  });
-  this.currentColor = this.availableColors[0];
+
+  this.getSizesCount = function (color_id) {
+    var sizes = _this2.sizes.filter(isColor(color_id));
+    return sizes.length;
+  };
+
   this.addToCart = function (reference, qty) {
     Product.add(reference.id, qty);
   };
+
+  this.setColorProperties = function (color) {
+    color.sizes = _this2.sizes.filter(isColor(color.id));
+    color.outOfStock = color.sizes.reduce(sumTotal, 0) < 1;
+    color.uniqueSize = color.sizes.length === 1;
+    return color;
+  };
+
+  this.price = $window.mkStore.price;
+  this.sizes = $window.mkStore.sizes;
+  this.colors = $window.mkStore.colors.map(this.setColorProperties);
+  this.availableColors = this.colors.filter(function (item) {
+    return !item.outOfStock;
+  });
+  this.currentColor = this.availableColors[0];
+  this.qty = 1;
+
+  checkUniqueSize();
 }]).controller('CartController', ['$window', 'Product', function ($window, $http) {
   var self = this;
   this.products = $window.cartProducts;

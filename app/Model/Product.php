@@ -83,15 +83,6 @@ class Product extends Model
             ->orWhere('subtitle', 'like', '%'.$term.'%');
     }
 
-    public function setVariationsAttribute($colors) {
-      $news = array_diff($colors, $this->variations->pluck('id')->toArray());
-      if (count($news) > 0) {
-        foreach ($colors as $colorId) {
-          $this->generateReference($colorId);
-        }
-      }
-    }
-
     public function decode_images ($images)  {
       if ('array' === gettype($images)) {
         return $images;
@@ -113,14 +104,16 @@ class Product extends Model
     }
 
     public function getRemovedImages($images) {
-      $oldImages = $this->decode_images($this->attributes['images']);
+      $prev = array_get($this->attributes, 'images', []);
+      $oldImages = $this->decode_images($prev);
       $newImages = $images;
 
       return array_diff($oldImages, $newImages);
     }
 
     public function getNewImages($images) {
-      $oldImages = $this->decode_images($this->attributes['images']);
+      $prev = array_get($this->attributes, 'images', []);
+      $oldImages = $this->decode_images($prev);
       $newImages = $images;
 
       return array_diff($newImages, $oldImages);
@@ -157,7 +150,8 @@ class Product extends Model
     }
 
     public function getImagesAttribute() {
-      $images = $this->decode_images($this->attributes['images']);
+      $prev = array_get($this->attributes, 'images', []);
+      $images = $this->decode_images($prev);
       $images = array_map([$this, 'get_file_route'], $images);
 
       return $images;
@@ -196,23 +190,6 @@ class Product extends Model
         return $this->small_images[0];
       }
       return 'http://placehold.it/360x360';
-
-    }
-    public function getVariationsAttribute() {
-        return $this->colors->unique('name');
-    }
-
-    public function generateReference($colorId) {
-        $sizes = $this->type->sizes;
-        $existing = $this->references()->where('color_id', $colorId)->first();
-        if ($existing) {
-          return False;
-        }
-        $reference = 'MK-'.$this->id.'-'.$colorId;
-        $this->references()->create([
-          'reference' => $reference,
-          'color_id' => $colorId
-        ]);
 
     }
 

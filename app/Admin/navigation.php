@@ -35,14 +35,24 @@ return [
         'icon'  => 'fa fa-exclamation-circle',
         'url'   => route('admin.information'),
     ],
-    (new Page(\App\Model\Order::class))->setTitle('Ordenes de compra'),
     [
         'title' => 'Tienda',
         'pages' => [
+            (new Page(\App\Model\Order::class))->setTitle('Ordenes de compra'),
             (new Page(\App\Model\Product::class))->setTitle('Productos'),
             (new Page(\App\Model\Reference::class))->setTitle('Modelos'),
-            (new Page(\App\Model\Type::class))->setTitle('Talles'),
         ]
+    ],
+    [
+      'title' => 'Configuracion',
+      'pages' => [
+        (new Page(\App\Model\Type::class))->setTitle('Talles'),
+        (new Page(\App\Model\Brand::class))->setTitle('Marcas'),
+        [
+          'title' => 'Página de inicio',
+          'url' => route('admin.settings')
+        ],
+      ]
     ],
     [
       'title' => 'Inventario',
@@ -54,11 +64,6 @@ return [
         ]
       ]
     ],
-    [
-        'title' => 'Configuración',
-        'icon' => 'fa fa-cog',
-        'url' => route('admin.settings')
-    ]
 
     // Examples
     // [

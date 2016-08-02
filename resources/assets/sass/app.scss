@@ -1,6 +1,7 @@
 @import 'node_modules/bourbon/app/assets/stylesheets/bourbon';
 @import 'node_modules/bourbon-neat/app/assets/stylesheets/neat';
 $red: #FE0000;
+$white: #fff;
 $dark: #1e1e1c;
 $gray: #5a5a5a;
 $light-gray: #919191;
@@ -188,4 +189,3 @@ body {
 @import 'footer';
 @import 'catalog';
 @import 'checkout';
-@import 'product-buy';

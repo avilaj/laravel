@@ -15,7 +15,9 @@ AdminSection::registerModel(Stock::class, function (ModelConfiguration $model) {
         ->setApply(function($query) {
             $query->orderBy('created_at', 'desc');
         })->setColumns([
-            AdminColumn::text('reference.reference')->setLabel('Producto'),
+            AdminColumn::text('reference.product.title')->setLabel('Producto'),
+            AdminColumn::text('reference.color.name')->setLabel('Color'),
+            AdminColumn::text('size.label')->setLabel('Talle'),
             AdminColumn::text('qty')->setLabel('Cant.'),
             AdminColumn::datetime('created_at')->setLabel('Date')->setFormat('d.m.Y')->setWidth('150px'),
             AdminColumn::text('message')->setLabel('Razón'),

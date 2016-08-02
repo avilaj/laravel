@@ -1,7 +1,6 @@
 .product-displayer {
   @include span-columns(6);
   @include pad(0);
-  background: #ccc;
   text-align: center;
   &__view {
     display: inline-block;

@@ -5,9 +5,16 @@
     <div class="mk-product-page">
         @include('partials.product-displayer')
         <h1 class="mk-product-page__title">{{ $product->title }}</h1>
-        <h2 class="mk-product-page__subtitle">{{ $product->subttitle }}</h2>
-        <p class="mk-product-page__description">{!! $product->description !!}</p>
-        <p class="mk-product-page__price">${{ $product->price }}.-</p>
+        <hr class="mk-product-page__separator">
+        @if($product->specs)
+        <div class="mk-product-page__specs">{!! $product->specs !!}</div>
+        <hr class="mk-product-page__separator">
+        @endif
+        @if($product->description)
+        <h3 class="mk-product-page__subtitle">Descripcion</h3>
+        <div class="mk-product-page__description">{!! $product->description !!}</div>
+        <hr class="mk-product-page__separator">
+        @endif
         @if($sizes)
           @include('catalog.angular-references')
         @else
@@ -15,7 +22,6 @@
             Producto fuera de stock
           </p>
         @endif
-        {{ $product->specs }}
     </div>
 </div>
 @endsection

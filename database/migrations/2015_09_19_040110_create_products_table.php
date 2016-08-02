@@ -24,7 +24,7 @@ class CreateProductsTable extends Migration
             $table->text('specs')->nullable();
             $table->text('images')->nullable();
 
-            $table->string('tags')->nullable();
+            $table->string('tags')->default('[]');
             $table->float('price')->default(0);
             $table->float('weight')->default(0);
             $table->integer('category_id')->references('id')->on('categories');

@@ -1,0 +1,27 @@
+.sidebar {
+  background: rgba($dark, .75);
+  @include span-columns(3);
+  font-size: .75rem;
+  &__subtitle {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: $red;
+    font-size: .75rem;
+    padding: .5rem 1rem;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  li {
+    text-transform: uppercase;
+    a {
+      color: $light-gray;
+      text-decoration: none;
+      padding: .5rem 1rem;
+      display: inline-block;
+      width: 100%;
+    }
+  }
+}

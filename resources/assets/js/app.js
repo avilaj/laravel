@@ -187,9 +187,7 @@ angular
     }
 
   }])
-  .controller('ProductController', ['$window', '$filter','Product', function ($window, $filter, Product)  {
-    let self = this;
-
+  .controller('ProductController', ['$window', 'Product', function ($window, Product)  {
     let sumTotal = function (anterior, actual) {
       return anterior + parseInt(actual.total);
     };
@@ -200,23 +198,47 @@ angular
       };
     };
 
+    let checkUniqueSize = () => {
+      if (this.currentColor.uniqueSize) {
+        this.currentSize = this.currentColor.sizes[0];
+      }
+    };
+
+    this.onColorChange = () => {
+      checkUniqueSize();
+    }
+
     this.available = (color_id) => {
       let total = this.sizes
         .filter(isColor(color_id))
         .reduce(sumTotal, 0);
         return total > 0;
     };
-    this.price = $window.mkStore.price;
-    this.colors = $window.mkStore.colors;
-    this.sizes = $window.mkStore.sizes;
-    this.qty = 1;
-    this.availableColors = $filter('filter')(this.colors, (color) => {
-      return this.available(color.id);
-    });
-    this.currentColor = this.availableColors[0];
+
+    this.getSizesCount = (color_id) => {
+      let sizes = this.sizes.filter(isColor(color_id));
+      return sizes.length;
+    };
+
     this.addToCart =  (reference, qty) => {
       Product.add(reference.id, qty);
-    }
+    };
+
+    this.setColorProperties = (color) => {
+      color.sizes = this.sizes.filter(isColor(color.id));
+      color.outOfStock = color.sizes.reduce(sumTotal, 0) < 1;
+      color.uniqueSize = color.sizes.length === 1;
+      return color;
+    };
+
+    this.price = $window.mkStore.price;
+    this.sizes = $window.mkStore.sizes;
+    this.colors = $window.mkStore.colors.map(this.setColorProperties);
+    this.availableColors = this.colors.filter(item => !item.outOfStock);
+    this.currentColor = this.availableColors[0];
+    this.qty = 1;
+
+    checkUniqueSize();
   }])
   .controller('CartController', ['$window', 'Product', function ($window, $http) {
     var self = this;
