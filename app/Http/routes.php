@@ -39,20 +39,17 @@ Route::group(['prefix' => 'catalogo'], function () {
 
   $appliedFilter = function () use ($prices) {
     $filters = [];
-    $currentRoute = url()->current();
+    $categorySlug = Request::route()
+      ->getParameter('category_slug');
+    $route = route('catalog', ['category_slug' => $categorySlug]);
     if (Request::route()->hasParameter('category_slug')) {
-
-      $category_slug = Request::route()
-        ->getParameter('category_slug');
-
-      $category = \App\Model\Category::whereSlug($category_slug)
+      $category = \App\Model\Category::whereSlug($categorySlug)
         ->first();
 
       if ($category) {
         $filters['category'] = (object) [
           'label' => $category->name,
-          'link' =>
-            url('/catalogo')
+          'link' => route('catalog')
             .'?'
             .http_build_query(Request::query())
         ];
@@ -65,7 +62,7 @@ Route::group(['prefix' => 'catalogo'], function () {
       if ($brand) {
         $filters['brand'] = (object) [
         'label' => $brand->name,
-        'link' => $currentRoute.'?'.http_build_query(Request::except('brand'))
+        'link' => $route.'?'.http_build_query(Request::except('brand'))
         ];
       }
     }
@@ -73,19 +70,23 @@ Route::group(['prefix' => 'catalogo'], function () {
     if(Request::has('price')) {
       $filters['price'] = (object) [
         'label' => $prices[Request::input('price')],
-        'link' => $currentRoute.'?'.http_build_query(Request::except('price'))
+        'link' => $route.'?'.http_build_query(Request::except('price'))
       ];
     }
     if(Request::has('search')) {
       $filters['search'] = (object) [
         'label' => Request::input('search'),
-        'link' => $currentRoute.'?'.http_build_query(Request::except('search'))
+        'link' => $route.'?'.http_build_query(Request::except('search'))
       ];
     }
+
     return $filters;
   };
 
   $filter = function ($query) {
+    if (Request::route()->hasParameter('category_slug')) {
+      $query->ofCategory(Request::route()->parameter('category_slug'));
+    }
     if (Request::has('brand')) {
       $query->ofBrand(Request::input('brand'));
     }
@@ -103,40 +104,22 @@ Route::group(['prefix' => 'catalogo'], function () {
     }
   };
 
-
-  Route::get('/', function (Request $request)
-    use ($filter, $prices, $appliedFilter)
-  {
-    $brands = \App\Model\Brand::all();
-    $products = Product::where($filter)->paginate(12);
-    return view('catalog.list', [
-      'filters' => $appliedFilter(),
-      'prices' => $prices,
-      'brands' => $brands,
-      'products' => $products
-      ])->render();
-  });
-
-  Route::get('/{category_slug}',
-    function (Request $request, $categorySlug)
+  Route::get('/{category_slug?}', ['as' => 'catalog',
+    function (Request $request, $categorySlug = null)
       use ($filter, $prices, $appliedFilter)
     {
       $brands = \App\Model\Brand::all();
-      $products = Product::whereHas('category',
-        function ($query) use ($categorySlug)
-        {
-          $query->where('slug', $categorySlug) ;
-        })
-      ->where($filter)
-      ->paginate(12);
+      $categories = \App\Model\Category::all();
+      $products = Product::where($filter)->paginate(12);
 
       return view('catalog.list', [
+        'categories' => $categories,
         'filters' => $appliedFilter(),
         'prices' => $prices,
         'brands' => $brands,
         'products' => $products
         ])->render();
-    });
+    }]);
 
   Route::get('/{category_slug}/{product_slug}',
     function (Request $request, $categorySlug, $productSlug)
@@ -147,9 +130,11 @@ Route::group(['prefix' => 'catalogo'], function () {
         return abort(404);
       }
       $brands = \App\Model\Brand::all();
+      $categories = \App\Model\Category::all();
       $colors = $product->colors->unique('id')->values()->all();
       $sizes = $product->availableReferences();
       return view('catalog.product', [
+        'categories' => $categories,
         'prices' => $prices,
         'brands' => $brands,
         'product'=> $product,
@@ -169,7 +154,7 @@ Route::get('/check-out', function () {
 Route::get('/check-out/proceed', function () {
   $cart = App\Model\Order::currentCart();
   $payment = App\Model\Order::CreatePayment();
-  // dd($payment);
+
   return view('checkout.proceed', [
     'payment_link' => $payment["response"]["sandbox_init_point"],
     'items' => $cart->content(),
@@ -196,7 +181,7 @@ Route::get('/check-out/set', function () {
   } else {
     if ($qty > 0) {
       $reference = Reference::with('product', 'color')->find($reference_id);
-      $size = Size::find($size_id);
+      $size = \App\Model\Size::find($size_id);
       $cart->add($identificator,
         $reference->product->title,
         $qty,

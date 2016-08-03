@@ -24,9 +24,9 @@
             {{ item.options.color}}
             {{ item.options.size}}
           </p>
-          <p><button type="button" class="remove-product" name="remove" ng-click="cart.remove(item.id, $index)" >Eliminar producto</button></p>
+          <p><button type="button" class="remove-product" name="remove" ng-click="cart.remove(item, $index)" >Eliminar producto</button></p>
         </td>
-        <td><input type="number" min="1" class="product-amount-input" ng-model="item.qty" ng-change="cart.updateQty(item.id, item.qty)"></td>
+        <td><input type="number" min="1" class="product-amount-input" ng-model="item.qty" ng-change="cart.updateQty(item, item.qty)"></td>
         <td>$ {{ item.price }}</td>
         <td>$ {{ item.price * item.qty}}</td>
       </tr>

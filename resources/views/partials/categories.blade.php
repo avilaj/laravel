@@ -32,7 +32,7 @@
     <ul>
         @foreach($brands as $brand)
         <li>
-            <a href="{{Request::fullUrlWithQuery(['brand' => $brand->id])}}">
+            <a href="{{ $brand->url }}">
                 {{ $brand->name }}
             </a>
         </li>

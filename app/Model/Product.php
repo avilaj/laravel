@@ -67,6 +67,13 @@ class Product extends Model
         return $query->where('brand_id', $brand_id);
     }
 
+    public function scopeOfCategory($query, $categorySlug) {
+      return $query->whereHas('category',
+        function ($query) use ($categorySlug) {
+          $query->where('slug', $categorySlug) ;
+        });
+    }
+
     public function scopeRecent($query) {
       return $query
         ->orderBy('created_at', 'desc')

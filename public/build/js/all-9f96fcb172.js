@@ -179,8 +179,8 @@ angular.module('mkcart', []).service('Product', ['$http', '$window', '$rootScope
     console.log('devuelve', this.count);
     return this.count;
   };
-  this.add = function (id, qty) {
-    var data = { 'reference_id': id, 'qty': qty };
+  this.add = function (id, size_id, qty) {
+    var data = { 'reference_id': id, 'size_id': size_id, 'qty': qty };
     _this.count += qty;
     return $http.get('/check-out/set', {
       params: data
@@ -221,8 +221,8 @@ angular.module('mkcart', []).service('Product', ['$http', '$window', '$rootScope
     return sizes.length;
   };
 
-  this.addToCart = function (reference, qty) {
-    Product.add(reference.id, qty);
+  this.addToCart = function (reference, size, qty) {
+    Product.add(reference.id, size.id, qty);
   };
 
   this.setColorProperties = function (color) {
@@ -242,22 +242,19 @@ angular.module('mkcart', []).service('Product', ['$http', '$window', '$rootScope
   this.qty = 1;
 
   checkUniqueSize();
-}]).controller('CartController', ['$window', 'Product', function ($window, $http) {
+}]).controller('CartController', ['$window', 'Product', function ($window, Product) {
   var self = this;
   this.products = $window.cartProducts;
   this.total = 0;
 
-  this.remove = function (id, index) {
+  this.remove = function (item, index) {
     self.products.splice(index, 1);
-    self.updateQty(id, 0);
+    self.updateQty(item, 0);
   };
 
-  this.updateQty = function (id, qty) {
-    var data = { 'reference_id': id, 'qty': qty };
+  this.updateQty = function (item, qty) {
     self.updateTotal();
-    return $http.get('/check-out/set', { params: data }).success(function (res) {
-      return res;
-    });
+    return Product.add(item.options.reference_id, item.options.size_id, qty);
   };
   var subtotal = function subtotal(item) {
     return item.price * item.qty;
@@ -268,6 +265,7 @@ angular.module('mkcart', []).service('Product', ['$http', '$window', '$rootScope
   this.updateTotal = function () {
     self.total = 0;
     self.total = self.products.map(subtotal).reduce(sumar, 0);
+    console.log(self.total);
     return self.total;
   };
   this.updateTotal();

@@ -175,8 +175,8 @@ angular
       console.log('devuelve',this.count);
       return this.count;
     };
-    this.add = (id, qty) => {
-      let data = {'reference_id': id, 'qty': qty};
+    this.add = (id, size_id, qty) => {
+      let data = {'reference_id': id, 'size_id': size_id, 'qty': qty};
       this.count += qty;
       return $http.get('/check-out/set', {
         params: data
@@ -220,8 +220,8 @@ angular
       return sizes.length;
     };
 
-    this.addToCart =  (reference, qty) => {
-      Product.add(reference.id, qty);
+    this.addToCart = (reference, size, qty) => {
+      Product.add(reference.id, size.id, qty);
     };
 
     this.setColorProperties = (color) => {
@@ -240,28 +240,26 @@ angular
 
     checkUniqueSize();
   }])
-  .controller('CartController', ['$window', 'Product', function ($window, $http) {
+  .controller('CartController', ['$window', 'Product', function ($window, Product) {
     var self = this;
     this.products = $window.cartProducts;
     this.total = 0;
 
-    this.remove = (id, index) => {
+    this.remove = (item, index) => {
       self.products.splice(index, 1);
-      self.updateQty(id, 0);
+      self.updateQty(item, 0);
     };
 
-    this.updateQty = function (id, qty) {
-      var data = {'reference_id': id, 'qty': qty};
+    this.updateQty = function (item, qty) {
       self.updateTotal();
-      return $http.get('/check-out/set', {params: data}).success( res => {
-        return res;
-      });
+      return Product.add(item.options.reference_id, item.options.size_id, qty)
     };
     let subtotal = (item) => item.price * item.qty
     let sumar = (prev, cur) => prev + cur
     this.updateTotal = () => {
       self.total = 0;
       self.total = self.products.map(subtotal).reduce(sumar, 0);
+      console.log(self.total);
       return self.total;
     }
     this.updateTotal();

@@ -39,9 +39,11 @@
     <section class="home-section home-brands">
       @foreach($brands as $brand)
         <div class="home-brands__item">
-          <img
-            src="http://placehold.it/150x70/ccc/fff?text=brand"
+          <a href="{{$brand->url}}">
+            <img
+            src="{{ $brand->image }}"
             alt="{{$brand->name}}">
+          </a>
         </div>
       @endforeach
     </section>
