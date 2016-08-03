@@ -13,7 +13,7 @@ AdminSection::registerModel(Reference::class, function (ModelConfiguration $mode
     $model->setAlias('references');
     $model->onDisplay(function () {
         $display = AdminDisplay::datatables();
-        $display->with('color');
+        $display->with('color', 'product');
         $display->setApply(function ($query) {
             $query->orderBy('created_at', 'desc');
         });
@@ -27,7 +27,13 @@ AdminSection::registerModel(Reference::class, function (ModelConfiguration $mode
             AdminColumn::custom()
                 ->setLabel("Ref")
                 ->setCallback(function ($instance) {
-                    return "<a href='".url('admin/products/'.$instance->product_id.'/edit')."'>".$instance->product->title."</a>";
+                  if ($instance->product) {
+                    return "<a href='"
+                    .url('admin/products/'.$instance->product->id.'/edit')
+                    ."'>"
+                    .$instance->product->title
+                    ."</a>";
+                  }
                 }),
             AdminColumn::text('color.name')->setLabel('Color'),
             AdminColumn::custom()
