@@ -204,8 +204,17 @@ class Product extends Model
       return \DB::table('references')
         ->join('stocks', 'references.id', '=', 'stocks.reference_id')
         ->join('sizes', 'sizes.id', '=', 'stocks.size_id')
-        ->select('references.id as id', 'sizes.label','references.color_id', \DB::raw('SUM(stocks.qty) as total'))
-        ->groupBy('references.id')
+        ->join('colors', 'colors.id', '=', 'references.color_id')
+        ->select(
+          'references.id as reference_id',
+          'colors.id as color_id',
+          'colors.name as color_label',
+          'sizes.id as size_id',
+          'sizes.label as size_label',
+          'references.color_id',
+          \DB::raw('SUM(stocks.qty) as total')
+        )
+        ->groupBy('reference_id')
         ->where('references.product_id', $this->id)
         ->get();
     }
@@ -230,5 +239,17 @@ class Product extends Model
 
     public function getQtyAttribute() {
         return $this->stock()->sum('qty');
+    }
+
+    public function relatedProducts($amount = 5) {
+      $category = Product::where('category_id', $this->category_id)
+        ->take($amount)->get();
+      if ($category->count() < $amount ) {
+        $differents = Product::whereNotIn('id', $category->pluck('id'))
+        ->take($amount)->get();
+        $category->merge($differents);
+      }
+
+      return $category->take($amount);
     }
 }

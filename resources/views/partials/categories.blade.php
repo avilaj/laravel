@@ -1,7 +1,7 @@
 <section class="mk-catalog__categories sidebar">
     <pre>
     </pre>
-  @if (isset($filters))
+  @if (isset($filters) && count($filters) > 0)
     <h3 class="sidebar__subtitle">Filtros</h3>
     <ul>
       @foreach($filters as $filter)
@@ -31,9 +31,9 @@
     <h3 class="sidebar__subtitle">Marcas</h3>
     <ul>
         @foreach($brands as $brand)
-        <li>
+        <li class="sidebar__brand">
             <a href="{{ $brand->url }}">
-                {{ $brand->name }}
+              <img src="{{$brand->image}}" alt="{{$brand->name}}" />
             </a>
         </li>
         @endforeach
@@ -43,10 +43,10 @@
       @if (isset($prices) && !@$filters['price'])
       <h3 class="sidebar__subtitle">Precio</h3>
       <ul>
-        @foreach ($prices as $value => $label)
+        @foreach ($prices() as $price)
         <li>
-            <a href="{{Request::fullUrlWithQuery(['price' => $value])}}">
-                {{ $label }}
+            <a href="{{ $price['url']}}">
+                {{ $price['label'] }}
             </a>
         </li>
         @endforeach

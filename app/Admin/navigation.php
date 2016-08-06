@@ -46,12 +46,10 @@ return [
     [
       'title' => 'Configuracion',
       'pages' => [
+        (new Page(\App\Model\Category::class))->setTitle('Categorías'),
         (new Page(\App\Model\Type::class))->setTitle('Talles'),
         (new Page(\App\Model\Brand::class))->setTitle('Marcas'),
-        [
-          'title' => 'Página de inicio',
-          'url' => route('admin.settings')
-        ],
+        (new Page(\App\Model\Color::class))->setTitle('Colores'),
       ]
     ],
     [
@@ -63,6 +61,10 @@ return [
             'url'   => route('admin.add-stock.select-product')
         ]
       ]
+    ],
+    [
+      'title' => 'Sitio',
+      'url' => route('admin.settings')
     ],
 
     // Examples

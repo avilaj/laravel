@@ -1,3 +1,6 @@
+<?php
+// dd($sizes);
+?>
 <script>
   var mkStore = mkStore || {};
   mkStore.price = <?php echo json_encode($product->price); ?>;
@@ -27,7 +30,7 @@
       id="product-size"
       ng-model="p.currentSize"
       ng-disabled="p.currentColor.uniqueSize || p.currentColor.outOfStock"
-      ng-options="size as size.label for size in p.currentColor.sizes"
+      ng-options="size as size.size_label for size in p.currentColor.sizes"
       class="mk-select product-buy__size">
       <option value="">
         -- seleccione un talle --

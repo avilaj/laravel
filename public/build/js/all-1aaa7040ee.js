@@ -160,6 +160,7 @@ $(document).ready(function () {
 //   .component('priceFilter', {
 //     template: ''
 //   });
+// import ProductController from './product.controller.js';
 
 angular.module('mkcart', []).service('Product', ['$http', '$window', '$rootScope', function ($http, $window, $scope) {
   var _this = this;
@@ -221,8 +222,9 @@ angular.module('mkcart', []).service('Product', ['$http', '$window', '$rootScope
     return sizes.length;
   };
 
-  this.addToCart = function (reference, size, qty) {
-    Product.add(reference.id, size.id, qty);
+  this.addToCart = function (reference, item, qty) {
+    console.log(item);
+    Product.add(item.reference_id, item.size_id, qty);
   };
 
   this.setColorProperties = function (color) {

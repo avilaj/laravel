@@ -12,7 +12,7 @@ class Category extends Model
 
 
     protected $table = 'categories';
-    protected $fillable = ['name', 'banner','order', 'description', 'slug','gallery_id', 'product_id'];
+    protected $fillable = ['name', 'banner','order', 'description', 'slug'];
     public $timestamps = false;
 
     public function sluggable () {

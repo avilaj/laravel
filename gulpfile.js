@@ -12,6 +12,7 @@ var elixir = require('laravel-elixir');
  */
 
 elixir(function(mix) {
+  console.dir(mix.babel.config);
     mix
     	.sass('app.scss')
     	.babel(['app.js'])

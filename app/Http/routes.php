@@ -28,14 +28,20 @@ Route::get('/', function ()
 
 
 Route::group(['prefix' => 'catalogo'], function () {
-  $prices = [
-    '0-100' => '$0 - $100',
-    '100-500' => '$100 - $500',
-    '500-1000' => '$500 - $1000',
-    '1000-2000' => '$1000 - $2000',
-    '2000-3000' => '$2000 - $3000',
-    '3000-9999' => 'más de $3000'
-  ];
+  $prices = function () {
+    $categorySlug = Request::route()
+      ->getParameter('category_slug');
+    $url = route('catalog', ['category_slug' => $categorySlug]);
+    $list = [
+      '0-100' => ['label'=>'$0 - $100', 'url' => $url.'?'.'price=0-100'],
+      '100-500' => ['label'=>'$100 - $500', 'url' => $url.'?'.'price=100-500'],
+      '500-1000' => ['label'=>'$500 - $1000', 'url' => $url.'?'.'price=500-1000'],
+      '1000-2000' => ['label'=>'$1000 - $2000', 'url' => $url.'?'.'price=1000-2000'],
+      '2000-3000' => ['label'=>'$2000 - $3000', 'url' => $url.'?'.'price=2000-3000'],
+      '3000-9999' => ['label'=>'más de $3000', 'url' => $url.'?'.'price=3000-9999']
+    ];
+    return $list;
+  };
 
   $appliedFilter = function () use ($prices) {
     $filters = [];
@@ -69,7 +75,7 @@ Route::group(['prefix' => 'catalogo'], function () {
 
     if(Request::has('price')) {
       $filters['price'] = (object) [
-        'label' => $prices[Request::input('price')],
+        'label' => $prices()[Request::input('price')]['label'],
         'link' => $route.'?'.http_build_query(Request::except('price'))
       ];
     }
@@ -181,7 +187,10 @@ Route::get('/check-out/set', function () {
   } else {
     if ($qty > 0) {
       $reference = Reference::with('product', 'color')->find($reference_id);
+      if (!$reference) return abort(400);
       $size = \App\Model\Size::find($size_id);
+      if (!$size) return abort(400);
+
       $cart->add($identificator,
         $reference->product->title,
         $qty,
