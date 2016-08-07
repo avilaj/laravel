@@ -29,10 +29,10 @@
     @endif
     @if (isset($brands) && !@$filters['brand'])
     <h3 class="sidebar__subtitle">Marcas</h3>
-    <ul>
+    <ul class="sidebar__brands">
         @foreach($brands as $brand)
         <li class="sidebar__brand">
-            <a href="{{ $brand->url }}">
+            <a href="{{ $brand->url }}" class="sidebar__brand__link" title="{{$brand->name}}">
               <img src="{{$brand->image}}" alt="{{$brand->name}}" />
             </a>
         </li>

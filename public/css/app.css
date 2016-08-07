@@ -8,6 +8,56 @@ body {
   background: #000 url("/images/woods.jpg") repeat-y;
   background-size: 100%; }
 
+.mk-page-form {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto; }
+  .mk-page-form::after {
+    clear: both;
+    content: "";
+    display: table; }
+  .mk-page-form .panel-heading {
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    color: #5a5a5a; }
+  .mk-page-form a.btn {
+    display: inline-block;
+    margin-top: 1rem;
+    color: #fff; }
+  .mk-page-form .panel {
+    font-size: .75rem;
+    float: left;
+    display: block;
+    margin-right: 2.3576515979%;
+    width: 40.2913699012%;
+    padding: 2.3576515979%;
+    margin-left: 29.8543150494%;
+    background: #1e1e1c;
+    color: #fff;
+    margin-bottom: 20vh; }
+    .mk-page-form .panel:last-child {
+      margin-right: 0; }
+    .mk-page-form .panel label {
+      margin-bottom: .5rem; }
+    .mk-page-form .panel label,
+    .mk-page-form .panel input,
+    .mk-page-form .panel button {
+      display: inline-block;
+      width: 100%; }
+    .mk-page-form .panel button {
+      border: 0;
+      text-transform: uppercase;
+      font-weight: bolder;
+      padding: .5rem 1rem;
+      background: #FE0000;
+      color: #fff; }
+    .mk-page-form .panel label {
+      font-weight: bolder; }
+    .mk-page-form .panel input {
+      border: 0;
+      padding: .5rem 1rem;
+      margin-bottom: 1rem; }
+
 .mk-btn {
   border: 2px solid transparent;
   padding: .5rem 1rem;
@@ -501,6 +551,8 @@ body {
       padding: .5rem 1rem;
       display: inline-block;
       width: 100%; }
+  .sidebar__brands {
+    padding: .5rem 1rem !important; }
   .sidebar__brand {
     float: left;
     display: block;
@@ -508,8 +560,12 @@ body {
     width: 31.7615656014%; }
     .sidebar__brand:last-child {
       margin-right: 0; }
-    .sidebar__brand a {
-      padding: 0; }
+    .sidebar__brand:nth-child(3n) {
+      margin-right: 0; }
+    .sidebar__brand:nth-child(3n+1) {
+      clear: left; }
+    .sidebar__brand__link {
+      padding: 0 !important; }
     .sidebar__brand img {
       width: 100%;
       height: auto; }

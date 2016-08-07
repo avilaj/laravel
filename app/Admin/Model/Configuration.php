@@ -12,7 +12,6 @@ AdminSection::registerModel(Configuration::class, function (ModConf $model)
     $model->onEdit(function ($id = 1)
     {
         $form = AdminForm::form();
-        // $form->setAction('/admin/settings/save');
         $form->setItems([
                 AdminFormElement::text('collection_title', 'Título'),
                 AdminFormElement::multiselect('home_products', 'Blabla')
@@ -20,12 +19,6 @@ AdminSection::registerModel(Configuration::class, function (ModConf $model)
                                         ->required(),
                 AdminFormElement::text('collection_description', 'Descripción'),
             ]);
-            // ->addBody([
-            //     // AdminFormElement::text('home_products', 'Productos destacados'),
-            // ])
-            // ->addBody([
-            //     // AdminFormElement::images('home_slider', 'Slider'),
-            // ])
         $form->getButtons()
             ->setSaveButtonText('Guardar')
             ->hideSaveAndCloseButton()

@@ -73,13 +73,13 @@ class Brand extends Model
     }
 
     public function setImageAttribute($image) {
-      $image = $this->get_filename($image);
-      if ($image) {
+      if ($image && $image != "") {
+        $image = $this->get_filename($image);
         if ($image != $this->attributes['image']) {
           $this->resize_image($image);
         }
       } else {
-        if ($this->attributes['image']) {
+        if (isset($this->attributes['image'])) {
           $this->remove_image($this->attributes['image']);
         }
       }

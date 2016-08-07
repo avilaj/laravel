@@ -10,6 +10,53 @@ body {
   background: #000 url('/images/woods.jpg') repeat-y;
   background-size: 100%;
 }
+.mk-page-form {
+  @include outer-container;
+  .panel-heading {
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    color: $gray;
+  }
+  a.btn {
+    display: inline-block;
+    margin-top: 1rem;
+    color: $white;
+  }
+  .panel {
+    font-size: .75rem;
+    @include span-columns(5);
+    @include pad;
+    @include shift(3.5);
+    background: $dark;
+    color: $white;
+    margin-bottom: 20vh;
+    label {
+      margin-bottom: .5rem;
+    }
+    label,
+    input,
+    button {
+      display: inline-block;;
+      width: 100%;
+    }
+    button {
+      border: 0;
+      text-transform: uppercase;
+      font-weight: bolder;
+      padding: .5rem 1rem;
+      background: $red;
+      color: $white;
+    }
+    label {
+      font-weight: bolder;
+    }
+    input {
+      border: 0;
+      padding: .5rem 1rem;
+      margin-bottom: 1rem;
+    }
+  }
+}
 .mk-btn {
   border: 2px solid transparent;
   padding: .5rem 1rem;

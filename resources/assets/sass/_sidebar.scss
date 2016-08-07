@@ -25,10 +25,14 @@
       width: 100%;
     }
   }
+  &__brands {
+    padding: .5rem 1rem !important;
+  }
   &__brand {
     @include span-columns(4);
-    a {
-      padding: 0;
+    @include omega(3n)
+    &__link {
+      padding: 0 !important;
     }
     img {
       width: 100%;

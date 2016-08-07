@@ -11,7 +11,8 @@
         "cviebrock/eloquent-sluggable": "~4.0@dev",
         "mercadopago/sdk": "0.5.2",
         "gloudemans/shoppingcart": "^2.1",
-        "intervention/image": "^2.3"
+        "intervention/image": "^2.3",
+        "laravel/socialite": "^2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

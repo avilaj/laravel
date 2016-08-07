@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="mk-page-container login">
-  <form role="form" method="POST" action="{{ url('/login') }}">
+<div class="mk-page-form login">
+  <form role="form" class="panel" method="POST" action="{{ url('/login') }}">
     {{ csrf_field() }}
 
     <div class="{{ $errors->has('email') ? ' has-error' : '' }}">
@@ -20,7 +20,7 @@
     </div>
 
     <div class="{{ $errors->has('password') ? ' has-error' : '' }}">
-      <label for="password">Password</label>
+      <label for="password">Contraseña</label>
 
       <div>
         <input id="password" type="password" name="password">
@@ -33,16 +33,10 @@
       </div>
     </div>
 
-    <div class="checkbox">
-      <label>
-        <input type="checkbox" name="remember"> Recordarme
-      </label>
-    </div>
-
     <button type="submit" class="btn btn-primary">
       <i class="fa fa-btn fa-sign-in"></i> Iniciar sesión
     </button>
-    <a class="btn btn-link" href="{{ url('/password/reset') }}">Perdiste tu password?</a>
+    <a class="btn btn-link" href="{{ url('/password/reset') }}">Recuperar contraseña</a>
 
   </form>
 </div>

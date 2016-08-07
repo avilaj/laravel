@@ -14,10 +14,17 @@
         'home_products' => 'array'
       ];
       protected $fillable = [
-                          'collection_title',
-                          'collection_description',
-                          'home_products'
-                          ];
+        'store_title',
+        'collection_title',
+        'collection_description',
+        'facebook_url',
+        'twitter_url',
+        'youtube_url',
+        'instagram_url',
+        'contact_phone',
+        'contact_email',
+        'home_products'
+      ];
 
 
       public function __construct()
