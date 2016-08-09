@@ -30,7 +30,7 @@
       font-size: 0.75rem;
       color: $gray;
     }
-    .productBox {
+    .product-box {
       @include span-columns(3);
     }
   }

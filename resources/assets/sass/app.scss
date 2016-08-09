@@ -111,7 +111,7 @@ body {
   }
 }
 
-.productBox {
+.product-box {
   $background: #fff;
   background: $background;
   display: inline-block;
@@ -236,3 +236,4 @@ body {
 @import 'footer';
 @import 'catalog';
 @import 'checkout';
+@import 'news/index';

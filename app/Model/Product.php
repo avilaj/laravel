@@ -76,8 +76,7 @@ class Product extends Model
 
     public function scopeRecent($query) {
       return $query
-        ->orderBy('created_at', 'desc')
-        ->take(9);
+        ->orderBy('created_at', 'desc');
     }
 
     public function scopePriceBetween($query, $range) {
@@ -132,7 +131,9 @@ class Product extends Model
       $arr = explode('.',$img_route);
 
       foreach ($this->resizes as $label => $size) {
-        $img->resize($size[0], $size[1]);
+        $img->fit($size[0], $size[1], function ($constraint) {
+          $constraint->upsize();
+        });
         $img->save($arr[0].'.'.$label.'.'.$arr[1]);
       }
     }

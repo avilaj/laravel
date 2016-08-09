@@ -12,14 +12,22 @@
 */
 use \App\Model\Product;
 use \App\Model\Reference;
-
+Route::resource('novedades', 'NewsController', [
+  'only' => ['index', 'show'],
+  'names' => ['index'=> 'news.list', 'show'=> 'news.show']
+]);
 Route::get('/', function ()
 {
+  $POSTS_AMOUNT = 6;
+
   $config = new \App\Model\Configuration;
   $brands = \App\Model\Brand::all();
-  $featured = \App\Model\Product::with('category')->whereIn('id', $config->home_products)->get();
+  $featured = \App\Model\Product::with('category')
+    ->whereIn('id', $config->home_products)->take($POSTS_AMOUNT)->get();
+  $news = \App\Model\News::featured()->take($POSTS_AMOUNT)->get();
   $recentProducts = \App\Model\Product::with('category')->latest()->get();
   return view('welcome', [
+    'news' => $news,
     'brands' => $brands,
     'featured_products' => $featured,
     'recent_products' => $recentProducts

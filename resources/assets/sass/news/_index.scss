@@ -1,0 +1,16 @@
+@import 'small-box';
+@import 'show';
+
+.mk-news {
+  @include outer-container;
+  margin-bottom: 7rem;
+  .post-box {
+    @include span-columns(3);
+    @include omega(4n);
+  }
+  .recent-posts {
+    .post-box {
+      margin-bottom: 3rem;
+    }
+  }
+}

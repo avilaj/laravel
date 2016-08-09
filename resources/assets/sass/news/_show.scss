@@ -1,0 +1,45 @@
+.post-display {
+  @include outer-container;
+  @include pad;
+  margin-bottom: 7rem;
+  color: $white;
+  img {
+    width: 100%;
+    height: auto;
+  }
+  &__content {
+    @include span-columns(8);
+  }
+  &__section-title {
+    text-transform: uppercase;
+    font-weight: bolder;
+    font-size: .75rem;
+    color: $white;
+  }
+  &__recent-posts {
+    @include span-columns(3);
+    @include omega;
+    @include shift(1);
+    .post-box {
+      margin-bottom: 3rem;
+    }
+  }
+  &__related-products {
+    @include span-columns(12);
+    .product-box {
+      @include span-columns(3);
+      @include omega(4n);
+    }
+  }
+  &__date {
+    color: $red;
+  }
+  &__title {
+    text-transform: uppercase;
+  }
+  &__gallery {
+  }
+  &__gallery-item {
+    @include span-columns(3);
+  }
+}

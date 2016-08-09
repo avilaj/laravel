@@ -28,13 +28,7 @@
         <div class="mk-product-page__related-products">
           <h3>Productos relacionados</h3>
           @foreach($product->relatedProducts() as $related)
-          <div class="productBox">
-            <a class="productBox__link" href="{{ $related->url }}" title="{{ $related->title }}">
-              <img class="productBox__image" src="{{ $related->thumbnail }}" alt="{{ $related->title }}">
-              <strong class="productBox__title">{{ $related->title }}</strong>
-              <span class="productBox__price">${{ $related->price }}.</span>
-            </a>
-          </div>
+            @include('products.small-box')
           @endforeach
         </div>
         @endif

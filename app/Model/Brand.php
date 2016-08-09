@@ -57,7 +57,7 @@ class Brand extends Model
       $arr = explode('.',$img_route);
 
       foreach ($this->sizes as $label => $size) {
-        $img->resize($size[0], $size[1]);
+        $img->fit($size[0], $size[1]);
         $img->save($arr[0].'.'.$label.'.'.$arr[1]);
       }
     }
