@@ -1,8 +1,8 @@
 <section class="mk-catalog__categories sidebar">
     <pre>
     </pre>
-  @if (isset($filters) && count($filters) > 0)
     <h3 class="sidebar__subtitle">Filtros</h3>
+  @if (isset($filters) && count($filters) > 0)
     <ul>
       @foreach($filters as $filter)
       <li>
