@@ -10,12 +10,12 @@
     <div class="section">
         <ul>
             <li class="section__title"><strong>Mapa del sitio</strong></li>
-            <li><a href="/novedades">Novedades</a></li>
-            <li><a href="/nosotros">Nosotros</a></li>
-            <li><a href="/catalogo">Catalogo</a></li>
-            <li><a href="/radio">Radio</a></li>
-            <li><a href="/locales">Locales</a></li>
-            <li><a href="/contacto">Contacto</a></li>
+            <li><a href="{{ route('news.list') }}">Novedades</a></li>
+            <li><a href="{{ route('products.list') }}">Catalogo</a></li>
+            <!-- <li><a href="/nosotros">Nosotros</a></li> -->
+            <!-- <li><a href="/radio">Radio</a></li> -->
+            <!-- <li><a href="/locales">Locales</a></li> -->
+            <!-- <li><a href="/contacto">Contacto</a></li> -->
         </ul>
     </div>
 
@@ -24,20 +24,18 @@
             <li class="section__title"><strong>Mi cuenta</strong></li>
             <li><a href="/registrarse">Registrarse</a></li>
             <li><a href="/ingresar">Ingresar</a></li>
-            <li><a href="/mi-carro">Mi Carro</a></li>
             <li><a href="/check-out">Check Out</a></li>
-            <li><a href="/locales">Locales</a></li>
-            <li><a href="/contacto">Contacto</a></li>
+            <!-- <li><a href="/locales">Locales</a></li> -->
+            <!-- <li><a href="/contacto">Contacto</a></li> -->
         </ul>
     </div>
 
     <div class="section">
         <ul>
             <li class="section__title"><strong>Servicio al cliente</strong></li>
-            <li><a href="/privacidad">Privacidad</a></li>
-            <li><a href="/terminos-condiciones">Términos y condiciones</a></li>
-            <li><a href="/mi-carro">Mi Carro</a></li>
-            <li><a href="/check-out">Check Out</a></li>
+            <!-- <li><a href="/privacidad">Privacidad</a></li> -->
+            <!-- <li><a href="/terminos-condiciones">Términos y condiciones</a></li> -->
+            <!-- <li><a href="/check-out">Check Out</a></li> -->
         </ul>
     </div>
 
