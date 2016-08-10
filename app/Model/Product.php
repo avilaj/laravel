@@ -6,11 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use App\Model\Reference;
 use App\Model\Color;
-
+use App\Filterable;
 
 class Product extends Model
 {
     use Sluggable;
+    use Filterable;
+
     protected $resizes = [
       'large' => [1024, 1024],
       'medium' => [540, 540],
@@ -67,11 +69,8 @@ class Product extends Model
         return $query->where('brand_id', $brand_id);
     }
 
-    public function scopeOfCategory($query, $categorySlug) {
-      return $query->whereHas('category',
-        function ($query) use ($categorySlug) {
-          $query->where('slug', $categorySlug) ;
-        });
+    public function scopeOfCategory($query, $id) {
+      return $query->where('category_id', $id);
     }
 
     public function scopeRecent($query) {
@@ -234,8 +233,7 @@ class Product extends Model
 
     public function getUrlAttribute ()
     {
-        $url = "/catalogo/{$this->category->slug}/{$this->slug}";
-        return $url;
+        return route('products.show', $this->id);
     }
 
     public function getQtyAttribute() {

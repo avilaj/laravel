@@ -41,10 +41,21 @@ class Category extends Model
     public function products() {
         return $this->hasMany('App\Model\Product');
     }
+
     public function getUrlAttribute () {
-        $url = "/catalogo/{$this->slug}";
-        return $url;
+      $url = route('products.list').'?';
+      $route = \Route::current()->getName();
+      $query = ['category' => $this->id];
+      if ('products.list' == $route) {
+        // mix the query;
+        $request = \Request::all();
+        $query = $query + $request;
+      }
+      $url .= http_build_query($query);
+
+      return $url;
     }
+
     public function getBannerCleanedAttribute() {
         if ( $this->banner && !empty($this->banner) ) {
             return str_replace('uploads/', '', $this->banner);

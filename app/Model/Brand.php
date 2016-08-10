@@ -38,8 +38,16 @@ class Brand extends Model
     }
 
     public function getUrlAttribute () {
-        $slug = \Request::route()->parameter('category_slug');
-        return route('catalog', ['category_slug'=>$slug]).'?brand='.$this->id;
+      $url = route('products.list').'?';
+      $route = \Route::current()->getName();
+      $query = ['brand' => $this->id];
+      if ('products.list' == $route) {
+        // mix the query;
+        $request = \Request::all();
+        $query = $query + $request;
+      }
+      $url .= http_build_query($query);
+      return $url;
     }
 
     public function get_file_route ($file) {
