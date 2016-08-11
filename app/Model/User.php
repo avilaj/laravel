@@ -48,10 +48,7 @@ class User extends Model implements AuthenticatableContract,
 
     public function getCart() {
       $user = \Auth::user();
-      if ($user->order_id) {
-        return $user->orders()->onCheckout()->recent()->first();
-      }
-      return false;
+      return $this->orders()->onCheckout()->recent()->first();
     }
 
     public function setCart() {
@@ -60,9 +57,6 @@ class User extends Model implements AuthenticatableContract,
         'status' => 'filling'
       ];
       $cart = Order::create($cart_data);
-
-      $this->order_id = $cart->id;
-      $this->save();
 
       return $cart;
     }
