@@ -73,8 +73,12 @@ class CartController extends Controller
   }
 
   public function ipn(Request $request) {
+    $rules = ['topic' => 'required', 'id' => 'required'];
+    $this->validate($request, $rules);
+
     $data = $request->query();
+    $data = ['topic' => @$data['topic'], 'identificator' => @$data['id']];
     $notification = \App\Model\Notification::create($data);
-    return [ 'message'=> 'received'];
+    return $notification;
   }
 }
