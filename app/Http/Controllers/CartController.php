@@ -76,7 +76,7 @@ class CartController extends Controller
     $rules = ['topic' => 'required', 'id' => 'required'];
     $this->validate($request, $rules);
 
-    $data = $request->query();
+    $data = $request->all();
     $data = ['topic' => @$data['topic'], 'identificator' => @$data['id']];
     $notification = \App\Model\Notification::create($data);
     return $notification;

@@ -67,65 +67,6 @@ Route::get('/', function ()
 
 View::composer('partials.categories', 'App\Composers\SidebarComposer');
 
-Route::get('/check-out', function () {
-  $cart = App\Model\Order::currentCart();
-  return view('checkout.index',[
-    'items' => $cart->content(),
-    'total' => $cart->total()
-    ]);
-});
-Route::get('/check-out/proceed', function () {
-  $cart = App\Model\Order::currentCart();
-  $payment = App\Model\Order::CreatePayment();
-
-  return view('checkout.proceed', [
-    'payment_link' => $payment["response"]["sandbox_init_point"],
-    'items' => $cart->content(),
-    'total' => $cart->total()
-    ]);
-});
-Route::get('/check-out/set', function () {
-  $reference_id = (int) Request::input('reference_id');
-  $size_id = (int) Request::input('size_id');
-  $qty = (int) Request::input('qty', 1);
-  if (! $reference_id || ! $size_id) {
-    return abort(400, 'Faltan parámetros.');
-  }
-
-  $identificator = md5($reference_id .'-'.$size_id);
-
-  $cart = App\Model\Order::currentCart();
-  $exists = $cart->search(function ($item) use ($identificator) {
-    return $item->id == $identificator;
-  });
-
-  if (!($exists instanceof Illuminate\Support\Collection)) {
-    $cart->update($exists->rowId, $qty);
-  } else {
-    if ($qty > 0) {
-      $reference = Reference::with('product', 'color')->find($reference_id);
-      if (!$reference) return abort(400);
-      $size = \App\Model\Size::find($size_id);
-      if (!$size) return abort(400);
-
-      $cart->add($identificator,
-        $reference->product->title,
-        $qty,
-        $reference->product->price,
-        [
-          'product_id' => $reference->product->id,
-          'reference_id' => $reference->id,
-          'color_id' => $reference->color_id,
-          'size_id' => $size_id,
-          'color' => $reference->color->name,
-          'size'=> $size->label
-        ]
-        );
-    }
-  }
-  return ['products'=>$cart->count(), 'price'=>$cart->total()];
-});
-
 Route::auth();
 
 Route::get('/home', 'HomeController@index');

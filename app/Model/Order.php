@@ -89,11 +89,9 @@ class Order extends Model
         'items'=> $products,
         "auto_return" => "approved",
         "external_reference" => $this->id,
-        "notification_url" => "https://www.your-site.com/ipn",
+        "notification_url" => route('cart.ipn'),
         "back_urls" => [
-          "success" => "https://www.success.com",
-          "failure" => "http://www.failure.com",
-          "pending" => "http://www.pending.com"
+          "success" => route('index')
         ]
       ]);
       return $reference['response']['sandbox_init_point'];
