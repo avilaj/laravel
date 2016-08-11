@@ -83,7 +83,7 @@ class Brand extends Model
     public function setImageAttribute($image) {
       if ($image && $image != "") {
         $image = $this->get_filename($image);
-        if ($image != $this->attributes['image']) {
+        if ($image != @$this->attributes['image']) {
           $this->resize_image($image);
         }
       } else {
