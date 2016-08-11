@@ -22,6 +22,13 @@ class OrderItem extends Model
         return $this->belongsTo('App\Model\Order')->withPivot('price', 'qty');
     }
 
+    public function size() {
+      return $this->belongsTo('App\Model\Size');
+    }
+    public function product() {
+      return $this->belongsTo('App\Model\Product');
+    }
+
     public function reference() {
       return $this->belongsTo('\App\Model\Reference');
     }

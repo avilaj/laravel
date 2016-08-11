@@ -183,9 +183,7 @@ angular.module('mkcart', []).service('Product', ['$http', '$window', '$rootScope
   this.add = function (id, size_id, qty) {
     var data = { 'reference_id': id, 'size_id': size_id, 'qty': qty };
     _this.count += qty;
-    return $http.get('/check-out/set', {
-      params: data
-    }).then(function (res) {
+    return $http.post('/cart/update', data).then(function (res) {
       return _this.setCount(res.data.products);
     });
   };
@@ -223,8 +221,10 @@ angular.module('mkcart', []).service('Product', ['$http', '$window', '$rootScope
   };
 
   this.addToCart = function (reference, item, qty) {
-    console.log(item);
-    Product.add(item.reference_id, item.size_id, qty);
+    _this2.addingProduct = true;
+    Product.add(item.reference_id, item.size_id, qty).then(function (response) {
+      _this2.addingProduct = false;
+    });
   };
 
   this.setColorProperties = function (color) {
@@ -256,7 +256,9 @@ angular.module('mkcart', []).service('Product', ['$http', '$window', '$rootScope
 
   this.updateQty = function (item, qty) {
     self.updateTotal();
-    return Product.add(item.options.reference_id, item.options.size_id, qty);
+    var reference_id = item.reference.id;
+    var size_id = item.size.id;
+    return Product.add(reference_id, size_id, qty);
   };
   var subtotal = function subtotal(item) {
     return item.price * item.qty;
@@ -267,7 +269,6 @@ angular.module('mkcart', []).service('Product', ['$http', '$window', '$rootScope
   this.updateTotal = function () {
     self.total = 0;
     self.total = self.products.map(subtotal).reduce(sumar, 0);
-    console.log(self.total);
     return self.total;
   };
   this.updateTotal();

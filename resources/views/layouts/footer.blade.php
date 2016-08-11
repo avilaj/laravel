@@ -22,9 +22,9 @@
     <div class="section">
         <ul>
             <li class="section__title"><strong>Mi cuenta</strong></li>
-            <li><a href="/registrarse">Registrarse</a></li>
-            <li><a href="/ingresar">Ingresar</a></li>
-            <li><a href="/check-out">Check Out</a></li>
+            <li><a href="/register">Registrarse</a></li>
+            <li><a href="/login">Ingresar</a></li>
+            <li><a href="{{ route('cart.index' )}}">Check Out</a></li>
             <!-- <li><a href="/locales">Locales</a></li> -->
             <!-- <li><a href="/contacto">Contacto</a></li> -->
         </ul>

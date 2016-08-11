@@ -18,11 +18,11 @@
         <td>
           <div class="checkout-page__product">
             <h3 class="checkout-page__product__title">
-              {{ item.name }}
+              {{ item.product.title }}
             </h3>
             <ul class="checkout-page__product__properties">
-              <li> <strong>Color:</strong> {{ item.options.color}}
-              <li> <strong>Talle:</strong> {{ item.options.size}}
+              <li> <strong>Color:</strong> {{ item.reference.color.name }}
+              <li> <strong>Talle:</strong> {{ item.size.label }}
             </ul>
           </div>
         <td> {{ item.qty }}
@@ -44,6 +44,6 @@
     </span>
     <br>
     <br>
-    <a href="/check-out/proceed" class="mk-btn mk-btn--primary mk-full-width">Completar compra</a>
+    <a href="<?php echo route('cart.pay') ?>" class="mk-btn mk-btn--primary mk-full-width">Completar compra</a>
   </div>
 </div>

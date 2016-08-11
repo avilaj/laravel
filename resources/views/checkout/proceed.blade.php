@@ -22,8 +22,8 @@
               {{ $item->name }}
             </h3>
             <ul class="checkout-page__product__properties">
-              <li> <strong>Color:</strong> {{ $item->options->color }}
-              <li> <strong>Talle:</strong> {{ $item->options->size }}
+              <li> <strong>Color:</strong> {{ $item->reference->color->name }}
+              <li> <strong>Talle:</strong> {{ $item->size->label }}
             </ul>
           </div>
         <td> {{ $item->qty }}

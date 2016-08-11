@@ -38,10 +38,14 @@ Route::get('cart/pay', [
 ]);
 
 Route::post('cart/update', [
-  'uses' => 'CartController@upda',
+  'uses' => 'CartController@update',
   'as' => 'cart.update'
 ]);
 
+Route::get('cart/gateway/confirm_payment', [
+  'uses' => 'CartController@ipn',
+  'as' => 'cart.ipn'
+]);
 
 Route::get('/', function ()
 {

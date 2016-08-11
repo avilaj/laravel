@@ -37,6 +37,12 @@ return [
     ],
     (new Page(\App\Model\News::class))->setTitle('Noticias'),
     [
+      'title' => 'Mercadopago',
+      'pages' => [
+        (new Page(\App\Model\Notification::class))->setTitle('Notificaciones'),
+      ]
+    ],
+    [
         'title' => 'Tienda',
         'pages' => [
             (new Page(\App\Model\Order::class))->setTitle('Ordenes de compra'),

@@ -179,9 +179,7 @@ angular
     this.add = (id, size_id, qty) => {
       let data = {'reference_id': id, 'size_id': size_id, 'qty': qty};
       this.count += qty;
-      return $http.get('/check-out/set', {
-        params: data
-      })
+      return $http.post('/cart/update', data)
         .then((res) => {
           return this.setCount(res.data.products)
         });
@@ -222,8 +220,11 @@ angular
     };
 
     this.addToCart = (reference, item, qty) => {
-      console.log(item);
-      Product.add(item.reference_id, item.size_id, qty);
+      this.addingProduct = true;
+      Product.add(item.reference_id, item.size_id, qty)
+        .then((response) => {
+          this.addingProduct = false;
+        })
     };
 
     this.setColorProperties = (color) => {
@@ -254,14 +255,15 @@ angular
 
     this.updateQty = function (item, qty) {
       self.updateTotal();
-      return Product.add(item.options.reference_id, item.options.size_id, qty)
+      let reference_id = item.reference.id;
+      let size_id = item.size.id;
+      return Product.add(reference_id, size_id, qty)
     };
     let subtotal = (item) => item.price * item.qty
     let sumar = (prev, cur) => prev + cur
     this.updateTotal = () => {
       self.total = 0;
       self.total = self.products.map(subtotal).reduce(sumar, 0);
-      console.log(self.total);
       return self.total;
     }
     this.updateTotal();

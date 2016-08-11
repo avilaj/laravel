@@ -55,9 +55,10 @@
       <button
       class="mk-btn mk-btn-buy product-buy__buy"
       id="product-add-to-cart"
+      ng-disabled="p.addingProduct"
       ng-click="p.addToCart(p.currentColor, p.currentSize, p.qty)">
       <i class="fa fa-shopping-cart"></i>
-      Comprar
+      {{ p.addingProduct ? 'Agregando...' : 'Comprar' }}
     </button>
 
     </div>

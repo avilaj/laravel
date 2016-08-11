@@ -52,9 +52,30 @@
         </ul>
 
         <ul class="topnav__list topnav__account">
-            <li class="topnav__item"><a href="/registrarse" class="topnav__account__link">Registrarse</a></li>
-            <li class="topnav__item"><a href="/login" class="topnav__account__link">Ingresar</a></li>
-            <li class="topnav__item"><a href="/check-out" class="topnav__account__link">Mi carrito <i class="fa fa-shopping-cart"></i></a></li>
+          <li class="topnav__item">
+            <a href="{{ route('cart.index' )}}" class="topnav__account__link">
+              Mi carrito <i class="fa fa-shopping-cart"></i>
+            </a>
+          </li>
+            @if(Auth::check())
+              <li class="topnav__item">
+                <a href="/logout" class="topnav__account__link">
+                  Cerrar sesión
+                </a>
+              </li>
+            @else
+              <li class="topnav__item">
+                <a href="/register" class="topnav__account__link">
+                  Registrarse
+                </a>
+              </li>
+              <li class="topnav__item">
+                <a href="/login" class="topnav__account__link">
+                  Ingresar
+                </a>
+              </li>
+            @endif
+
         </ul>
         <script type="text/javascript">
         var mkStore = mkStore || {};

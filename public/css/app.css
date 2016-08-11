@@ -4,9 +4,15 @@ html {
 *, *::after, *::before {
   box-sizing: inherit; }
 
+html,
+body {
+  padding: 0;
+  margin: 0; }
+
 body {
   background: #000 url("/images/woods.jpg") repeat-y;
-  background-size: 100%; }
+  background-size: 100%;
+  font-family: Helvetica, Arial, sans-serif; }
 
 .mk-page-form {
   max-width: 1200px;
@@ -58,14 +64,26 @@ body {
       padding: .5rem 1rem;
       margin-bottom: 1rem; }
 
+.mk-full-width {
+  width: 100%; }
+
 .mk-btn {
   border: 2px solid transparent;
   padding: .5rem 1rem;
   font-size: .75rem;
   font-weight: bolder;
-  text-transform: uppercase; }
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  cursor: pointer; }
   .mk-btn i {
     margin-right: .5rem; }
+  .mk-btn--primary {
+    background: #FE0000;
+    color: #fff; }
+  .mk-btn--icon i {
+    margin: 0; }
 
 .mk-select,
 .mk-input {
@@ -635,24 +653,62 @@ body {
   background: #fff;
   max-width: 1200px;
   margin-left: auto;
-  margin-right: auto; }
+  margin-right: auto;
+  padding: 2.3576515979%;
+  margin-bottom: 7rem;
+  min-height: 300px; }
   .checkout-page::after {
     clear: both;
     content: "";
     display: table; }
-  .checkout-page table {
-    margin: auto; }
-    .checkout-page table thead th {
+  .checkout-page__nice-message {
+    font-weight: normal;
+    font-size: 1.5rem;
+    color: #5a5a5a;
+    text-align: center;
+    padding: 1rem; }
+    .checkout-page__nice-message__title {
+      font-weight: lighter; }
+  .checkout-page__sidebar {
+    float: left;
+    display: block;
+    margin-right: 2.3576515979%;
+    width: 23.2317613015%; }
+    .checkout-page__sidebar:last-child {
+      margin-right: 0; }
+  .checkout-page__summary {
+    float: left;
+    display: block;
+    margin-right: 2.3576515979%;
+    width: 74.4105871005%;
+    border-collapse: collapse; }
+    .checkout-page__summary:last-child {
+      margin-right: 0; }
+    .checkout-page__summary__product {
+      width: 100%; }
+    .checkout-page__summary thead th {
       text-transform: uppercase;
-      font-weight: normal;
-      padding: 1rem; }
+      font-weight: bolder;
+      font-size: .75rem;
+      padding: .5rem;
+      text-align: left; }
   .checkout-page td {
-    padding: 1rem;
-    border-bottom: 1px solid grey; }
+    padding: .5rem;
+    border-top: 1px solid #5a5a5a;
+    text-align: center; }
   .checkout-page__total {
-    padding: 1rem;
     text-align: right;
     font-size: 2rem; }
+  .checkout-page__product {
+    text-align: left; }
+    .checkout-page__product__properties {
+      text-transform: lowercase;
+      font-size: .75rem;
+      list-style-type: none;
+      padding: 0;
+      margin: 0; }
+      .checkout-page__product__properties strong {
+        text-transform: capitalize; }
 
 .post-box__link {
   display: inline-block;

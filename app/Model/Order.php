@@ -4,9 +4,11 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 
 
+
 class Order extends Model
 {
 
+    protected $FILLING_STATE = 'filling';
     protected $table = 'orders';
     protected $fillable = ['customer_id',
                            'details',
@@ -23,6 +25,15 @@ class Order extends Model
       return $this->hasMany('App\Model\OrderItem');
     }
 
+    public function scopeRecent($query) {
+      return $query->orderBy('created_at', 'desc');
+    }
+
+    public function scopeOnCheckout($query) {
+      return $query->where('status', $this->FILLING_STATE);
+    }
+
+
     public function references ()
     {
         return $this->hasMany('App\Model\Reference',
@@ -37,37 +48,47 @@ class Order extends Model
       $this->save();
     }
 
+    public function getItem($reference_id, $size_id) {
+      return $this->items()->where('reference_id', $reference_id)
+        ->where('size_id', $size_id)->first();
+    }
+
+    public function filling() {
+      return $this->status == $this->FILLING_STATE;
+    }
+
+    public function markAsFilling() {
+      $this->status = $this->FILLING_STATE;
+      $this->save();
+    }
 
     static function currentCart() {
       $user = \Auth::user();
-      if ($user) {
-        return \Cart::instance($user->id);
-      } else {
-        return \Cart::instance();
-      }
+      return $user->currentCart();
     }
 
 
-    static function CreatePayment() {
-      $cart = self::currentCart();
+    public function CreatePayment() {
       $products = [];
-      foreach($cart->content() as $item) {
+      foreach($this->items as $item) {
         $products[] = [
           'id' => $item->id,
-          'title' => $item->name,
-          'description' => $item->options->color . ' - '. $item->options->size,
-          'category_id' => 'Zapatos',
+          'title' => $item->product->title,
+          'picture_url' => $item->product->thumbnail,
+          'description' => $item->reference->color->name . ' - '. $item->size->label,
+          'category_id' => $item->product->category->id,
           'quantity' => $item->qty,
           'unit_price' => $item->price
         ];
       }
 
       $mp = new \MP('6671', '6hQurng8uncAK9wdRfe3Mt2XzfZzcPNl');
+      $mp->sandbox_mode(true);
       $reference = $mp->create_preference([
         "expires" => false,
-        'items'=>$products,
+        'items'=> $products,
         "auto_return" => "approved",
-        "external_reference" => "Reference_1234",
+        "external_reference" => $this->id,
         "notification_url" => "https://www.your-site.com/ipn",
         "back_urls" => [
           "success" => "https://www.success.com",
@@ -75,6 +96,6 @@ class Order extends Model
           "pending" => "http://www.pending.com"
         ]
       ]);
-      return $reference;
+      return $reference['response']['sandbox_init_point'];
     }
 }
