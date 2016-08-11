@@ -1,0 +1,23 @@
+.mk-btn {
+  border: 2px solid transparent;
+  padding: .5rem 1rem;
+  font-size: .75rem;
+  font-weight: bolder;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  i {
+    margin-right: .5rem;
+  }
+  &--primary {
+    background: $red;
+    color: $white;
+  }
+  &--icon {
+    i {
+      margin: 0;
+    }
+  }
+}

@@ -1,21 +1,57 @@
 .checkout-page {
   background: #fff;
   @include outer-container;
-  & table {
-    margin:auto;
+  @include pad;
+  margin-bottom: 7rem;
+  min-height: 300px;
+  &__nice-message {
+    font-weight: normal;
+    font-size: 1.5rem;
+    color: $gray;
+    text-align: center;
+    padding: 1rem;
+    &__title {
+      font-weight: lighter;
+    }
+  }
+  &__sidebar {
+    @include span-columns(3);
+  }
+  &__summary {
+    @include span-columns(9);
+    border-collapse: collapse;
+    &__product {
+      width: 100%;
+    }
     & thead th{
       text-transform: uppercase;
-      font-weight: normal;
-      padding: 1rem;
+      font-weight: bolder;
+      font-size: .75rem;
+      padding: .5rem;
+      text-align: left;
+
     }
   }
   td {
-    padding: 1rem;
-    border-bottom: 1px solid grey;
+    padding: .5rem;
+    border-top: 1px solid $gray;
+    text-align: center;
   }
   &__total {
-    padding: 1rem;
     text-align: right;
     font-size: 2rem;
+  }
+  &__product {
+    text-align: left;
+    &__properties {
+      text-transform:lowercase;
+      font-size: .75rem;
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      strong {
+        text-transform: capitalize;
+      }
+    }
   }
 }

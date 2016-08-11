@@ -6,9 +6,15 @@ $dark: #1e1e1c;
 $gray: #5a5a5a;
 $light-gray: #919191;
 
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
 body {
   background: #000 url('/images/woods.jpg') repeat-y;
   background-size: 100%;
+  font-family: Helvetica, Arial, sans-serif;
 }
 .mk-page-form {
   @include outer-container;
@@ -57,16 +63,13 @@ body {
     }
   }
 }
-.mk-btn {
-  border: 2px solid transparent;
-  padding: .5rem 1rem;
-  font-size: .75rem;
-  font-weight: bolder;
-  text-transform: uppercase;
-  i {
-    margin-right: .5rem;
-  }
+
+.mk-full-width {
+  width: 100%;
 }
+
+@import 'button';
+
 .mk-select,
 .mk-input {
   box-sizing: border-box;

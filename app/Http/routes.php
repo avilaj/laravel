@@ -22,6 +22,27 @@ Route::resource('productos', 'ProductsController', [
   'names' => ['index' => 'products.list', 'show' => 'products.show']
 ]);
 
+Route::get('cart', [
+  'uses' => 'CartController@index',
+  'as' => 'cart.index'
+]);
+
+Route::get('cart/shipping', [
+  'uses' => 'CartController@shipping',
+  'as' => 'cart.shipping'
+]);
+
+Route::get('cart/pay', [
+  'uses' => 'CartController@pay',
+  'as' => 'cart.pay'
+]);
+
+Route::post('cart/update', [
+  'uses' => 'CartController@upda',
+  'as' => 'cart.update'
+]);
+
+
 Route::get('/', function ()
 {
   $POSTS_AMOUNT = 6;
@@ -44,7 +65,7 @@ View::composer('partials.categories', 'App\Composers\SidebarComposer');
 
 Route::get('/check-out', function () {
   $cart = App\Model\Order::currentCart();
-  return view('checkout.index', [
+  return view('checkout.index',[
     'items' => $cart->content(),
     'total' => $cart->total()
     ]);
