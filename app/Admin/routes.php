@@ -9,7 +9,7 @@ Route::get('settings', ['as' => 'admin.settings', function () {
     $data = new \App\Model\Configuration;
     $products = \App\Model\Product::get()->lists('title', 'id')->toArray();
     return AdminSection::view(view('admin.configuration',
-      ['data' => $data]
+      compact('data', 'products')
     ), 'Configuración del sitio');
 }]);
 
