@@ -13,7 +13,9 @@ class CartController extends Controller
   private $cart;
   private $user;
   public function __construct() {
-    $this->middleware('auth');
+    $this->middleware('auth', [
+      'except' => ['ipn']
+    ]);
     if (\Auth::check()) {
       $this->user = \Auth::user();
       $this->cart = $this->user->currentCart();
