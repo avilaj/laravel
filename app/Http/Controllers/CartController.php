@@ -14,8 +14,10 @@ class CartController extends Controller
   private $user;
   public function __construct() {
     $this->middleware('auth');
-    $this->user = \Auth::user();
-    $this->cart = $this->user->currentCart();
+    if (\Auth::check()) {
+      $this->user = \Auth::user();
+      $this->cart = $this->user->currentCart();
+    }
 
   }
 
