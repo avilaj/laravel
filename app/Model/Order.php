@@ -82,7 +82,7 @@ class Order extends Model
         ];
       }
 
-      $mp = new \MP('6671', '6hQurng8uncAK9wdRfe3Mt2XzfZzcPNl');
+      $mp = new \MP('1393215262983453', 'hP7o1MNh2uBmlnEEUgCDirNQHzOKnFFg');
       $mp->sandbox_mode(true);
       $reference = $mp->create_preference([
         "expires" => false,
@@ -91,7 +91,7 @@ class Order extends Model
         "external_reference" => $this->id,
         "notification_url" => route('cart.ipn'),
         "back_urls" => [
-          "success" => route('index')
+          "success" => url('/')
         ]
       ]);
       return $reference['response']['sandbox_init_point'];
