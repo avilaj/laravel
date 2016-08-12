@@ -42,8 +42,8 @@ Route::post('cart/update', [
   'as' => 'cart.update'
 ]);
 
-Route::post('cart/gateway/confirm_payment', [
-  'uses' => 'CartController@ipn',
+Route::any('gateway/ipn', [
+  'uses' => 'Gateway@ipn',
   'as' => 'cart.ipn'
 ]);
 

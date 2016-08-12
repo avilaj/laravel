@@ -55,7 +55,7 @@ class CartController extends Controller
     $data['price'] = $reference->product->price;
 
     $item = $this->cart->getItem($data['reference_id'], $data['size_id']);
-    // dd($item);
+
     if ($item) {
       if ($data['qty'] > 0) {
         $item->qty = $data['qty'];
@@ -72,13 +72,4 @@ class CartController extends Controller
     return $this->cart;
   }
 
-  public function ipn(Request $request) {
-    $rules = ['topic' => 'required', 'id' => 'required'];
-    $this->validate($request, $rules);
-
-    $data = $request->all();
-    $data = ['topic' => @$data['topic'], 'identificator' => @$data['id']];
-    $notification = \App\Model\Notification::create($data);
-    return $notification;
-  }
 }
