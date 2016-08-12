@@ -28,7 +28,9 @@ class Gateway extends Controller
         'identificator' => json_encode(@$data ?: 'none')
       ];
 
-      return Notification::create($data);
+      Notification::create($data);
+
+      return 'ok';
     }
 
 
