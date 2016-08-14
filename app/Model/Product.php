@@ -201,27 +201,8 @@ class Product extends Model
     }
 
     public function availableReferences () {
-      return \DB::table('references')
-        ->join('stocks', 'references.id', '=', 'stocks.reference_id')
-        ->join('sizes', 'sizes.id', '=', 'stocks.size_id')
-        ->join('colors', 'colors.id', '=', 'references.color_id')
-        ->select(
-          'references.id as reference_id',
-          'colors.id as color_id',
-          'colors.name as color_label',
-          'sizes.id as size_id',
-          'sizes.label as size_label',
-          'references.color_id',
-          \DB::raw('SUM(stocks.qty) as total')
-        )
-        ->groupBy('reference_id')
-        ->where('references.product_id', $this->id)
-        ->get();
+      return $this->stock()->forDisplay()->get();
     }
-
-    // public function orders () {
-    //     return $this->hasManyThrough('App\Model\OrderItem', 'App\Model\OrderItem');
-    // }
 
     public function setPriceAttribute ($value)
     {

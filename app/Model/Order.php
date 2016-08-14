@@ -82,12 +82,13 @@ class Order extends Model
         ];
       }
 
-      $mp = new \MP('1393215262983453', 'hP7o1MNh2uBmlnEEUgCDirNQHzOKnFFg');
-      $mp->sandbox_mode(true);
+      $mp = new \MP(config('mercadopago.client'), config('mercadopago.secret'));
+      $mp->sandbox_mode(false);
       $reference = $mp->create_preference([
         "expires" => false,
         'items'=> $products,
         "auto_return" => "approved",
+        "payer_email" => "test_user_92797824@testuser.com",
         "external_reference" => $this->id,
         "notification_url" => route('cart.ipn'),
         "back_urls" => [

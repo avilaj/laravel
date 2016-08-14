@@ -19,6 +19,9 @@ AdminSection::registerModel(Notification::class, function (ModelConfiguration $m
             AdminColumn::text('id')->setLabel('#')->setWidth('50px'),
             AdminColumn::text('topic')->setLabel('Topic'),
             AdminColumn::text('identificator')->setLabel('Id'),
+            AdminColumn::custom(function ($instance) {
+              return 'hello';
+            }),
             AdminColumn::datetime('created_at')
               ->setLabel('Date')
               ->setWidth('150px')

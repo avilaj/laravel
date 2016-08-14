@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "fe05e95f5b3c1c33680a423e79eacec3",
-    "content-hash": "a0eea1a34afece821c25534c698c9365",
+    "hash": "97c19234c83f56a92cc3370856ecf94b",
+    "content-hash": "16e9f1400cb0de7d246fdeaed8c5002e",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -764,56 +764,6 @@
                 "parser"
             ],
             "time": "2015-10-04 16:44:32"
-        },
-        {
-            "name": "gloudemans/shoppingcart",
-            "version": "2.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Crinsane/LaravelShoppingcart.git",
-                "reference": "0c3c859b6c8b55d6cd6be118cb96bc0c8f37063c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Crinsane/LaravelShoppingcart/zipball/0c3c859b6c8b55d6cd6be118cb96bc0c8f37063c",
-                "reference": "0c3c859b6c8b55d6cd6be118cb96bc0c8f37063c",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/events": "5.1.*|5.2.*",
-                "illuminate/session": "5.1.*|5.2.*",
-                "illuminate/support": "5.1.*|5.2.*"
-            },
-            "require-dev": {
-                "mockery/mockery": "~0.9.0",
-                "orchestra/testbench": "~3.0",
-                "phpunit/phpunit": "~4.0"
-            },
-            "suggest": {
-                "gloudemans/notify": "Simple flash notifications for Laravel"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Gloudemans\\Shoppingcart\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Rob Gloudemans",
-                    "email": "info@robgloudemans.nl"
-                }
-            ],
-            "description": "Laravel Shoppingcart",
-            "keywords": [
-                "laravel",
-                "shoppingcart"
-            ],
-            "time": "2016-06-30 13:43:08"
         },
         {
             "name": "guzzle/guzzle",
@@ -3309,6 +3259,56 @@
                 "fixtures"
             ],
             "time": "2016-04-29 12:21:54"
+        },
+        {
+            "name": "gloudemans/shoppingcart",
+            "version": "2.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Crinsane/LaravelShoppingcart.git",
+                "reference": "0c3c859b6c8b55d6cd6be118cb96bc0c8f37063c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Crinsane/LaravelShoppingcart/zipball/0c3c859b6c8b55d6cd6be118cb96bc0c8f37063c",
+                "reference": "0c3c859b6c8b55d6cd6be118cb96bc0c8f37063c",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/events": "5.1.*|5.2.*",
+                "illuminate/session": "5.1.*|5.2.*",
+                "illuminate/support": "5.1.*|5.2.*"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9.0",
+                "orchestra/testbench": "~3.0",
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "gloudemans/notify": "Simple flash notifications for Laravel"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Gloudemans\\Shoppingcart\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rob Gloudemans",
+                    "email": "info@robgloudemans.nl"
+                }
+            ],
+            "description": "Laravel Shoppingcart",
+            "keywords": [
+                "laravel",
+                "shoppingcart"
+            ],
+            "time": "2016-06-30 13:43:08"
         },
         {
             "name": "hamcrest/hamcrest-php",

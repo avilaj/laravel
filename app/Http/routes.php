@@ -13,10 +13,14 @@
 use \App\Model\Product;
 use \App\Model\Reference;
 
+Route::get('/', ['uses'=>'HomeController@index', 'as' => 'home']);
+
+
 Route::resource('novedades', 'NewsController', [
   'only' => ['index', 'show'],
   'names' => ['index'=> 'news.list', 'show'=> 'news.show']
 ]);
+
 Route::resource('productos', 'ProductsController', [
   'only' => ['index', 'show'],
   'names' => ['index' => 'products.list', 'show' => 'products.show']
@@ -47,26 +51,16 @@ Route::any('gateway/ipn', [
   'as' => 'cart.ipn'
 ]);
 
-Route::get('/', function ()
-{
-  $POSTS_AMOUNT = 6;
+Route::get('gateway/payment/{id}', [
+  'uses' => 'Gateway@showPayment',
+  'as' => 'gateway.showPayment'
+]);
 
-  $config = new \App\Model\Configuration;
-  $brands = \App\Model\Brand::all();
-  $featured = \App\Model\Product::with('category')
-    ->whereIn('id', $config->home_products)->take($POSTS_AMOUNT)->get();
-  $news = \App\Model\News::featured()->take($POSTS_AMOUNT)->get();
-  $recentProducts = \App\Model\Product::with('category')->latest()->get();
-  return view('welcome', [
-    'news' => $news,
-    'brands' => $brands,
-    'featured_products' => $featured,
-    'recent_products' => $recentProducts
-  ]);
-});
+Route::get('gateway/order/{id}', [
+  'uses' => 'Gateway@showOrder',
+  'as' => 'gateway.showOrder'
+]);
 
 View::composer('partials.categories', 'App\Composers\SidebarComposer');
 
 Route::auth();
-
-Route::get('/home', 'HomeController@index');

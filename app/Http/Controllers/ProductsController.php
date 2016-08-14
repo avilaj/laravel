@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 use App\Model\Product;
 use App\ProductFilters;
 
@@ -16,11 +16,14 @@ class ProductsController extends Controller
   }
 
   public function show($id) {
-    $product = Product::findOrFail($id);
-    $colors = $product->colors->unique('id')->values()->all();
-    $sizes = $product->availableReferences();
-    $data = compact("sizes", "product", "colors");
 
-    return view('catalog.product', $data);
+    $product = Product::findOrFail($id);
+    $references = $product->references()->forDisplay();
+    $stock = $product->availableReferences();
+    $data = compact("stock", "product", "references");
+    $response = new \Illuminate\Http\JsonResponse($data);
+    $response->setJsonOptions(JSON_PRETTY_PRINT);
+    return $response;
+    // dd($data);
   }
 }

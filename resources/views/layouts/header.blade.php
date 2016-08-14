@@ -79,7 +79,6 @@
         </ul>
         <script type="text/javascript">
         var mkStore = mkStore || {};
-          mkStore.productCount = {{ Cart::count() }};
         </script>
     </nav>
 </header>

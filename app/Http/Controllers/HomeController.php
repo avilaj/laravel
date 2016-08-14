@@ -14,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     /**
@@ -24,6 +24,19 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+      $POSTS_AMOUNT = 6;
+
+      $config = new \App\Model\Configuration;
+      $brands = \App\Model\Brand::all();
+      $featured = \App\Model\Product::with('category')
+        ->whereIn('id', $config->home_products)->take($POSTS_AMOUNT)->get();
+      $news = \App\Model\News::featured()->take($POSTS_AMOUNT)->get();
+      $recentProducts = \App\Model\Product::with('category')->latest()->get();
+      return view('welcome', [
+        'news' => $news,
+        'brands' => $brands,
+        'featured_products' => $featured,
+        'recent_products' => $recentProducts
+      ]);
     }
 }

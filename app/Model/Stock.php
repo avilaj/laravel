@@ -19,4 +19,12 @@ class Stock extends Model
     {
         return $this->belongsTo('App\Model\Size', 'size_id');
     }
+
+    public function scopeGroup($query) {
+      return $this->groupBy('reference_id', 'size_id');
+    }
+
+    public function scopeForDisplay($query) {
+      return $query->select('reference_id', 'size_id', \DB::raw('sum(qty) as stock'))->group();
+    }
 }

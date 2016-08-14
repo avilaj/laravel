@@ -153,7 +153,6 @@ return [
          */
         SleepingOwl\Admin\Providers\SleepingOwlServiceProvider::class,
         Cviebrock\EloquentSluggable\ServiceProvider::class,
-        Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
 
         /*
@@ -209,7 +208,6 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Cart' => \Gloudemans\Shoppingcart\Facades\Cart::class,
         'Image' => Intervention\Image\Facades\Image::class,
 
     ],
