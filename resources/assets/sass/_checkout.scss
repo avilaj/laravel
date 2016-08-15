@@ -43,6 +43,18 @@
   }
   &__product {
     text-align: left;
+    &__info {
+      @include span-columns(8)
+    }
+    &__image {
+      @include span-columns(4);
+      img {
+        width: 100%;
+        max-width: 150px;
+        height: auto;
+      }
+
+    }
     &__properties {
       text-transform:lowercase;
       font-size: .75rem;

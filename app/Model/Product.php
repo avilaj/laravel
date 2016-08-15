@@ -201,7 +201,7 @@ class Product extends Model
     }
 
     public function availableReferences () {
-      return $this->stock()->forDisplay()->get();
+      return $this->stock()->forDisplay();
     }
 
     public function setPriceAttribute ($value)

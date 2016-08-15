@@ -17,7 +17,7 @@ class Reference extends Model
 
     public function color ()
     {
-        return $this->belongsTo('App\Model\Color');
+        return $this->belongsTo('App\Model\Color')->select('id', 'name');
     }
     /**
     * @return array <label, id, qty>
@@ -26,17 +26,17 @@ class Reference extends Model
       return $this->hasManyThrough('App\Model\Size', 'App\Model\Stock', 'reference_id', 'id');
     }
 
+    public function availableSizes() {
+      return $this->stock()
+        ->groupBy('reference_id', 'size_id')
+        ->select(\DB::raw('sum(stocks.qty) as tot'));
+    }
+
     public function stock ()
     {
     	return $this->hasMany('App\Model\Stock', 'reference_id');
     }
-    public function scopeForDisplay($query) {
-      return $this->with('color')
-        ->select(
-          'id',
-          \DB::raw('color.name as color')
-        );
-    }
+
     public function scopeByProduct($query)
     {
         return $query->groupBy(\DB::raw('CONCAT(product_id, "-", color_id)'));

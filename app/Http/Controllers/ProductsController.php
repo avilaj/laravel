@@ -3,27 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
-// use Illuminate\Http\Request;
 use App\Model\Product;
 use App\ProductFilters;
 
 class ProductsController extends Controller
 {
+
   public function index (ProductFilters $query) {
     $products = Product::filter($query)->paginate(12);
     $data = compact("filters", "products");
     return view('catalog.list', $data);
   }
 
-  public function show($id) {
-
+  public function show ($id) {
     $product = Product::findOrFail($id);
-    $references = $product->references()->forDisplay();
-    $stock = $product->availableReferences();
-    $data = compact("stock", "product", "references");
-    $response = new \Illuminate\Http\JsonResponse($data);
-    $response->setJsonOptions(JSON_PRETTY_PRINT);
-    return $response;
-    // dd($data);
+    $references = $product->references()
+      ->join('colors', 'references.color_id', '=', 'colors.id')
+      ->select('references.id','references.color_id', 'colors.name')->get();
+    $references_id =  $references->lists('id')->toArray();
+    $stock = \App\Model\Stock::forDisplay()
+      ->whereIn('reference_id', $references_id)
+      ->get();
+    $data = compact("product", "references", "stock");
+    return view('catalog.product', $data);
   }
+
 }

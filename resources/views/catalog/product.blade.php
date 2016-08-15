@@ -2,6 +2,12 @@
 @section('content')
 <div class="mk-catalog">
     @include('partials.categories')
+    <script>
+      var mkStore = mkStore || {};
+      mkStore.product = {!! $product !!};
+      mkStore.sizes = {!! $stock !!};
+      mkStore.references = {!! $references !!}
+    </script>
     <div class="mk-product-page">
         @include('partials.product-displayer')
         <div class="mk-product__product-info">
@@ -16,7 +22,7 @@
           <div class="mk-product-page__description">{!! $product->description !!}</div>
           <hr class="mk-product-page__separator">
           @endif
-          @if($sizes)
+          @if($stock)
             @include('catalog.angular-references')
           @else
             <p>

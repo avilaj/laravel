@@ -18,13 +18,20 @@
       <tr>
         <td>
           <div class="checkout-page__product">
-            <h3 class="checkout-page__product__title">
-              {{ $item->name }}
-            </h3>
-            <ul class="checkout-page__product__properties">
-              <li> <strong>Color:</strong> {{ $item->reference->color->name }}
-              <li> <strong>Talle:</strong> {{ $item->size->label }}
-            </ul>
+            <div class="checkout-page__product__image">
+              <img
+              ng-src="{{ $item->product->thumbnail }}"
+              alt="{{ $item->product->title}} image" />
+            </div>
+            <div class="checkout-page__product__info">
+              <h3 class="checkout-page__product__title">
+                {{ $item->product->title }}
+              </h3>
+              <ul class="checkout-page__product__properties">
+                <li> <strong>Color:</strong> {{ $item->reference->color->name }}
+                <li> <strong>Talle:</strong> {{ $item->size->label }}
+              </ul>
+            </div>
           </div>
         <td> {{ $item->qty }}
         <td> $ {{ $item->price }}

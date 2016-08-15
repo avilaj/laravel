@@ -54,7 +54,7 @@
         <ul class="topnav__list topnav__account">
           <li class="topnav__item">
             <a href="{{ route('cart.index' )}}" class="topnav__account__link">
-              Mi carrito <i class="fa fa-shopping-cart"></i>
+              <cart-header></cart-header>
             </a>
           </li>
             @if(Auth::check())

@@ -52,231 +52,150 @@ $(document).ready( ()=> {
   $('.product-displayer__thumbnails img').first().trigger('click');
 });
 
-// class Bag {
-//
-//   constructor(products) {
-//     this.selected = [] || products;
-//   }
-//
-//   set(product, amount) {
-//     let selected = {
-//       id: product.id,
-//       product: product,
-//       qty: amount
-//     }
-//     this.selected.push(selected);
-//     return this.selected;
-//   }
-//
-//   remove(product) {
-//
-//   }
-// }
-//
-//   var cart = {};
-//   var select = document.getElementById("product-size");
-//   var qty = document.getElementById("product-qty");
-//
-//   function addSizes (colorId) {
-//     var options = sizes;
-//     var selection = [];
-//     for (var i = 0; i < options.length; i++) {
-//       var ref = options[i]
-//       if (ref.color_id == colorId) {
-//         selection.push(ref);
-//       }
-//     }
-//     for (var i = 0; i < selection.length; i++) {
-//       var size = selection[i];
-//       var option = document.createElement("option");
-//       option.value = size.id;
-//       var label = size.label;
-//       if (size.total == "0") {
-//         label += " AGOTADO";
-//         option.disabled = true;
-//       }
-//       option.innerText = label;
-//       select.appendChild(option);
-//     }
-//   }
-//
-//   function setColor(color) {
-//     $(select).html('');
-//     $(select).attr('value', '');
-//     $(select).append('<option> Seleccione su talle </option>')
-//     addSizes(color);
-//   }
-//
-//   function updateCartCount(total) {
-//     $(".cart-product-count").html("("+total+")");
-//   }
-//   function getCartCount() {
-//     return $(".cart-product-count").html();
-//   }
-//   $('.remove-product').click(function (e) {
-//     setProduct(e.target.dataset.id, 0);
-//   });
-//   $('.product-amount-input').change(function (e) {
-//     var product = e.target.dataset.id;
-//     var quantity = e.target.value;
-//     setProduct(product, quantity);
-//
-//   });
-//
-//   function setProduct(product, quantity) {
-//     $.get('/check-out/set', {'reference_id': product, 'qty': quantity}).done(function (data) {
-//       updateCartCount(data.products);
-//     });
-//   }
-//
-//   function addToCart() {
-//     var product = select.value;
-//     var quantity = qty.value;
-//     setProduct(product, quantity);
-//     // updateCartCount(data.prsetProductoducts);
-//   }
-//   $('input:radio[name=color]:first').click();
-//   // function addToCart() {}
-//
-// angular.module('filtering', [])
-//   .controller('filteringCtrl', ['$scope','$location', function ($scope, $location) {
-//     console.log($location);
-//     let defaults = {
-//       'price': '0-3000',
-//       'brand': null,
-//       'search': null
-//     };
-//     this.applyFilter = () => {
-//       let params = {};
-//       params.price = this.minprice + '-' + this.maxprice;
-//       params.brand = this.brand;
-//     }
-//     this.brand = null;
-//     this.minprice = 70;
-//     this.maxprice = 3000;
-//   }])
-//   .component('priceFilter', {
-//     template: ''
-//   });
-// import ProductController from './product.controller.js';
+class CartController {
+  constructor (CartService) {
+    'ngInject';
+    this.delegate = CartService;
+  }
 
-angular
-  .module('mkcart', [])
-  .service('Product', ['$http', '$window', '$rootScope', function ($http, $window, $scope) {
-    this.count = $window.mkStore.productCount || 0;
-    $scope.$watch(function () {
-      return $window.mkStore.productCount;
-    }, (value) => this.count = value)
-    this.setCount = (amount) => {
-      $window.mkStore = $window.mkStore || {};
-      $window.mkStore.productCount = amount;
-      this.count = amount;
-    };
-    this.getCount = function () {
-      console.log('devuelve',this.count);
-      return this.count;
-    };
-    this.add = (id, size_id, qty) => {
-      let data = {'reference_id': id, 'size_id': size_id, 'qty': qty};
-      this.count += qty;
-      return $http.post('/cart/update', data)
-        .then((res) => {
-          return this.setCount(res.data.products)
-        });
-    }
+  totalPrice () {
+    let items = this.items();
+    let sum  = (a, b) => a * 1 + b * 1;
+    let getSubtotal = (item) => item.price * 1 * item.qty * 1;
+    let prices = items.map(getSubtotal);
+    let total = prices.reduce(sum, 0);
 
-  }])
-  .controller('ProductController', ['$window', 'Product', function ($window, Product)  {
-    let sumTotal = function (anterior, actual) {
-      return anterior + parseInt(actual.total);
-    };
+    return total;
+  }
 
-    let isColor = function (color_id) {
-      return function (item) {
-        return item.color_id == color_id;
-      };
-    };
+  items() {
+    return this.delegate.items();
+  }
 
-    let checkUniqueSize = () => {
-      if (this.currentColor.uniqueSize) {
-        this.currentSize = this.currentColor.sizes[0];
-      }
-    };
+  remove(item, index) {
+    this.delegate.remove(item, index);
+  }
 
-    this.onColorChange = () => {
-      checkUniqueSize();
-    }
+}
 
-    this.available = (color_id) => {
-      let total = this.sizes
-        .filter(isColor(color_id))
-        .reduce(sumTotal, 0);
-        return total > 0;
-    };
+class ProductController {
 
-    this.getSizesCount = (color_id) => {
-      let sizes = this.sizes.filter(isColor(color_id));
-      return sizes.length;
-    };
+  constructor ($window, CartService) {
+    'ngInject';
 
-    this.addToCart = (reference, item, qty) => {
-      this.addingProduct = true;
-      Product.add(item.reference_id, item.size_id, qty)
-        .then((response) => {
-          this.addingProduct = false;
-        })
-    };
-
-    this.setColorProperties = (color) => {
-      color.sizes = this.sizes.filter(isColor(color.id));
-      color.outOfStock = color.sizes.reduce(sumTotal, 0) < 1;
-      color.uniqueSize = color.sizes.length === 1;
-      return color;
-    };
-
-    this.price = $window.mkStore.price;
-    this.sizes = $window.mkStore.sizes;
-    this.colors = $window.mkStore.colors.map(this.setColorProperties);
-    this.availableColors = this.colors.filter(item => !item.outOfStock);
-    this.currentColor = this.availableColors[0];
+    this.cart = CartService;
+    this.store = $window.mkStore;
     this.qty = 1;
 
-    checkUniqueSize();
-  }])
-  .controller('CartController', ['$window', 'Product', function ($window, Product) {
-    var self = this;
-    this.products = $window.cartProducts;
-    this.total = 0;
+    this.store.references.map((ref)=> this.addStock(ref));
+    this.reference = this.getAvailableReference();
+  }
 
-    this.remove = (item, index) => {
-      self.products.splice(index, 1);
-      self.updateQty(item, 0);
-    };
+  buy() {
+    return this.cart.update(this.reference.id, this.size.size_id, this.qty);
+  }
 
-    this.updateQty = function (item, qty) {
-      self.updateTotal();
-      let reference_id = item.reference.id;
-      let size_id = item.size.id;
-      return Product.add(reference_id, size_id, qty)
+  getAvailableReference() {
+    return this.store.references.filter(this.hasStock)[0];
+  }
+
+  sum (prev, item) {
+    return prev + item.stock  * 1;
+  };
+
+  addStock(reference) {
+    let stock = this.findSizes(reference).reduce(this.sum, 0);
+
+    reference.stock = stock;
+    return reference;
+  }
+
+  matchesReference (referenceId) {
+    return (item) => {
+      return referenceId == item.reference_id;
     };
-    let subtotal = (item) => item.price * item.qty
-    let sumar = (prev, cur) => prev + cur
-    this.updateTotal = () => {
-      self.total = 0;
-      self.total = self.products.map(subtotal).reduce(sumar, 0);
-      return self.total;
-    }
-    this.updateTotal();
+  }
+
+  findSizes (reference) {
+    if (!reference) return [];
+    return this.store.sizes.filter(this.matchesReference(reference.id));
+  }
+
+  hasStock(entity) {
+    return !!entity && (entity.stock * 1) > 0;
+  }
+
+}
+
+class CartService {
+  constructor($http, $window) {
+    'ngInject';
+    this.$window = $window;
+    this.$http = $http;
+
+    this.cart = {
+      qty: 0,
+      items: []
+    };
+    this.getStatus();
+  }
+
+  items() {
+    if (! this.cart) return [];
+    return  this.cart.items;
+  }
+
+  getStatus() {
+    return this.$http.get('/cart/status')
+      .then( (response) => {
+        console.log(response.data);
+        this.cart = response.data;
+      } );
+  }
+
+  remove(item, index) {
+    this.cart.items.splice(index, 1);
+    this.update(item.reference_id, item.size_id, 0);
+  }
+
+  update(reference_id, size_id, qty) {
+    let data = {reference_id, size_id, qty};
+    this.updating = true;
+    return this.$http.post('/cart/update', data)
+      .then( (response) => {
+        this.cart = response.data;
+        return this.cart;
+      }, (err) => {
+        if (err.status == 401) {
+          this.$window.location.href = '/login';
+        }
+      })
+      .then( res => {
+        this.updating = false;
+        return res;
+      });
+  }
+}
+
+
+angular.module('services', [])
+  .service('CartService', CartService)
+
+angular.module('mkcart-header', ['services'])
+  .controller('cartHeaderController', ['CartService', function (CartService) {
+    this.qty = () => CartService.items().length;
   }])
-  .controller('TotalController', ['Product', function (Product) {
-    var self = this;
-    this.cart = Product;
-  }])
-  .component('cartTotal', {
-    template: "({{ cart.cart.total() }})",
-    controller: "TotalController",
-    controllerAs: 'cart'
+  .component('cartHeader', {
+    template: 'Mi carrito ({{ $ctrl.qty() }}) <i class="fa fa-shopping-cart"></i>',
+    controller: 'cartHeaderController'
   });
 
-  angular.bootstrap(document.querySelector('.cart-product-count'), ['mkcart']);
+angular.module('product-show', ['services'])
+  .controller('ProductController', ['$window', 'CartService', ProductController])
+  .controller('CartController', CartController)
+;
+
+angular.module('cart', ['services', 'mkcart-header', 'product-show'])
+angular.bootstrap(document.querySelector('body'), ['cart']);
+
   // angular.bootstrap(document.getElementById('filtering'), ['filtering']);

@@ -21,10 +21,12 @@ class Stock extends Model
     }
 
     public function scopeGroup($query) {
-      return $this->groupBy('reference_id', 'size_id');
+      return $this->groupBy(\DB::raw('CONCAT(reference_id, "-", size_id)'));
     }
 
     public function scopeForDisplay($query) {
-      return $query->select('reference_id', 'size_id', \DB::raw('sum(qty) as stock'))->group();
+      return $query->group()
+      ->join('sizes', 'stocks.size_id', '=', 'sizes.id')
+      ->select('reference_id', 'sizes.label','size_id', \DB::raw('sum(qty) as stock'));
     }
 }

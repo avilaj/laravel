@@ -1,36 +1,26 @@
-<?php
-// dd($sizes);
-?>
-<script>
-  var mkStore = mkStore || {};
-  mkStore.price = <?php echo json_encode($product->price); ?>;
-  mkStore.sizes = <?php echo json_encode($sizes); ?>;
-  mkStore.colors = <?php echo json_encode($colors); ?>;
-</script>
-<div ng-app="mkcart" ng-controller="ProductController as p" class="product-buy">
+<div ng-controller="ProductController as p" class="product-buy">
   <h3 class="mk-product-page__subtitle">Color</h3>
   <div class="product-buy__color"
-      ng-class="{'disabled': p.outOfStock, 'selected': p.currentColor == color}"
-      ng-repeat="color in p.colors">
+      ng-class="{'disabled': !p.hasStock(reference), 'selected': p.reference.id == reference.id}"
+      ng-repeat="reference in p.store.references">
       <input
       type="radio"
-      name="color"
-      ng-disabled="color.outOfStock"
-      ng-change="p.onColorChange()"
-      ng-value="color"
-      id="ref-{{ color.id }}"
-      ng-model="p.currentColor">
-    <label for="ref-{{ color.id }}"> {{ color.name }} </label>
+      name="reference"
+      ng-disabled=" !p.hasStock(reference)"
+      ng-value="reference"
+      id="ref-{{ reference.id }}"
+      ng-model="p.reference">
+    <label for="ref-{{ reference.id }}"> {{ reference.name }} </label>
   </div>
   <hr class="mk-product-page__separator">
-  <div class="" ng-hide="p.currentColor.outOfStock">
+  <div class="" ng-hide="p.reference.outOfStock">
     <h3 class="mk-product-page__subtitle">Talle</h3>
     <select
       name="size"
       id="product-size"
-      ng-model="p.currentSize"
-      ng-disabled="p.currentColor.uniqueSize || p.currentColor.outOfStock"
-      ng-options="size as size.size_label for size in p.currentColor.sizes"
+      ng-model="p.size"
+      ng-disabled=" !p.hasStock(p.reference)"
+      ng-options="size as size.label disable when !p.hasStock(size) for size in p.findSizes(p.reference)"
       class="mk-select product-buy__size">
       <option value="">
         -- seleccione un talle --
@@ -43,22 +33,23 @@
       name="qty"
       ng-model="p.qty"
       step="1"
+      ng-disabled=" !p.hasStock(p.reference)"
       min="1"
-      max="{{ p.currentSize.total }}"
+      max="{{ p.size.stock }}"
       id="product-qty">
       <span class="product-buy__subtotal">
-        $ {{p.price}}
+        $ {{p.store.product.price}}
       </span>
       <span class="product-buy__total" ng-show="p.qty > 1">
-        / $ {{p.price * p.qty}}
+        / $ {{p.store.product.price * p.qty}}
       </span>
       <button
       class="mk-btn mk-btn-buy product-buy__buy"
       id="product-add-to-cart"
-      ng-disabled="p.addingProduct"
-      ng-click="p.addToCart(p.currentColor, p.currentSize, p.qty)">
+      ng-disabled="!p.hasStock(p.reference) || p.addingProduct"
+      ng-click="p.buy()">
       <i class="fa fa-shopping-cart"></i>
-      {{ p.addingProduct ? 'Agregando...' : 'Comprar' }}
+      {{ p.cart.updating ? 'Agregando...' : 'Comprar' }}
     </button>
 
     </div>

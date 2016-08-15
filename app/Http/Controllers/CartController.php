@@ -23,11 +23,18 @@ class CartController extends Controller
 
   }
 
-  public function index () {
-    return view('checkout.index', [
-      'items' => $this->cart->items()->with('reference.color', 'size', 'product')->get(),
-      'total' => $this->cart->price
-      ]);
+  public function index (Request $request) {
+    return view('checkout.index');
+  }
+
+  public function status(Request $request) {
+    $items = $this->cart->items()->with('reference.color', 'size', 'product')->get();
+    $total = $this->cart->price;
+
+    $data = compact('items', 'total');
+    if ($request->wantsJson()) {
+      return $data;
+    }
   }
 
   public function shipping () {
@@ -35,8 +42,7 @@ class CartController extends Controller
   }
 
   public function pay () {
-    $items = $this->cart->items()
-      ->with('reference.color', 'size', 'product')->get();
+    $items = $this->cart->items()->with('reference.color', 'size', 'product')->get();
     $total = $this->cart->price;
     $payment_link = $this->cart->CreatePayment();
     return view('checkout.proceed', compact('items', 'total', 'payment_link'));
@@ -69,7 +75,10 @@ class CartController extends Controller
 
     $this->cart->updatePrice();
 
-    return $this->cart;
+    $items = $this->cart->items()->with('reference.color', 'size', 'product')->get();
+    $total = $this->cart->price;
+
+    return compact('items', 'total');
   }
 
 }

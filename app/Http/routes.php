@@ -10,11 +10,6 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-use \App\Model\Product;
-use \App\Model\Reference;
-
-Route::get('/', ['uses'=>'HomeController@index', 'as' => 'home']);
-
 
 Route::resource('novedades', 'NewsController', [
   'only' => ['index', 'show'],
@@ -29,6 +24,11 @@ Route::resource('productos', 'ProductsController', [
 Route::get('cart', [
   'uses' => 'CartController@index',
   'as' => 'cart.index'
+]);
+
+Route::get('cart/status', [
+  'uses' => 'CartController@status',
+  'as' => 'cart.status'
 ]);
 
 Route::get('cart/shipping', [
@@ -64,3 +64,4 @@ Route::get('gateway/order/{id}', [
 View::composer('partials.categories', 'App\Composers\SidebarComposer');
 
 Route::auth();
+Route::get('/', ['uses'=>'HomeController@index', 'as' => 'home']);

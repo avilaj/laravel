@@ -701,6 +701,24 @@ body {
     font-size: 2rem; }
   .checkout-page__product {
     text-align: left; }
+    .checkout-page__product__info {
+      float: left;
+      display: block;
+      margin-right: 2.3576515979%;
+      width: 65.8807828007%; }
+      .checkout-page__product__info:last-child {
+        margin-right: 0; }
+    .checkout-page__product__image {
+      float: left;
+      display: block;
+      margin-right: 2.3576515979%;
+      width: 31.7615656014%; }
+      .checkout-page__product__image:last-child {
+        margin-right: 0; }
+      .checkout-page__product__image img {
+        width: 100%;
+        max-width: 150px;
+        height: auto; }
     .checkout-page__product__properties {
       text-transform: lowercase;
       font-size: .75rem;
