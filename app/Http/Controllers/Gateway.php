@@ -16,7 +16,7 @@ class Gateway extends Controller
   public function __construct()
   {
     $this->mp = new \MP(config('mercadopago.client'), config('mercadopago.secret'));
-    // $this->mp->sandbox_mode(false);
+    $this->mp->sandbox_mode(TRUE);
   }
   /**
    * Receives id and topic for storage.

@@ -83,7 +83,7 @@ class Order extends Model
       }
 
       $mp = new \MP(config('mercadopago.client'), config('mercadopago.secret'));
-      $mp->sandbox_mode(false);
+      $mp->sandbox_mode(TRUE);
       $reference = $mp->create_preference([
         "expires" => false,
         'items'=> $products,
