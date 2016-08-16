@@ -19,16 +19,12 @@
 //         'remember_token' => str_random(10),
 //     ];
 // });
-
-$factory->define(App\News::class, function (Faker\Generator $faker) {
+$factory->define(App\Model\News::class, function (Faker\Generator $faker) {
     return [
         'title' => $faker->sentence(10),
         'pin' => $faker->boolean($chanceOfGettingTrue = 30),
         'short_text' => $faker->realText($faker->numberBetween(70,120)),
         'text' => $faker->realText($faker->numberBetween(120, 240)),
-        'thumbnail' => 'uploads/rider_01.jpg',
-        'created_at' =>  $faker->dateTimeThisYear($max = 'now'),
-        'gallery_id' => 3
     ];
 });
 

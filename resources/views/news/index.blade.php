@@ -8,6 +8,8 @@
        @endforeach
      @endif
    </div>
-   {!! $news->render() !!}
+ </div>
+ <div class="mk-paginator">
+   <span class="mk-paginator__amount"><strong>{{ $news->total() }}</strong> posts</span> {!! $news->links() !!}
  </div>
 @endsection
