@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
 
-    protected $FILLING_STATE = 'filling';
+    protected $FILLING_STATE = 'FILLING';
     protected $table = 'orders';
     protected $fillable = ['customer_id',
                            'details',
@@ -27,6 +27,10 @@ class Order extends Model
 
     public function scopeRecent($query) {
       return $query->orderBy('created_at', 'desc');
+    }
+
+    public function payments() {
+      return $this->hasMany("App\Model\Payment");
     }
 
     public function scopeOnCheckout($query) {
@@ -83,7 +87,7 @@ class Order extends Model
       }
 
       $mp = new \MP(config('mercadopago.client'), config('mercadopago.secret'));
-      $mp->sandbox_mode(TRUE);
+      $mp->sandbox_mode(FALSE);
       $reference = $mp->create_preference([
         "expires" => false,
         'items'=> $products,
@@ -95,6 +99,6 @@ class Order extends Model
           "success" => url('/')
         ]
       ]);
-      return $reference['response']['sandbox_init_point'];
+      return $reference['response']['init_point'];
     }
 }

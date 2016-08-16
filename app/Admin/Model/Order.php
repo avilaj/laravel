@@ -18,6 +18,9 @@ AdminSection::registerModel(Order::class, function (ModelConfiguration $model) {
         $display->setApply(function($query) {
             $query->orderBy('created_at', 'desc');
         });
+        $display->setFilters([
+          AdminDisplayFilter::field('id')->setTitle('Busqueda por id')
+        ]);
         $display->setColumns([
             AdminColumn::text('id')->setLabel('#'),
             AdminColumn::text('price')->setLabel('Total'),
@@ -27,6 +30,13 @@ AdminSection::registerModel(Order::class, function (ModelConfiguration $model) {
                 ->setCallback(function ($instance) {
                     $link  = url("admin/order_items?order_id=".$instance->id);
                     return '<a href="'.$link.'">Ver detalle</a>';
+                }),
+            AdminColumn::custom()
+                ->setLabel("Pagos")
+                ->setCallback(function ($instance) {
+                    $link  = url("admin/payments?order_id=".$instance->id);
+                    $total = $instance->payments->count();
+                    return '<a href="'.$link.'">'.$total.'</a>';
                 }),
             AdminColumn::custom()
                 ->setLabel("Usuario")
@@ -46,10 +56,11 @@ AdminSection::registerModel(Order::class, function (ModelConfiguration $model) {
 
             AdminFormElement::select('status', 'Estado')
                                     ->setOptions([
+                                      'FILLING' => '0 - En checkout',
                                       'PROCESANDO'=>'1 - Procesando',
                                       'EMPACANDO'=>'2 - Empacando',
                                       'ENVIADO'=>'3 - Enviado',
-                                      'RECIBIDO'=>'4 - Recibido'])
+                                      'ENTREGADO'=>'4 - Entregado'])
                                     ->setDefaultValue('PROCESANDO'),
             AdminFormElement::wysiwyg('description', 'Descripción', 'tinymce')
         ]);

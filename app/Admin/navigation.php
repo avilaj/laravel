@@ -40,6 +40,7 @@ return [
       'title' => 'Mercadopago',
       'pages' => [
         (new Page(\App\Model\Notification::class))->setTitle('Notificaciones'),
+        (new Page(\App\Model\Payment::class))->setTitle('Pagos'),
       ]
     ],
     [
