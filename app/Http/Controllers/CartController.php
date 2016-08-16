@@ -81,4 +81,11 @@ class CartController extends Controller
     return compact('items', 'total');
   }
 
+  public function paymentStatus(Request $request)
+  {
+    $data = $request->all();
+    $status = $data['collection_status'];
+    return view('checkout.payment_status', compact("status"));
+  }
+
 }

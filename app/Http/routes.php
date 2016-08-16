@@ -41,6 +41,11 @@ Route::get('cart/pay', [
   'as' => 'cart.pay'
 ]);
 
+Route::get('cart/payment_status', [
+  'uses' => 'CartController@paymentStatus',
+  'as' => 'cart.payment-status'
+]);
+
 Route::post('cart/update', [
   'uses' => 'CartController@update',
   'as' => 'cart.update'

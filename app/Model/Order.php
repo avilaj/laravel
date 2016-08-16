@@ -92,11 +92,13 @@ class Order extends Model
         "expires" => false,
         'items'=> $products,
         "auto_return" => "approved",
-        "payer_email" => "test_user_92797824@testuser.com",
+        "payer_email" => \Auth::user()->email,
         "external_reference" => $this->id,
         "notification_url" => route('cart.ipn'),
         "back_urls" => [
-          "success" => url('/')
+          "success" => route('cart.payment-status');
+          "pending" => route('cart.payment-status');
+          "error" => route('cart.payment-status');
         ]
       ]);
       return $reference['response']['init_point'];
