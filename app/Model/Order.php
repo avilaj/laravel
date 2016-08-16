@@ -96,9 +96,9 @@ class Order extends Model
         "external_reference" => $this->id,
         "notification_url" => route('cart.ipn'),
         "back_urls" => [
-          "success" => route('cart.payment-status');
-          "pending" => route('cart.payment-status');
-          "error" => route('cart.payment-status');
+          "success" => route('cart.payment-status'),
+          "pending" => route('cart.payment-status'),
+          "error" => route('cart.payment-status'),
         ]
       ]);
       return $reference['response']['init_point'];
