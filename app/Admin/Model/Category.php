@@ -28,6 +28,7 @@ AdminSection::registerModel(Category::class, function (ModelConfiguration $model
     $model->onCreateAndEdit(function($id = null) {
         $form = AdminForm::form()->setItems([
             AdminFormElement::text('name', 'Nombre')->required(),
+            new App\SleepyElements\ReferenceManager('banner', 'Banner'),
             AdminFormElement::image('banner', 'Banner')->required(),
             AdminFormElement::textarea('description', 'Descripción')
         ]);

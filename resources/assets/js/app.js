@@ -52,131 +52,14 @@ $(document).ready( ()=> {
   $('.product-displayer__thumbnails img').first().trigger('click');
 });
 
-class CartController {
-  constructor (CartService) {
-    'ngInject';
-    this.delegate = CartService;
-  }
 
-  totalPrice () {
-    let items = this.items();
-    let sum  = (a, b) => a * 1 + b * 1;
-    let getSubtotal = (item) => item.price * 1 * item.qty * 1;
-    let prices = items.map(getSubtotal);
-    let total = prices.reduce(sum, 0);
 
-    return total;
-  }
+import newsletter from './newsletter/newsletter.module';
 
-  items() {
-    return this.delegate.items();
-  }
+import ProductController from './product/product.controller';
 
-  remove(item, index) {
-    this.delegate.remove(item, index);
-  }
-
-}
-
-class ProductController {
-
-  constructor ($window, CartService) {
-    'ngInject';
-
-    this.cart = CartService;
-    this.store = $window.mkStore;
-    this.qty = 1;
-
-    this.store.references.map((ref)=> this.addStock(ref));
-    this.reference = this.getAvailableReference();
-  }
-
-  buy() {
-    return this.cart.update(this.reference.id, this.size.size_id, this.qty);
-  }
-
-  getAvailableReference() {
-    return this.store.references.filter(this.hasStock)[0];
-  }
-
-  sum (prev, item) {
-    return prev + item.stock  * 1;
-  };
-
-  addStock(reference) {
-    let stock = this.findSizes(reference).reduce(this.sum, 0);
-
-    reference.stock = stock;
-    return reference;
-  }
-
-  matchesReference (referenceId) {
-    return (item) => {
-      return referenceId == item.reference_id;
-    };
-  }
-
-  findSizes (reference) {
-    if (!reference) return [];
-    return this.store.sizes.filter(this.matchesReference(reference.id));
-  }
-
-  hasStock(entity) {
-    return !!entity && (entity.stock * 1) > 0;
-  }
-
-}
-
-class CartService {
-  constructor($http, $window) {
-    'ngInject';
-    this.$window = $window;
-    this.$http = $http;
-
-    this.cart = {
-      qty: 0,
-      items: []
-    };
-    this.getStatus();
-  }
-
-  items() {
-    if (! this.cart) return [];
-    return  this.cart.items;
-  }
-
-  getStatus() {
-    return this.$http.get('/cart/status')
-      .then( (response) => {
-        console.log(response.data);
-        this.cart = response.data;
-      } );
-  }
-
-  remove(item, index) {
-    this.cart.items.splice(index, 1);
-    this.update(item.reference_id, item.size_id, 0);
-  }
-
-  update(reference_id, size_id, qty) {
-    let data = {reference_id, size_id, qty};
-    this.updating = true;
-    return this.$http.post('/cart/update', data)
-      .then( (response) => {
-        this.cart = response.data;
-        return this.cart;
-      }, (err) => {
-        if (err.status == 401) {
-          this.$window.location.href = '/login';
-        }
-      })
-      .then( res => {
-        this.updating = false;
-        return res;
-      });
-  }
-}
-
+import CartService from './cart/cart.service';
+import CartController from './cart/cart.controller';
 
 angular.module('services', [])
   .service('CartService', CartService)
@@ -195,7 +78,7 @@ angular.module('product-show', ['services'])
   .controller('CartController', CartController)
 ;
 
-angular.module('cart', ['services', 'mkcart-header', 'product-show'])
+angular.module('cart', ['services', 'mkcart-header', 'product-show', newsletter])
 angular.bootstrap(document.querySelector('body'), ['cart']);
 
   // angular.bootstrap(document.getElementById('filtering'), ['filtering']);

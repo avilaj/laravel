@@ -21,6 +21,6 @@
     @include("layouts.header")
     @yield("content")
     @include("layouts.footer")
-    <script src="{{ elixir('js/all.js') }}"></script>
+    <script src="{{ elixir('js/bundle.js') }}"></script>
 </body>
 </html>

@@ -69,6 +69,7 @@
       display: inline-block;
       font-weight: 700;
       margin: auto;
+      margin-top: 2rem;
       padding: 1rem 2rem;
       text-decoration: none;
     }
@@ -78,12 +79,22 @@
     &__subline {
       margin-bottom: .75rem;
     }
+    .message {
+      font-size: 1rem;
+      text-transform: none;
+      background: #090909;
+      padding: .5rem 1rem;
+    }
     &__input {
-      background: white;
       display: inline-block;
       position: relative;
+      width: 100%;
+      form {
+        background: white;
+      }
       input {
         background: transparent;
+        width: 100%;
         border: 0;
         font-size: .75rem;
         padding: 1rem 2rem;
@@ -91,7 +102,8 @@
       .fa {
         pointer-events: none;
         position: relative;
-        left: -1rem;
+        margin-left: -1rem;
+        color: #ccc;
       }
     }
   }
@@ -100,17 +112,25 @@
 .home {
   &-section {
     &-newsletter-n-local {
-      @include row(table);
-  
+      color: white;
       .home-newsletter,
       .home-stores {
         @include span-columns(6);
         @include pad(3rem);
-        background: #ccc;
+        height: 14rem;
         font-size: .75rem;
         text-transform: uppercase;
+        background-size: cover;
       }
     }
   }
   @include reset-display;
+}
+
+.home-newsletter {
+  background: transparent url('/images/newsletter-subscribe.jpg') no-repeat;
+}
+
+.home-stores {
+  background: transparent url('/images/locales-home.jpg') no-repeat;
 }

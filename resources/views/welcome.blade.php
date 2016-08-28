@@ -51,7 +51,9 @@
         <div class="home-newsletter">
             <h3 class="home-newsletter__headline">Suscribite a nuestro newsletter</h3>
             <div class="home-newsletter__subline">Y se el primero en enterarte de todas nuestras novedades</div>
-            <div class="home-newsletter__input"><input type="email" placeholder="Ingresa tu email"> <i class="fa fa-angle-right"></i></div>
+            <div class="home-newsletter__input">
+              <newsletter-subscribe></newsletter-subscribe>
+            </div>
         </div>
     </section>
 </main>

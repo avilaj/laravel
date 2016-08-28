@@ -66,6 +66,11 @@ Route::get('gateway/order/{id}', [
   'as' => 'gateway.showOrder'
 ]);
 
+Route::post('subscriptions', [
+  'as' => 'subscriptions.create',
+  'uses' => 'SubscriptionsController@subscribe'
+]);
+
 View::composer('partials.categories', 'App\Composers\SidebarComposer');
 
 Route::auth();

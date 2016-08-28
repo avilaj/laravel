@@ -92,75 +92,6 @@ body {
   padding: .5rem 1rem;
   font-size: .75rem; }
 
-.news__box {
-  font-size: .75rem;
-  text-align: center;
-  background: #fff;
-  padding: 10px; }
-  .news__box__picture {
-    margin-bottom: .5rem;
-    display: inline-block;
-    width: 100%; }
-  .news__box__picture img {
-    height: auto;
-    width: 100%; }
-  .news__box__title {
-    display: inline-block;
-    max-width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    word-wrap: normal;
-    color: #5a5a5a;
-    text-transform: uppercase;
-    white-space: nowrap;
-    font-weight: 700;
-    display: inline-block;
-    width: 100%; }
-  .news__box__subtitle {
-    display: inline-block;
-    max-width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    word-wrap: normal;
-    color: #919191;
-    white-space: nowrap;
-    display: inline-block; }
-
-.product-box {
-  background: #fff;
-  display: inline-block;
-  font-size: .75rem;
-  padding-bottom: 1rem;
-  text-align: center;
-  width: 100%; }
-  .product-box__link {
-    display: inline-block;
-    width: 100%; }
-  .product-box .product-box__image {
-    display: inline-block;
-    height: auto;
-    margin: 0;
-    width: 100%;
-    margin-bottom: .5rem; }
-  .product-box__title {
-    display: inline-block;
-    max-width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    word-wrap: normal;
-    color: #5a5a5a;
-    display: inline-block;
-    font-weight: 700;
-    text-transform: uppercase;
-    white-space: nowrap;
-    width: 100%; }
-  .product-box__price {
-    color: #919191;
-    font-weight: 700; }
-
 .markshop-logo {
   text-align: center;
   background: transparent url("/images/header.jpg") no-repeat;
@@ -325,38 +256,59 @@ body {
     display: inline-block;
     font-weight: 700;
     margin: auto;
+    margin-top: 2rem;
     padding: 1rem 2rem;
     text-decoration: none; }
 
 .home-newsletter__headline, .home-newsletter__subline {
   margin-bottom: .75rem; }
 
+.home-newsletter .message {
+  font-size: 1rem;
+  text-transform: none;
+  background: #090909;
+  padding: .5rem 1rem; }
+
 .home-newsletter__input {
-  background: white;
   display: inline-block;
-  position: relative; }
+  position: relative;
+  width: 100%; }
+  .home-newsletter__input form {
+    background: white; }
   .home-newsletter__input input {
     background: transparent;
+    width: 100%;
     border: 0;
     font-size: .75rem;
     padding: 1rem 2rem; }
   .home-newsletter__input .fa {
     pointer-events: none;
     position: relative;
-    left: -1rem; }
+    margin-left: -1rem;
+    color: #ccc; }
 
 .home-section-newsletter-n-local {
-  display: table;
-  width: 100%;
-  table-layout: fixed; }
+  color: white; }
   .home-section-newsletter-n-local .home-newsletter,
   .home-section-newsletter-n-local .home-stores {
-    display: table-cell;
-    width: 50%;
+    float: left;
+    display: block;
+    margin-right: 2.3576515979%;
+    width: 48.821174201%;
     padding: 3rem;
-    background: #ccc;
+    height: 14rem;
     font-size: .75rem;
-    text-transform: uppercase; }
+    text-transform: uppercase;
+    background-size: cover; }
+    .home-section-newsletter-n-local .home-newsletter:last-child,
+    .home-section-newsletter-n-local .home-stores:last-child {
+      margin-right: 0; }
+
+.home-newsletter {
+  background: transparent url("/images/newsletter-subscribe.jpg") no-repeat; }
+
+.home-stores {
+  background: transparent url("/images/locales-home.jpg") no-repeat; }
 
 .owl-carousel .owl-nav {
   font-size: 2rem;
@@ -393,7 +345,11 @@ body {
     content: "";
     display: table; }
   #footer a {
-    color: #ccc; }
+    color: #ccc;
+    display: inline-block; }
+  #footer img {
+    max-width: 100%;
+    height: auto; }
   #footer .section {
     float: left;
     display: block;
@@ -732,7 +688,8 @@ body {
   display: inline-block;
   cursor: pointer;
   text-transform: none;
-  text-decoration: none; }
+  text-decoration: none;
+  max-width: 100%; }
 
 .post-box__image {
   margin-bottom: .5rem; }
@@ -754,7 +711,13 @@ body {
   font-weight: bolder;
   color: #fff;
   margin: 0;
-  margin-bottom: .5rem; }
+  margin-bottom: .5rem;
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal; }
 
 .post-box__description {
   color: #fff;
@@ -849,5 +812,45 @@ body {
       clear: left; }
   .mk-news .recent-posts .post-box {
     margin-bottom: 3rem; }
+
+.product-box {
+  background: #fff;
+  display: inline-block;
+  font-size: .75rem;
+  padding-bottom: 1rem;
+  text-align: center;
+  width: 100%; }
+  .product-box__link {
+    display: inline-block;
+    text-decoration: none;
+    width: 100%; }
+  .product-box .product-box__image {
+    display: inline-block;
+    height: auto;
+    margin: 0;
+    width: 100%;
+    margin-bottom: .5rem; }
+  .product-box__title {
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+    color: #5a5a5a;
+    display: inline-block;
+    font-weight: 700;
+    text-transform: uppercase;
+    white-space: nowrap;
+    width: 100%; }
+  .product-box__price {
+    color: #919191;
+    font-weight: 700; }
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  background: transparent url("/images/loading-spokes.svg") no-repeat; }
 
 /*# sourceMappingURL=app.css.map */
