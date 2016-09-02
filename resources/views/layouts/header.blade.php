@@ -46,9 +46,9 @@
           <li class="topnav__item"><a class="topnav__pages__link" href="{{route('products.list')}}">Catalogo</a></li>
           <li class="topnav__item"><a class="topnav__pages__link" href="{{ route('news.list') }}">Novedades</a></li>
           <li class="topnav__item"><a class="topnav__pages__link" href="{{ route('podcast.list') }}">Radio</a></li>
-            <!-- <li class="topnav__item"><a class="topnav__pages__link" href="/nosotros">Nosotros</a></li> -->
-            <!-- <li class="topnav__item"><a class="topnav__pages__link" href="/locales">Locales</a></li> -->
-            <!-- <li class="topnav__item"><a class="topnav__pages__link" href="/contacto">Contacto</a></li> -->
+          <!-- <li class="topnav__item"><a class="topnav__pages__link" href="{{ route('pages.about') }}">Nosotros</a></li> -->
+          <li class="topnav__item"><a class="topnav__pages__link" href="{{ route('pages.stores') }}">Locales</a></li>
+          <li class="topnav__item"><a class="topnav__pages__link" href="{{ route('pages.contact') }}">Contacto</a></li>
         </ul>
 
         <ul class="topnav__list topnav__account">

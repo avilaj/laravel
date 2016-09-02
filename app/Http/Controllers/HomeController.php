@@ -39,4 +39,19 @@ class HomeController extends Controller
         'recent_products' => $recentProducts
       ]);
     }
+
+    public function stores()
+    {
+      return view('pages.stores');
+    }
+
+    public function contact()
+    {
+      return view('pages.contact');
+    }
+
+    public function saveContact(Request $request)
+    {
+      return $request->all();
+    }
 }

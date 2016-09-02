@@ -80,3 +80,7 @@ View::composer('partials.categories', 'App\Composers\SidebarComposer');
 
 Route::auth();
 Route::get('/', ['uses'=>'HomeController@index', 'as' => 'home']);
+
+Route::get('locales', ['uses' => 'HomeController@stores', 'as' => 'pages.stores']);
+Route::get('contacto', ['uses' => 'HomeController@contact', 'as' => 'pages.contact']);
+Route::get('nosotros', ['uses' => 'HomeController@about', 'as' => 'pages.about']);

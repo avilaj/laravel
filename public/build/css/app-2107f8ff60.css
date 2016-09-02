@@ -853,4 +853,59 @@ body {
   display: inline-block;
   background: transparent url("/images/loading-spokes.svg") no-repeat; }
 
+.stores {
+  color: white; }
+  .stores h1 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    max-width: 960px;
+    margin: auto; }
+  .stores__list {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 960px; }
+    .stores__list::after {
+      clear: both;
+      content: "";
+      display: table; }
+
+.store-box {
+  display: block;
+  margin-bottom: 3em; }
+  .store-box::after {
+    clear: both;
+    content: "";
+    display: table; }
+  .store-box__info {
+    float: left;
+    display: block;
+    margin-right: 2.3576515979%;
+    width: 31.7615656014%;
+    font-size: .75rem; }
+    .store-box__info:last-child {
+      margin-right: 0; }
+    .store-box__info h3 {
+      color: #FE0000;
+      text-transform: uppercase;
+      font-size: 2rem; }
+  .store-box__gallery {
+    float: left;
+    display: block;
+    margin-right: 2.3576515979%;
+    width: 65.8807828007%; }
+    .store-box__gallery:last-child {
+      margin-right: 0; }
+    .store-box__gallery img {
+      float: left;
+      display: block;
+      margin-right: 2.3576515979%;
+      width: 31.7615656014%; }
+      .store-box__gallery img:last-child {
+        margin-right: 0; }
+      .store-box__gallery img:nth-child(3n) {
+        margin-right: 0; }
+      .store-box__gallery img:nth-child(3n+1) {
+        clear: left; }
+
 /*# sourceMappingURL=app.css.map */
