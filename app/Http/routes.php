@@ -16,6 +16,11 @@ Route::resource('novedades', 'NewsController', [
   'names' => ['index'=> 'news.list', 'show'=> 'news.show']
 ]);
 
+Route::resource('podcast', 'PodcastController', [
+  'only' => ['index', 'show'],
+  'names' => ['index'=> 'podcast.list', 'show'=> 'podcast.show']
+]);
+
 Route::resource('productos', 'ProductsController', [
   'only' => ['index', 'show'],
   'names' => ['index' => 'products.list', 'show' => 'products.show']

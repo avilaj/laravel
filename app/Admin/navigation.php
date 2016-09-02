@@ -7,44 +7,13 @@ use SleepingOwl\Admin\Navigation\Page;
 // 	   return auth()->user()->isSuperAdmin();
 // });
 //
-// AdminNavigation::addPage(\App\Model\User::class)
-// ->setTitle('test')->setPages(function(Page $page) {
-//     $page
-//         ->addPage()
-//         ->setTitle('Dashboard')
-//         ->setUrl(route('admin.dashboard'))
-//         ->setPriority(100);
-
-//     $page->addPage(\App\Model\User::class);
-// });
-//
-// // or
-//
-
-// AdminSection::addMenuPage(\App\Model\User::class)->setIcon("fa fa-user");
-// AdminSection::addMenuPage(\App\Model\Product::class)->setIcon("fa fa-cart");
 
 return [
-    [
-        'title' => 'Dashboard',
-        'icon'  => 'fa fa-dashboard',
-        'url'   => route('admin.dashboard'),
-    ],
-    [
-        'title' => 'Information',
-        'icon'  => 'fa fa-exclamation-circle',
-        'url'   => route('admin.information'),
-    ],
+    (new Page(\App\Model\Podcast::class))->setTitle('Podcast'),
     (new Page(\App\Model\News::class))->setTitle('Noticias'),
     [
-      'title' => 'Mercadopago',
-      'pages' => [
-        (new Page(\App\Model\Notification::class))->setTitle('Notificaciones'),
-        (new Page(\App\Model\Payment::class))->setTitle('Pagos'),
-      ]
-    ],
-    [
         'title' => 'Tienda',
+        'priority' => 1,
         'pages' => [
             (new Page(\App\Model\Order::class))->setTitle('Ordenes de compra'),
             (new Page(\App\Model\Product::class))->setTitle('Productos'),
@@ -52,16 +21,8 @@ return [
         ]
     ],
     [
-      'title' => 'Configuracion',
-      'pages' => [
-        (new Page(\App\Model\Category::class))->setTitle('Categorías'),
-        (new Page(\App\Model\Type::class))->setTitle('Talles'),
-        (new Page(\App\Model\Brand::class))->setTitle('Marcas'),
-        (new Page(\App\Model\Color::class))->setTitle('Colores'),
-      ]
-    ],
-    [
       'title' => 'Inventario',
+      'priority' => 2,
       'pages' => [
         (new Page(\App\Model\Stock::class))->setTitle('Stock'),
         [
@@ -71,7 +32,26 @@ return [
       ]
     ],
     [
+      'title' => 'Mercadopago',
+      'priority' => 3,
+      'pages' => [
+        (new Page(\App\Model\Notification::class))->setTitle('Notificaciones'),
+        (new Page(\App\Model\Payment::class))->setTitle('Pagos'),
+      ]
+    ],
+    [
+      'title' => 'Configuracion',
+      'priority' => 4,
+      'pages' => [
+        (new Page(\App\Model\Category::class))->setTitle('Categorías'),
+        (new Page(\App\Model\Type::class))->setTitle('Talles'),
+        (new Page(\App\Model\Brand::class))->setTitle('Marcas'),
+        (new Page(\App\Model\Color::class))->setTitle('Colores'),
+      ]
+    ],
+    [
       'title' => 'Sitio',
+      'priority' => 5,
       'url' => route('admin.settings')
     ],
 
