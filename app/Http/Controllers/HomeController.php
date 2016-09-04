@@ -26,7 +26,7 @@ class HomeController extends Controller
     public function index()
     {
       $POSTS_AMOUNT = 6;
-
+      $slideshow = \App\Model\Slideshow::find('home');
       $config = new \App\Model\Configuration;
       $brands = \App\Model\Brand::all();
       $featured = \App\Model\Product::with('category')
@@ -34,6 +34,7 @@ class HomeController extends Controller
       $news = \App\Model\News::featured()->take($POSTS_AMOUNT)->get();
       $recentProducts = \App\Model\Product::with('category')->latest()->get();
       return view('welcome', [
+        'slideshow' => $slideshow,
         'news' => $news,
         'brands' => $brands,
         'featured_products' => $featured,

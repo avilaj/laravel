@@ -10,7 +10,7 @@ $(document).ready( ()=> {
       responsive: responsive
     });
   }
-
+  $('.mk-slideshow').owlCarousel({items: 1, autoHeight: true});
   Slider("#news-slider", {
     0:{items: 2},
     1000: {items: 4}

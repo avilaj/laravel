@@ -19,6 +19,9 @@
 </head>
 <body>
     @include("layouts.header")
+    @if(isset($slideshow) && $slideshow)
+      @include('partials.slideshow', ['slides' => $slideshow->slides])
+    @endif
     @yield("content")
     @include("layouts.footer")
     <script src="{{ elixir('js/bundle.js') }}"></script>
