@@ -9,8 +9,15 @@ use SleepingOwl\Admin\Navigation\Page;
 //
 
 return [
-    (new Page(\App\Model\Podcast::class))->setTitle('Podcast'),
-    (new Page(\App\Model\News::class))->setTitle('Noticias'),
+    (new Page(\App\Model\Message::class))->setTitle('Mensajes'),
+    [
+      'title' => 'Blog',
+      'priority' => 3,
+      'pages' => [
+        (new Page(\App\Model\Podcast::class))->setTitle('Podcast'),
+        (new Page(\App\Model\News::class))->setTitle('Noticias'),
+      ]
+    ],
     [
         'title' => 'Tienda',
         'priority' => 1,

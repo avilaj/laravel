@@ -17,7 +17,6 @@ AdminSection::registerModel(News::class, function (ModelConfiguration $model) {
         });
         $display->setColumns([
             AdminColumn::text('title')->setLabel('Título'),
-            AdminColumn::image('thumbnail')->setLabel('Miniatura'),
             AdminColumn::datetime('created_at')
                                     ->setLabel('Date')
                                     ->setFormat('d.m.Y')
@@ -34,7 +33,7 @@ AdminSection::registerModel(News::class, function (ModelConfiguration $model) {
             AdminFormElement::checkbox('pin', 'Destacado en home'),
             AdminFormElement::text('short_text', 'Reseña')->required(),
             AdminFormElement::wysiwyg('text', 'Text', 'tinymce')->required(),
-            AdminFormElement::images('images', 'Imágenes'),
+            AdminFormElement::images('gallery_for_admin', 'Imágenes'),
         ]);
         $form->getButtons()
             ->setSaveButtonText('Guardar')

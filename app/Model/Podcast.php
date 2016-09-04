@@ -6,13 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Podcast extends Model
 {
-    use \KodiComponents\Support\Upload;
+    use \App\ImageResizable;
 
     protected $table = "podcast";
     protected $fillable = ["title", "content", "image"];
-    protected $casts = [
-      "image" => "image"
-    ];
 
     public function scopeRecent($query) {
       return $query->orderBy('created_at', 'DESC');
@@ -22,26 +19,30 @@ class Podcast extends Model
       return route('podcast.show', $this->id);
     }
 
-    public function getUploadSettings() {
+    public function resizable () {
       return [
-          'image' => [
-              'fit' => [1024, 1024, function ($constraint) {
-                  $constraint->upsize();
-                  $constraint->aspectRatio();
-              }]
-          ],
-          'image_medium' => [
-              'fit' => [540, 540, function ($constraint) {
-                $constraint->upsize();
-                $constraint->aspectRatio();
-              }]
-          ],
-          'image_small' => [
-              'fit' => [360, 360, function ($constraint) {
-                $constraint->upsize();
-              }]
-          ]
+        'image' => [
+          'small' => function ($image) {
+            $image->fit(360, 360, function ($constraint) {
+              $constraint->upsize();
+            });
+          },
+          'large' => function ($image) {
+            $image->resize(1288, 740, function ($constraint) {
+              $constraint->upsize();
+              $constraint->aspectRatio();
+            });
+          }
+        ]
       ];
-  }
+    }
+
+    public function setImageForAdminAttribute($image) {
+      $this->image = $image;
+    }
+
+    public function getImageForAdminAttribute() {
+      return $this->onlyOriginals('image');
+    }
 
 }

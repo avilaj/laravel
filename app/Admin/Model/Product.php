@@ -53,7 +53,7 @@ AdminSection::registerModel(Product::class, function (ModelConfiguration $model)
             AdminFormElement::text('title', 'Producto')->required(),
             AdminFormElement::text('subtitle', 'Subtitulo')->required(),
             AdminFormElement::text('price', 'Precio')->required(),
-            AdminFormElement::images('images', 'Imágenes'),
+            AdminFormElement::images('images_for_admin', 'Imágenes'),
             AdminFormElement::select('brand_id', 'Marca')
               ->setModelForOptions('App\Model\Brand')
               ->setDisplay('name'),

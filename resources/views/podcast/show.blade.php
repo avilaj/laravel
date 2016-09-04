@@ -8,9 +8,11 @@
     <h1 class="post-display__title">
       {{ $post->title }}
     </h1>
+    @if($post->image)
     <div class="post-display__header-image">
-      <img src="{{ $post->image }}" alt="{{$post->title}}">
+      <img src="/{{ $post->image->large }}" alt="{{$post->title}}">
     </div>
+    @endif
     <div class="post-display__video">
     {!! $post->content !!}
     </div>
@@ -24,7 +26,7 @@
     @endif
   </div>
   <div class="post-display__related-products">
-    <h3 class="post-display__section-title">Productos relacionados </h3>
+    <h3 class="post-display__section-title">Productos recientes </h3>
     @if(isset($relatedProducts) &&count($relatedProducts) > 0)
     @foreach($relatedProducts as $product)
     @include('products.small-box')

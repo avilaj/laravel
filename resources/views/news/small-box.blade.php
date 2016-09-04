@@ -1,7 +1,7 @@
 <div class="post-box">
   <a href="{{ $post->url }}" class="post-box__link">
     <div class="post-box__image">
-      <img src="{{ $post->thumbnail }}" alt="{{ $post->title }}">
+      <img src="{{ $post->thumbnail->small or '//placehold.it/360x360' }}" alt="{{ $post->title }}">
     </div>
     <div class="post-box__date">
       {{ $post->created_at->toFormattedDateString() }}

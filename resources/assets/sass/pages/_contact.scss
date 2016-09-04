@@ -1,0 +1,54 @@
+.contact-page {
+  color: $light-gray;
+  padding-bottom: 7rem;
+  @include outer-container;
+  h1 {
+    font-size: 2rem;
+    text-transform: uppercase;
+    color: $red;
+  }
+  
+  &__greetings {
+    @include span-columns(6);
+    @include pad;
+  }
+
+  &__success {
+    @include span-columns(6);
+    @include shift(3);
+    background: $dark;
+    @include pad;
+    h1 {
+      color: white;
+    }
+  }
+
+  form {
+    @include span-columns(6);
+    @include pad;
+  }
+  button {
+    border: 0;
+    padding: .5rem 1rem;
+    background: $red;
+    color: white;
+    margin-top: 2rem;
+  }
+  input,
+  textarea {
+    border: 0;
+    padding: .5rem;
+    font-size: 1rem;
+    border-bottom: 1px solid $light-gray;
+    &:focus {
+      background: $light-gray;
+    }
+  }
+  input {
+    @include span-columns(12);
+  }
+  textarea {
+    @include span-columns(12);
+  }
+
+}

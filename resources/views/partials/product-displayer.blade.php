@@ -1,17 +1,14 @@
 <section class="product-displayer">
     <span class="product-displayer__view">
-      @if(isset($product->medium_images))
-        <img src="{{$product->medium_images[0]}}" alt="preview">
-      @endif
     </span>
     <div class="product-displayer__thumbnails owl-carousel">
-      @if(isset($product->small_images))
-      @foreach($product->small_images as $index => $image)
+      @if(isset($product->images))
+      @foreach($product->images as $image)
         <div class="product-displayer__thumb item">
           <img
-            src="{{ $image }}"
-            data-medium="{{$product->medium_images[$index]}}"
-            data-large="{{$product->large_images[$index]}}"
+            src="/{{ $image->small }}"
+            data-medium="/{{ $image->medium or '' }}"
+            data-large="/{{ $image->large or ''}}"
             alt="thumbnail">
         </div>
       @endforeach

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use \App\Model\Message;
 
 class HomeController extends Controller
 {
@@ -50,8 +51,24 @@ class HomeController extends Controller
       return view('pages.contact');
     }
 
+    public function contactSuccess()
+    {
+      return view('pages.contact-success');
+    }
+
     public function saveContact(Request $request)
     {
-      return $request->all();
+      $rules = [
+        'name'=> 'required',
+        'email' => 'required|email',
+        'message' => 'required|max:256',
+      ];
+      $this->validate($request, $rules);
+      $message = Message::create($request->all());
+      if ($message) {
+        return redirect(route('pages.contact-success'))->with('name', $request->input('name'));
+      } else {
+        return abort(400);
+      }
     }
 }

@@ -4,12 +4,12 @@
  * This is a simple example of the main features.
  * For full list see documentation.
  */
-use App\Model\Brand;
+use App\Model\Message;
 
 use SleepingOwl\Admin\Model\ModelConfiguration;
-AdminSection::registerModel(Brand::class, function (ModelConfiguration $model) {
-    $model->setTitle("Marcas");
-    $model->setAlias('brands');
+AdminSection::registerModel(Message::class, function (ModelConfiguration $model) {
+    $model->setTitle("Mensajes");
+    $model->setAlias('messages');
     $model->onDisplay(function () {
         $display = AdminDisplay::datatables();
         $display->setApply(function($query) {
@@ -17,8 +17,10 @@ AdminSection::registerModel(Brand::class, function (ModelConfiguration $model) {
         });
         $display->setColumns([
             AdminColumn::text('id')->setLabel('#')->setWidth('50px'),
-            AdminColumn::image('image_for_admin')->setLabel('Logo'),
-            AdminColumn::text('name')->setLabel('Marca'),
+            AdminColumn::text('name')->setLabel('Nombre'),
+            AdminColumn::text('email')->setLabel('Email'),
+            AdminColumn::text('phone')->setLabel('Tel'),
+            AdminColumn::text('message')->setLabel('Mensaje'),
             AdminColumn::datetime('created_at')
                                     ->setLabel('Date')
                                     ->setFormat('d.m.Y')
@@ -31,8 +33,10 @@ AdminSection::registerModel(Brand::class, function (ModelConfiguration $model) {
     // Create And Edit
     $model->onCreateAndEdit(function($id = null) {
         $form = AdminForm::form()->setItems([
-            AdminFormElement::text('name', 'Nombre')->required(),
-            AdminFormElement::image('image_for_admin', 'Logo')
+          AdminFormElement::text('name', 'Nombre')->required(),
+          AdminFormElement::text('phone', 'Telefono'),
+          AdminFormElement::text('email', 'Email')->required(),
+          AdminFormElement::text('message', 'Mensaje')->required(),
         ]);
         $form->getButtons()
             ->setSaveButtonText('Guardar')

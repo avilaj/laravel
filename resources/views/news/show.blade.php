@@ -9,16 +9,16 @@
       {{ $post->title }}
     </h1>
     <div class="post-display__header-image">
-      <img src="{{$post->thumbnail('large')}}" alt="{{$post->title}}">
+      <img src="/{{$post->thumbnail->large or ''}}" alt="{{$post->title}}">
     </div>
     <div class="post-display__text">
       {!! $post->text !!}
     </div>
     <div class="post-display__gallery">
-      @if(isset($post->gallery) && count($post->gallery) > 0)
-      @foreach($post->gallery as $image)
+      @if(isset($post->images))
+      @foreach($post->images as $image)
       <div class="post-display__gallery-item">
-        <img src="{{ $image }}" alt="Gallery image" />
+        <img src="/{{ $image->small or '' }}" alt="Gallery image" />
       </div>
       @endforeach
       @endif
@@ -33,7 +33,7 @@
     @endif
   </div>
   <div class="post-display__related-products">
-    <h3 class="post-display__section-title">Productos relacionados </h3>
+    <h3 class="post-display__section-title">Productos recientes </h3>
     @if(isset($relatedProducts) &&count($relatedProducts) > 0)
     @foreach($relatedProducts as $product)
     @include('products.small-box')

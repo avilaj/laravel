@@ -17,7 +17,7 @@ AdminSection::registerModel(Podcast::class, function (ModelConfiguration $model)
         });
         $display->setColumns([
             AdminColumn::text('title')->setLabel('Título'),
-            AdminColumn::image('image')->setLabel('Imagen'),
+            AdminColumn::image('image_for_admin')->setLabel('Imagen'),
             AdminColumn::datetime('created_at')
                                     ->setLabel('Date')
                                     ->setFormat('d.m.Y')
@@ -31,7 +31,7 @@ AdminSection::registerModel(Podcast::class, function (ModelConfiguration $model)
     $model->onCreateAndEdit(function($id = null) {
         $form = AdminForm::form()->setItems([
             AdminFormElement::text('title', 'Titulo')->required(),
-            AdminFormElement::image('image', 'Imágen'),
+            AdminFormElement::image('image_for_admin', 'Imágen'),
             AdminFormElement::wysiwyg('content', 'Contenido'),
         ]);
         $form->getButtons()
