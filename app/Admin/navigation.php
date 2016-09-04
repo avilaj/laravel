@@ -56,6 +56,7 @@ return [
         (new Page(\App\Model\Color::class))->setTitle('Colores'),
       ]
     ],
+    (new Page(\App\Model\Slideshow::class))->setTitle('Slideshows'),
     [
       'title' => 'Sitio',
       'priority' => 5,

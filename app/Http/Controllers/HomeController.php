@@ -29,32 +29,38 @@ class HomeController extends Controller
       $slideshow = \App\Model\Slideshow::find('home');
       $config = new \App\Model\Configuration;
       $brands = \App\Model\Brand::all();
-      $featured = \App\Model\Product::with('category')
+      $featured_products = \App\Model\Product::with('category')
         ->whereIn('id', $config->home_products)->take($POSTS_AMOUNT)->get();
       $news = \App\Model\News::featured()->take($POSTS_AMOUNT)->get();
-      $recentProducts = \App\Model\Product::with('category')->latest()->get();
-      return view('welcome', [
-        'slideshow' => $slideshow,
-        'news' => $news,
-        'brands' => $brands,
-        'featured_products' => $featured,
-        'recent_products' => $recentProducts
-      ]);
+      $recent_products = \App\Model\Product::with('category')->latest()->get();
+      $title = "super online store";
+      return view('welcome', compact(
+        "title",
+        "slideshow",
+        "news",
+        "brands",
+        "featured_products",
+        "recent_products"
+      ));
     }
 
     public function stores()
     {
-      return view('pages.stores');
+      $title = "locales";
+
+      return view('pages.stores', compact("title"));
     }
 
     public function contact()
     {
-      return view('pages.contact');
+      $title = "contactanos";
+      return view('pages.contact', compact("title"));
     }
 
     public function contactSuccess()
     {
-      return view('pages.contact-success');
+      $title = "gracias por tu contacto";
+      return view('pages.contact-success', compact("title"));
     }
 
     public function saveContact(Request $request)

@@ -26,13 +26,16 @@ class NewsController extends Controller
     public function index()
     {
         $news = News::paginate(12);
-        return view('news.index', ['news' => $news]);
+        $title = "novedades";
+        return view('news.index', compact("news", "title"));
     }
 
     public function show($id) {
       $post = News::findOrFail($id);
       $recentPosts = News::recent()->take(4)->get();
       $relatedProducts = \App\Model\Product::recent()->take(4)->get();
-      return view('news.show', compact("post", "recentPosts", "relatedProducts"));
+      $title = "novedades - ".strtolower($post->title);
+
+      return view('news.show', compact("post", "recentPosts", "relatedProducts", "title"));
     }
 }

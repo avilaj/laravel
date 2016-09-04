@@ -10,8 +10,9 @@ class ProductsController extends Controller
 {
 
   public function index (ProductFilters $query) {
+    $title = 'productos';
     $products = Product::filter($query)->paginate(12);
-    $data = compact("filters", "products");
+    $data = compact("filters", "products", "title");
     return view('catalog.list', $data);
   }
 
@@ -24,7 +25,8 @@ class ProductsController extends Controller
     $stock = \App\Model\Stock::forDisplay()
       ->whereIn('reference_id', $references_id)
       ->get();
-    $data = compact("product", "references", "stock");
+    $title = strtolower($product->title . ', ' . $product->brand->name);
+    $data = compact("product", "references", "stock", "title");
     return view('catalog.product', $data);
   }
 

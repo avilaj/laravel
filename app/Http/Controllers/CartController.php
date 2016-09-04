@@ -24,7 +24,8 @@ class CartController extends Controller
   }
 
   public function index (Request $request) {
-    return view('checkout.index');
+    $title = "mi carro";
+    return view('checkout.index', compact("title"));
   }
 
   public function status(Request $request) {
@@ -38,14 +39,16 @@ class CartController extends Controller
   }
 
   public function shipping () {
-    return view('cart.shipping');
+    $title = "mi carro - envío";
+    return view('cart.shipping', compact("title"));
   }
 
   public function pay () {
     $items = $this->cart->items()->with('reference.color', 'size', 'product')->get();
     $total = $this->cart->price;
     $payment_link = $this->cart->CreatePayment();
-    return view('checkout.proceed', compact('items', 'total', 'payment_link'));
+    $title = "my carro - pago";
+    return view('checkout.proceed', compact('items', 'total', 'payment_link', 'title'));
   }
 
   public function update(Request $request) {
@@ -85,7 +88,8 @@ class CartController extends Controller
   {
     $data = $request->all();
     $status = $data['collection_status'];
-    return view('checkout.payment_status', compact("status"));
+    $title = "mi carro - finalizado";
+    return view('checkout.payment_status', compact("status", "title"));
   }
 
 }

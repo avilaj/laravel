@@ -1,4 +1,4 @@
 <?php
 
 PackageManager::load('admin-default')
-  ->js('links-manager', resources_url('js/links-manager.js'));
+  ->js('links-manager', asset('/admin/js/links-manager.js'));
