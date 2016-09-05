@@ -25,7 +25,9 @@ class ProductsController extends Controller
     $stock = \App\Model\Stock::forDisplay()
       ->whereIn('reference_id', $references_id)
       ->get();
-    $title = strtolower($product->title . ', ' . $product->brand->name);
+    $title = $product->title;
+    $title.= $product->brand? ', '.$product->brand->name : '';
+    $title = strtolower($title);
     $data = compact("product", "references", "stock", "title");
     return view('catalog.product', $data);
   }
