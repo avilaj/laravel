@@ -2,10 +2,8 @@
 @section('content')
  <div class="mk-news">
    <div class="mk-news__list">
-     @if(isset($posts) and count($posts) > 0)
-       @foreach($posts as $post)
-        @include('podcast.small-box')
-       @endforeach
+     @if($posts)
+      @each('podcast.small-box', $posts, 'post')
      @endif
    </div>
  </div>

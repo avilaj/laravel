@@ -24,21 +24,20 @@
       @endif
     </div>
   </div>
+
+  @if($recentPosts)
   <div class="post-display__recent-posts">
     <h3 class="post-display__section-title">Posteos recientes</h3>
-    @if(isset($recentPosts) &&count($recentPosts) > 0)
-    @foreach($recentPosts as $post)
-    @include('news.small-box')
-    @endforeach
-    @endif
+    @each('news.small-box', $recentPosts, 'post')
   </div>
+  @endif
+
+  @if($relatedProducts)
   <div class="post-display__related-products">
     <h3 class="post-display__section-title">Productos recientes </h3>
-    @if(isset($relatedProducts) &&count($relatedProducts) > 0)
-    @foreach($relatedProducts as $product)
-    @include('products.small-box')
-    @endforeach
-    @endif
+    @each('products.small-box', $relatedProducts, 'product')
   </div>
+  @endif
+
 </div>
 @endsection
