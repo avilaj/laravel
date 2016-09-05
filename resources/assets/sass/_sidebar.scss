@@ -2,6 +2,7 @@
   background: rgba($dark, .75);
   @include span-columns(3);
   font-size: .75rem;
+  padding-bottom: 5rem;
   &__subtitle {
     text-transform: uppercase;
     font-weight: bold;
@@ -14,11 +15,19 @@
     list-style-type: none;
     padding: 0;
     margin: 0;
+    font-family: 'Oswald', sans-serif;
   }
   li {
     text-transform: uppercase;
+    border-bottom: 1px solid rgba(white, 0.25);
+    &:last-child {
+      border-bottom: 0;
+    }
     a {
       color: $light-gray;
+      &:hover {
+        color: white;
+      }
       text-decoration: none;
       padding: .5rem 1rem;
       display: inline-block;
@@ -30,8 +39,13 @@
   }
   &__brand {
     @include span-columns(4);
-    @include omega(3n)
+    @include omega(3n);
+    border: 0;
+    border-bottom: 0 !important;
+    margin-bottom: .35rem;
     &__link {
+      border: 1px solid rgba(white, .25);
+      text-align: center;
       padding: 0 !important;
     }
     img {

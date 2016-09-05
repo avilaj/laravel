@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 export default class ProductController {
 
   constructor ($window, CartService) {
@@ -6,13 +8,19 @@ export default class ProductController {
     this.cart = CartService;
     this.store = $window.mkStore;
     this.qty = 1;
-
+    this.bought = [];
     this.store.references.map((ref)=> this.addStock(ref));
     this.reference = this.getAvailableReference();
   }
 
+  productAdded(reference) {
+    return _.includes(this.bought, this.reference.id);
+  }
+
   buy() {
-    return this.cart.update(this.reference.id, this.size.size_id, this.qty);
+    let reference_id = this.reference.id;
+    return this.cart.update(reference_id, this.size.size_id, this.qty)
+    .then( r => this.bought.push(reference_id))
   }
 
   getAvailableReference() {

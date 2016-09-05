@@ -2,7 +2,7 @@
     <span class="product-displayer__view">
     </span>
     <div class="product-displayer__thumbnails owl-carousel">
-      @if(isset($product->images))
+      @if(is_array($product->images))
       @foreach($product->images as $image)
         <div class="product-displayer__thumb item">
           <img

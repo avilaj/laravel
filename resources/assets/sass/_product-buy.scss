@@ -42,5 +42,12 @@
     width: 60%;
     cursor: pointer;
   }
+  &__bought {
+    background: white;
+    color: $dark;
+    display: block;
+    cursor: pointer;
+    width: 60%;
+  }
 
 }

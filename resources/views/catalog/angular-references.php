@@ -43,15 +43,17 @@
       <span class="product-buy__total" ng-show="p.qty > 1">
         / $ {{p.store.product.price * p.qty}}
       </span>
-      <button
+      <button ng-if="!p.productAdded(p.reference)"
       class="mk-btn mk-btn-buy product-buy__buy"
       id="product-add-to-cart"
       ng-disabled="!p.hasStock(p.reference) || p.addingProduct"
       ng-click="p.buy()">
-      <i class="fa fa-shopping-cart"></i>
-      {{ p.cart.updating ? 'Agregando...' : 'Comprar' }}
-    </button>
-
+        <i class="fa fa-shopping-cart"></i>
+        {{ p.cart.updating ? 'Agregando...' : 'Comprar' }}
+      </button>
+      <a ng-if="p.productAdded(p.reference)" class="mk-btn product-buy__bought" href="<?php echo route('cart.index') ?>">
+        <i class="fa fa-check"></i> Ver mi carrito
+      </a>
     </div>
   </div>
 </div>
