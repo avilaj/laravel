@@ -17,5 +17,5 @@ elixir(function(mix) {
       .browserify(['app.js'])
     	.version(['public/css/app.css', 'public/js/bundle.js']);
 
-    mix.browserify('admin/links-manager.js', 'public/admin/js/');
+    mix.browserify('admin/links-manager.js', 'public/js/admin/');
 });

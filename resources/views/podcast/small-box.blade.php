@@ -4,7 +4,7 @@
       <img src="/{{ $post->image->small }}" alt="{{ $post->title }}">
     </div>
     <div class="post-box__date">
-      {{ $post->created_at->toFormattedDateString() }}
+      {{ $post->created_at->formatLocalized('%d %B') }}
     </div>
     <div class="post-box__title">
       {{ $post->title }}
