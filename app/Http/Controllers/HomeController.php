@@ -47,14 +47,17 @@ class HomeController extends Controller
     public function stores()
     {
       $title = "locales";
+      $slideshow = \App\Model\Slideshow::find('default');
 
-      return view('pages.stores', compact("title"));
+      return view('pages.stores', compact("title", "slideshow"));
     }
 
     public function contact()
     {
       $title = "contactanos";
-      return view('pages.contact', compact("title"));
+      $slideshow = \App\Model\Slideshow::find('default');
+
+      return view('pages.contact', compact("title", "slideshow"));
     }
 
     public function contactSuccess()

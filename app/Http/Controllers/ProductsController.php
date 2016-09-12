@@ -12,7 +12,8 @@ class ProductsController extends Controller
   public function index (ProductFilters $query) {
     $title = 'productos';
     $products = Product::filter($query)->paginate(12);
-    $data = compact("filters", "products", "title");
+    $slideshow = \App\Model\Slideshow::find('default');
+    $data = compact("filters", "products", "title", "slideshow");
     return view('catalog.list', $data);
   }
 
@@ -28,7 +29,8 @@ class ProductsController extends Controller
     $title = $product->title;
     $title.= $product->brand? ', '.$product->brand->name : '';
     $title = strtolower($title);
-    $data = compact("product", "references", "stock", "title");
+    $slideshow = \App\Model\Slideshow::find('default');
+    $data = compact("product", "references", "stock", "title", "slideshow");
     return view('catalog.product', $data);
   }
 

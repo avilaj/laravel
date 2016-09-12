@@ -26,8 +26,10 @@ class NewsController extends Controller
     public function index()
     {
         $news = News::paginate(12);
+        $slideshow = \App\Model\Slideshow::find('default');
+
         $title = "novedades";
-        return view('news.index', compact("news", "title"));
+        return view('news.index', compact("news", "title", "slideshow"));
     }
 
     public function show($id) {
@@ -35,7 +37,8 @@ class NewsController extends Controller
       $recentPosts = News::recent()->take(4)->get();
       $relatedProducts = \App\Model\Product::recent()->take(4)->get();
       $title = "novedades - ".strtolower($post->title);
+      $slideshow = \App\Model\Slideshow::find('default');
 
-      return view('news.show', compact("post", "recentPosts", "relatedProducts", "title"));
+      return view('news.show', compact("post", "recentPosts", "relatedProducts", "title", "slideshow"));
     }
 }
