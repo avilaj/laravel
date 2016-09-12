@@ -31,7 +31,7 @@
         @foreach($brands as $brand)
         <li class="sidebar__brand">
             <a href="{{ $brand->url }}" class="sidebar__brand__link" title="{{$brand->name}}">
-              <img src="{{$brand->image}}" alt="{{$brand->name}}" />
+              <img src="{{$brand->image->small or ''}}" alt="{{$brand->name}}" />
             </a>
         </li>
         @endforeach

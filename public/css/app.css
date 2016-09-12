@@ -182,7 +182,9 @@ body {
   .home-brands {
     max-width: 70%;
     margin-left: auto;
-    margin-right: auto; }
+    margin-right: auto;
+    border-top: 1px solid #919191;
+    border-bottom: 1px solid #919191; }
     .home-brands::after {
       clear: both;
       content: "";
@@ -191,10 +193,15 @@ body {
       float: left;
       display: block;
       margin-right: 2.3576515979%;
-      width: 9.0154208018%; }
+      width: 9.0154208018%;
+      border-left: 1px solid #919191;
+      padding: .25rem; }
       .home-brands__item:last-child {
         margin-right: 0; }
+      .home-brands__item:first-child {
+        border-left: none; }
       .home-brands__item img {
+        line-height: 0;
         width: 100%;
         height: auto; }
   .home-section__title {

@@ -7,11 +7,17 @@
 
   &-brands {
     @include outer-container(70%);
-
+    border-top: 1px solid $light-gray;
+    border-bottom: 1px solid $light-gray;
     &__item {
       @include span-columns(12/9);
-
+      border-left: 1px solid $light-gray;
+      padding: .25rem;
+      &:first-child {
+        border-left: none;
+      }
       img {
+        line-height: 0;
         width: 100%;
         height: auto;
       }
