@@ -20,7 +20,7 @@
         <div class="home-brands__item">
           <a href="{{$brand->url}}">
             <img
-            src="{{ $brand->image }}"
+            src="{{ $brand->image->small or '' }}"
             alt="{{$brand->name}}">
           </a>
         </div>
