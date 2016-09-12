@@ -1,4 +1,6 @@
 .home {
+  position: relative;
+  z-index: 1;
   &-section {
     @include outer-container;
   }
@@ -41,9 +43,22 @@
 
   &-news {
     @include outer-container(70%);
+    margin-top: -3rem;
     margin-bottom: 2rem;
     background: rgba(black, 0.5);
     padding: 10px;
+    .post-box__description,
+    .post-box__title {
+      color: $gray;
+    }
+    .post-box__date {
+      display: none;
+    }
+    .owl-carousel {
+      background: white;
+      padding: .5rem;
+      color: $dark;
+    }
   }
 
   &-brands {

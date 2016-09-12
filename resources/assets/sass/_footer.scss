@@ -11,7 +11,8 @@
   }
 
   img {
-    max-width: 100%;
+    width: 100%;
+    max-width: 10rem;
     height: auto;
   }
 
@@ -43,5 +44,5 @@
   }
 }
 .footer-background {
-  background: #333;
+  @include linear-gradient(to top, rgba(white, 0), rgba(white, .15));
 }
