@@ -3,6 +3,13 @@
     <img src="/images/markshop.png" alt="Markshop">
   </a>
 </div>
+<div class="search-box">
+  <form class="" action="{{route('products.list')}}" method="get">
+    <input type="search" placeholder="Buscar" class="search-box__input" name="search">
+    <i class="fa fa-search search-box__icon"></i>
+  </form>
+</div>
+
 <header id="header">
     <nav class="topnav">
 

@@ -24,10 +24,8 @@
   }
   &__title {
     text-transform: uppercase;
-    font-weight: bolder;
     color: $white;
     margin: 0;
-    margin-bottom: .5rem;
     @include ellipsis;
   }
   &__description {

@@ -35,7 +35,7 @@ class User extends Model implements AuthenticatableContract,
      *
      * @var array
      */
-    protected $hidden = ['password', 'remember_token'];
+    protected $hidden = ['password', 'remember_token', 'is_admin'];
 
     public function currentCart() {
       $cart = $this->getCart();
@@ -59,6 +59,10 @@ class User extends Model implements AuthenticatableContract,
       $cart = Order::create($cart_data);
 
       return $cart;
+    }
+
+    public function isAdmin() {
+      return $this->is_admin;
     }
 
     public function orders() {

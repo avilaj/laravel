@@ -76,6 +76,16 @@ Route::post('add-stock/{product_id}', ['as' => 'admin.add-stock.save', function 
   return redirect('admin/stock');
 }]);
 
+Route::post('subscriptions.csv', ['as' => 'subscriptions.export', function (Request $request) {
+  // $labels = \Schema::getColumnListing('subscriptions');
+  Excel::create('suscripciones', function ($excel) {
+    $excel->sheet('emails', function ($sheet) {
+      $sub = \App\Model\Subscription::all();
+      $sheet->fromArray($sub);
+    });
+  })->download('xls');
+}]);
+
 Route::get('information', ['as' => 'admin.information', function () {
     $content = 'Define your information here.';
     return AdminSection::view($content, 'Information');

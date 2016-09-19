@@ -3,6 +3,10 @@ namespace App;
 use \Image;
 
 trait ImageResizable {
+  /**
+  * Adjusts the encode quality
+  **/
+  private $quality = 80;
 
   public function getAttributeValue ($key) {
     $value = parent::getAttributeValue($key);
@@ -76,6 +80,7 @@ trait ImageResizable {
       $img->reset();
       $modify($img);
       $mod_file = $filename_base.$name.$filename_extension;
+      $img->encode('jpg', $this->quality );
       $img->save($mod_file);
       $img->reset();
       $data[$name] = $mod_file;

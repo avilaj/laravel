@@ -57,6 +57,8 @@ return [
       ]
     ],
     (new Page(\App\Model\Slideshow::class))->setTitle('Slideshows'),
+    (new Page(\App\Model\User::class))->setTitle('Usuarios'),
+    (new Page(\App\Model\Subscription::class))->setTitle('Suscripciones'),
     [
       'title' => 'Sitio',
       'priority' => 5,
