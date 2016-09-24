@@ -22,17 +22,13 @@ AdminSection::registerModel(OrderItem::class, function (ModelConfiguration $mode
                 ->setModel(Order::class)
         ]);
         $display->setColumns([
-            AdminColumn::text('id')->setLabel('#'),
-            AdminColumn::custom()
-                ->setLabel("Referencia")
-                ->setCallback(function ($instance) {
-                    $link  = url("admin/references?id=".$instance->reference->id);
-                    $label = $instance->reference->reference;
-                    return '<a href="'.$link.'">'.$label.'</a>';
-                }),
+            AdminColumn::text('order_id')->setLabel('Orden'),
+            AdminColumn::text('product.title')->setLabel('Producto'),
+            AdminColumn::text('product.brand.name')->setLabel('Marca'),
+            AdminColumn::text('reference.color.name')->setLabel('color'),
+            AdminColumn::text('size.label')->setLabel('Talle'),
             AdminColumn::text('price')->setLabel('Precio'),
-            AdminColumn::text('qty')->setLabel('Cantidad'),
-            AdminColumn::datetime('created_at')->setLabel('Date')->setFormat('d.m.Y')->setWidth('150px')
+            AdminColumn::text('qty')->setLabel('Cantidad')
         ]);
         $display->with('reference');
         return $display;

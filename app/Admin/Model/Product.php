@@ -51,7 +51,6 @@ AdminSection::registerModel(Product::class, function (ModelConfiguration $model)
     $model->onCreateAndEdit(function($id = null) {
         $form = AdminForm::form()->setItems([
             AdminFormElement::text('title', 'Producto')->required(),
-            AdminFormElement::text('subtitle', 'Subtitulo')->required(),
             AdminFormElement::text('price', 'Precio')->required(),
             AdminFormElement::images('images_for_admin', 'Imágenes'),
             AdminFormElement::select('brand_id', 'Marca')

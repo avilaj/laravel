@@ -68,10 +68,10 @@ AdminSection::registerModel(Order::class, function (ModelConfiguration $model) {
                                       'PENDIENTE' => '0 - Pendiente',
                                       'REVISION' => '1 - En revisión',
                                       'RECHAZADO'=>'2 - Rechazado',
-                                      'CORRECTO'=>'3 - Correcto',
+                                      'PAGADO'=>'3 - Correcto',
                                     ])
                                     ->setDefaultValue('PENDIENTE'),
-            AdminFormElement::wysiwyg('details', 'Detalles', 'tinymce')
+            AdminFormElement::wysiwyg('details', 'Comentarios', 'tinymce')
         ]);
         $form->getButtons()
             ->setSaveButtonText('Guardar')

@@ -14,7 +14,6 @@ class OrderItem extends Model
                            'reference_id',
                            'qty',
                            'price',
-                           'status',
                            'created_at',
                            'updated_at'];
 

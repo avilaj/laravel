@@ -8,6 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
 
+  /**
+   *  PAYMENT STATUS
+   * ================
+   * 'PENDIENTE' => '0 - Pendiente',
+   * 'REVISION' => '1 - En revisión',
+   * 'RECHAZADO'=>'2 - Rechazado',
+   * 'PAGADO'=>'3 - Pagado',
+  **/
+
+    protected $PAID_STATE = 'PAGADO';
     protected $FILLING_STATE = null;
     protected $table = 'orders';
     protected $fillable = ['customer_id',
@@ -37,6 +47,11 @@ class Order extends Model
     public function isPaid() {
       $total_paid = $this->payments->sum('amount_paid');
       return $this->price <= $total_paid;
+    }
+
+    public function markAsPaid() {
+      $this->payment_status = $this->PAID_STATE;
+      $this->save();
     }
 
     public function scopeOnCheckout($query) {

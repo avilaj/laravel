@@ -31,7 +31,11 @@ class AccountController extends Controller
     }
 
     public function orders() {
-      $orders = $this->user->orders()->with('items', 'items.reference','items.size', 'items.product')->where('status','!=', 'filling')->get();
+      $orders = $this->user->orders()
+        ->with('items', 'items.reference','items.size', 'items.product')
+        ->where('status','!=', NULL)
+        ->recent()
+        ->get();
       $data = compact('orders');
       return view('account.orders', $data);
     }

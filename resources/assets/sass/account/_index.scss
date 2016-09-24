@@ -17,6 +17,10 @@
   &-list {
     @include pad;
     @include span-columns(7);
+    .order-box {
+      @include row;
+      margin-bottom: 2rem;
+    }
     .order-product {
       border-bottom: 1px solid $gray;
       &:last-child {

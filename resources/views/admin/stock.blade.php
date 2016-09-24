@@ -2,7 +2,7 @@
   <input type="hidden" name="_token" value="{{ csrf_token() }}">
   <div class="form-group">
     <label for="reference_id" class="control-label">
-      Modelo <span class="text-danger">*</span>
+      Color <span class="text-danger">*</span>
     </label>
     <select id="reference_id"
     class="form-control input-select" name="reference_id">

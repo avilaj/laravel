@@ -2,17 +2,16 @@
   .order-product {
     padding: .5rem;
   }
-  &__price,
-  &__date,
   &__status {
     @include span-columns(12);
     padding: .5rem;
     background: rgba(black, .5);
+    > .item {
+      @include span-columns(6);
+      @include omega(2n);
+    }
   }
-  &__shipment,
-  &__payment {
-    @include span-columns(6);
-  }
+
   &__products {
     @include span-columns(12);
     background: rgba($gray, .5);

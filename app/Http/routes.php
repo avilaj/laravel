@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -96,3 +97,8 @@ Route::get('contacto', ['uses' => 'HomeController@contact', 'as' => 'pages.conta
 Route::get('contacto-realizado', ['uses' => 'HomeController@contactSuccess', 'as' => 'pages.contact-success']);
 Route::post('contacto', ['uses' => 'HomeController@saveContact', 'as' => 'pages.contact-save']);
 Route::get('nosotros', ['uses' => 'HomeController@about', 'as' => 'pages.about']);
+
+Route::post('/gateway/test', function (Request $request) {
+  $data = $request->all();
+  return \App\Model\Payment::create($data);
+});

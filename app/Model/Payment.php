@@ -2,9 +2,15 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Observers\PaymentObserver;
 
 class Payment extends Model
 {
+  public static function boot() {
+    parent::boot();
+
+    Payment::observe( new PaymentObserver() );
+  }
   protected $table = "payments";
 
   protected $fillable = [
