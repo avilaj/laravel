@@ -9,6 +9,16 @@ class Order extends Model
 {
 
   /**
+  * SHIPMENT STATUS
+  * ================
+  * 'FILLING' => '0 - En checkout',
+  * 'PROCESANDO'=>'1 - Procesando',
+  * 'EMPACANDO'=>'2 - Empacando',
+  * 'ENVIADO'=>'3 - Enviado',
+  * 'ENTREGADO'=>'4 - Entregado'
+  **/
+
+  /**
    *  PAYMENT STATUS
    * ================
    * 'PENDIENTE' => '0 - Pendiente',
@@ -82,6 +92,10 @@ class Order extends Model
       return $this->status == $this->FILLING_STATE;
     }
 
+    public function processShipment() {
+      $this->status = 'PROCESANDO';
+      $this->save();
+    }
     public function markAsFilling() {
       $this->status = $this->FILLING_STATE;
       $this->save();
