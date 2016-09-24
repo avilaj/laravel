@@ -1,4 +1,8 @@
+import Account from './account/account';
+
 $(document).ready( ()=> {
+  Account.init();
+
   let Slider = (selector, responsive) => {
     let element = $(selector);
     element.owlCarousel({
@@ -51,7 +55,6 @@ $(document).ready( ()=> {
   });
   $('.product-displayer__thumbnails img').first().trigger('click');
 });
-
 
 
 import newsletter from './newsletter/newsletter.module';

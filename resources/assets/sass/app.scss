@@ -11,10 +11,14 @@ body {
   padding: 0;
   margin: 0;
 }
+.owl-carousel {
+  z-index: auto;
+}
 body {
   background: #000 url('/images/woods.jpg') repeat-y;
   background-size: 100%;
   font-family: 'Montserrat', sans-serif;
+  font-size: .75rem;
 }
 .mk-page-form {
   @include outer-container;
@@ -166,8 +170,9 @@ body {
 @import 'footer';
 @import 'catalog';
 @import 'checkout';
+@import 'spinner';
+@import 'search-box';
 @import 'news/index';
 @import 'products/index';
-@import 'spinner';
 @import 'pages/index';
-@import 'search-box';
+@import 'account/index';

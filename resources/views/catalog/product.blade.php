@@ -33,9 +33,9 @@
         @if($product->relatedProducts())
         <div class="mk-product-page__related-products">
           <h3>Productos relacionados</h3>
-          @foreach($product->relatedProducts() as $related)
-            @include('products.small-box')
-          @endforeach
+          <div class="mk-product-page__related-products-list">
+            @each('products.small-box', $product->relatedProducts(), 'product')
+          </div>
         </div>
         @endif
     </div>

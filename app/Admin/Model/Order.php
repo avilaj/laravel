@@ -24,9 +24,10 @@ AdminSection::registerModel(Order::class, function (ModelConfiguration $model) {
         $display->setColumns([
             AdminColumn::text('id')->setLabel('#'),
             AdminColumn::text('price')->setLabel('Total'),
-            AdminColumn::text('status')->setLabel('Estado'),
+            AdminColumn::text('status')->setLabel('Estado de Envío'),
+            AdminColumn::text('payment_status')->setLabel('Estado de Pago'),
             AdminColumn::custom()
-                ->setLabel("Comprador")
+                ->setLabel("Productos")
                 ->setCallback(function ($instance) {
                     $link  = url("admin/order_items?order_id=".$instance->id);
                     return '<a href="'.$link.'">Ver detalle</a>';
@@ -54,7 +55,7 @@ AdminSection::registerModel(Order::class, function (ModelConfiguration $model) {
     $model->onCreateAndEdit(function() {
         $form = AdminForm::form()->setItems([
 
-            AdminFormElement::select('status', 'Estado')
+            AdminFormElement::select('status', 'Estado del envio')
                                     ->setOptions([
                                       'FILLING' => '0 - En checkout',
                                       'PROCESANDO'=>'1 - Procesando',
@@ -62,7 +63,15 @@ AdminSection::registerModel(Order::class, function (ModelConfiguration $model) {
                                       'ENVIADO'=>'3 - Enviado',
                                       'ENTREGADO'=>'4 - Entregado'])
                                     ->setDefaultValue('PROCESANDO'),
-            AdminFormElement::wysiwyg('description', 'Descripción', 'tinymce')
+            AdminFormElement::select('payment_status', 'Estado del pago')
+                                    ->setOptions([
+                                      'PENDIENTE' => '0 - Pendiente',
+                                      'REVISION' => '1 - En revisión',
+                                      'RECHAZADO'=>'2 - Rechazado',
+                                      'CORRECTO'=>'3 - Correcto',
+                                    ])
+                                    ->setDefaultValue('PENDIENTE'),
+            AdminFormElement::wysiwyg('details', 'Detalles', 'tinymce')
         ]);
         $form->getButtons()
             ->setSaveButtonText('Guardar')

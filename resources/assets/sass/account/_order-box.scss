@@ -1,0 +1,25 @@
+.order-box {
+  .order-product {
+    padding: .5rem;
+  }
+  &__price,
+  &__date,
+  &__status {
+    @include span-columns(12);
+    padding: .5rem;
+    background: rgba(black, .5);
+  }
+  &__shipment,
+  &__payment {
+    @include span-columns(6);
+  }
+  &__products {
+    @include span-columns(12);
+    background: rgba($gray, .5);
+  }
+
+  &__price {
+    text-align: right;
+    font-size: 1rem;
+  }
+}

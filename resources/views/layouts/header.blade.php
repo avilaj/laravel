@@ -66,9 +66,8 @@
           </li>
             @if(Auth::check())
               <li class="topnav__item">
-                <a href="/logout" class="topnav__account__link">
-                  Cerrar sesión
-                </a>
+                <span id="account-menu">Mi cuenta</span>
+                @include('account.menu')
               </li>
             @else
               <li class="topnav__item">

@@ -76,6 +76,16 @@ Route::post('subscriptions', [
   'uses' => 'SubscriptionsController@subscribe'
 ]);
 
+Route::get('account/config', [
+  'as' => 'account.config',
+  'uses' => 'AccountController@config'
+]);
+
+Route::get('account/orders', [
+  'as' => 'account.orders',
+  'uses' => 'AccountController@orders'
+]);
+
 View::composer('partials.categories', 'App\Composers\SidebarComposer');
 
 Route::auth();

@@ -20,7 +20,7 @@
           <div class="checkout-page__product">
             <div class="checkout-page__product__image">
               <img
-              ng-src="{{ $item->product->thumbnail }}"
+              ng-src="{{ $item->product->thumbnail->small or '' }}"
               alt="{{ $item->product->title}} image" />
             </div>
             <div class="checkout-page__product__info">

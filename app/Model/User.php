@@ -54,8 +54,10 @@ class User extends Model implements AuthenticatableContract,
     public function setCart() {
       $cart_data = [
         'customer_id' => $this->id,
-        'status' => 'filling'
+        'payment_status' => null,
+        'status' => null
       ];
+
       $cart = Order::create($cart_data);
 
       return $cart;

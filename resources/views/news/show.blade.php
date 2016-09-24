@@ -28,14 +28,18 @@
   @if($recentPosts)
   <div class="post-display__recent-posts">
     <h3 class="post-display__section-title">Posteos recientes</h3>
-    @each('news.small-box', $recentPosts, 'post')
+    <div class="post-display__list">
+      @each('news.small-box', $recentPosts, 'post')
+    </div>
   </div>
   @endif
 
   @if($relatedProducts)
   <div class="post-display__related-products">
     <h3 class="post-display__section-title">Productos recientes </h3>
-    @each('products.small-box', $relatedProducts, 'product')
+    <div class="post-display__list">
+      @each('products.small-box', $relatedProducts, 'product')
+    </div>
   </div>
   @endif
 

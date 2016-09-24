@@ -1,0 +1,15 @@
+.order-product {
+  @include span-columns(12);
+  &__image {
+    @include span-columns(2);
+    img {
+      max-width: 50px;
+      display: inline-block;
+    }
+  }
+
+  &__description {
+    @include span-columns(7);
+  }
+
+}

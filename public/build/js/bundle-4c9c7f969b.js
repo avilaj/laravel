@@ -16738,6 +16738,66 @@
 },{}],2:[function(require,module,exports){
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _headerMenu = require('./header-menu');
+
+var _headerMenu2 = _interopRequireDefault(_headerMenu);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Account = function Account() {
+
+  var init = function init() {
+    _headerMenu2.default.init();
+  };
+
+  return {
+    init: init
+  };
+};
+
+exports.default = new Account();
+
+},{"./header-menu":3}],3:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+// import tether from 'tether';
+
+var HeaderMenu = function HeaderMenu() {
+
+  var init = function init() {
+    var target = document.getElementById('account-menu');
+    if (!target) return;
+    var dropInstance = new Drop({
+      target: target,
+      content: document.querySelector('.account-menu'),
+      classes: '',
+      position: 'bottom right',
+      openOn: 'click'
+    });
+    return dropInstance;
+  };
+
+  return {
+    init: init
+  };
+};
+
+exports.default = new HeaderMenu();
+
+},{}],4:[function(require,module,exports){
+'use strict';
+
+var _account = require('./account/account');
+
+var _account2 = _interopRequireDefault(_account);
+
 var _newsletter = require('./newsletter/newsletter.module');
 
 var _newsletter2 = _interopRequireDefault(_newsletter);
@@ -16757,6 +16817,8 @@ var _cart4 = _interopRequireDefault(_cart3);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 $(document).ready(function () {
+  _account2.default.init();
+
   var Slider = function Slider(selector, responsive) {
     var element = $(selector);
     element.owlCarousel({
@@ -16828,7 +16890,7 @@ angular.bootstrap(document.querySelector('body'), ['cart']);
 
 // angular.bootstrap(document.getElementById('filtering'), ['filtering']);
 
-},{"./cart/cart.controller":3,"./cart/cart.service":4,"./newsletter/newsletter.module":5,"./product/product.controller":7}],3:[function(require,module,exports){
+},{"./account/account":2,"./cart/cart.controller":5,"./cart/cart.service":6,"./newsletter/newsletter.module":7,"./product/product.controller":9}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -16880,7 +16942,7 @@ var CartController = function () {
 
 exports.default = CartController;
 
-},{}],4:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -16955,7 +17017,7 @@ var CartService = function () {
 
 exports.default = CartService;
 
-},{}],5:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -16975,7 +17037,7 @@ exports.default = angular.module('newsletter', []).controller("SubscribeControll
   controller: 'SubscribeController'
 }).name;
 
-},{"./subscribe.controller":6}],6:[function(require,module,exports){
+},{"./subscribe.controller":8}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -17025,7 +17087,7 @@ var SubscribeController = function () {
 
 exports.default = SubscribeController;
 
-},{}],7:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -17118,6 +17180,6 @@ var ProductController = function () {
 
 exports.default = ProductController;
 
-},{"lodash":1}]},{},[2]);
+},{"lodash":1}]},{},[4]);
 
 //# sourceMappingURL=bundle.js.map

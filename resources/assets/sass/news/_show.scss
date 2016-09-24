@@ -28,7 +28,7 @@
     @include span-columns(12);
     .product-box {
       @include span-columns(3);
-      @include omega(4n);
+      @include omega(3n+1);
     }
   }
   &__date {

@@ -8,12 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
 
-    protected $FILLING_STATE = 'FILLING';
+    protected $FILLING_STATE = null;
     protected $table = 'orders';
     protected $fillable = ['customer_id',
                            'details',
                            'status',
                            'price',
+                           'payment_status',
                            'created_at',
                            'updated_at'];
 
@@ -31,6 +32,11 @@ class Order extends Model
 
     public function payments() {
       return $this->hasMany("App\Model\Payment");
+    }
+
+    public function isPaid() {
+      $total_paid = $this->payments->sum('amount_paid');
+      return $this->price <= $total_paid;
     }
 
     public function scopeOnCheckout($query) {

@@ -1,0 +1,27 @@
+@import 'header-menu';
+@import "order-box";
+@import "order-product";
+
+.mk-account-orders {
+  @include outer-container;
+  margin: 2rem auto;
+  background: rgba($dark, .7);
+  color: white;
+  h2 {
+    background: rgba($gray, .5);
+    @include pad;
+  }
+  a {
+    color: $red;
+  }
+  &-list {
+    @include pad;
+    @include span-columns(7);
+    .order-product {
+      border-bottom: 1px solid $gray;
+      &:last-child {
+        border: 0;
+      }
+    }
+  }
+}

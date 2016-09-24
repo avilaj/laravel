@@ -3,6 +3,7 @@
 
 .mk-news {
   @include outer-container;
+  margin-top: 2rem;
   margin-bottom: 7rem;
   .post-box {
     @include span-columns(3);
