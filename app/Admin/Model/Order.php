@@ -57,7 +57,7 @@ AdminSection::registerModel(Order::class, function (ModelConfiguration $model) {
 
             AdminFormElement::select('status', 'Estado del envio')
                                     ->setOptions([
-                                      'FILLING' => '0 - En checkout',
+                                      NULL => '0 - En checkout',
                                       'PROCESANDO'=>'1 - Procesando',
                                       'EMPACANDO'=>'2 - Empacando',
                                       'ENVIADO'=>'3 - Enviado',
@@ -65,10 +65,11 @@ AdminSection::registerModel(Order::class, function (ModelConfiguration $model) {
                                     ->setDefaultValue('PROCESANDO'),
             AdminFormElement::select('payment_status', 'Estado del pago')
                                     ->setOptions([
-                                      'PENDIENTE' => '0 - Pendiente',
-                                      'REVISION' => '1 - En revisión',
-                                      'RECHAZADO'=>'2 - Rechazado',
-                                      'PAGADO'=>'3 - Correcto',
+                                      NULL => '0 - En checkout',
+                                      'PENDIENTE' => '1 - Pendiente',
+                                      'REVISION' => '2 - En revisión',
+                                      'RECHAZADO'=>'3 - Rechazado',
+                                      'PAGADO'=>'4 - Correcto',
                                     ])
                                     ->setDefaultValue('PENDIENTE'),
             AdminFormElement::wysiwyg('details', 'Comentarios', 'tinymce')
