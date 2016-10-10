@@ -61,7 +61,7 @@
       </span>
       <br>
       <br>
-      <a href="<?php echo route('cart.pay') ?>" class="mk-btn mk-btn--primary mk-full-width">Completar compra</a>
+      <a href="<?php echo route('cart.shipping') ?>" class="mk-btn mk-btn--primary mk-full-width">Siguiente</a>
     </div>
   </div>
 </div>

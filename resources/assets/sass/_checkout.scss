@@ -4,6 +4,12 @@
   @include pad;
   margin-bottom: 7rem;
   min-height: 300px;
+  &__shipping {
+    font-size: 1rem;
+  }
+  &__shipping-cost {
+    font-size: 1.5rem;
+  }
   &__nice-message {
     font-weight: normal;
     font-size: 1.5rem;

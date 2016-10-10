@@ -25,6 +25,7 @@ return [
             (new Page(\App\Model\Order::class))->setTitle('Ordenes de compra'),
             (new Page(\App\Model\Product::class))->setTitle('Productos'),
             (new Page(\App\Model\Reference::class))->setTitle('Modelos'),
+            (new Page(\App\Model\ShippingArea::class))->setTitle('Areas de entrega'),
         ]
     ],
     [

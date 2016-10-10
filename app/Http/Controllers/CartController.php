@@ -40,15 +40,34 @@ class CartController extends Controller
 
   public function shipping () {
     $title = "mi carro - envío";
-    return view('cart.shipping', compact("title"));
+    $data = array_only($this->cart->toArray(), ['address', 'postal', 'city', 'shipping_area_id']);
+    $data['shipping_areas'] = \App\Model\ShippingArea::all();
+    return view('checkout.shipping', $data);
+  }
+
+  public function shipping_save (Request $request) {
+    $data = $request->all();
+
+    $this->cart->address = $data['address'];
+    $this->cart->postal = $data['postal'];
+    $this->cart->city = $data['city'];
+    $this->cart->shipping_area_id = $data['shipping_area_id'];
+
+    if ($this->cart->save()) {
+      return redirect()->route('cart.pay');
+    } else {
+      return redirect()->route('cart.shipping')->with('error', 'No se pudo configurar su envio.');
+    }
   }
 
   public function pay () {
     $items = $this->cart->items()->with('reference.color', 'size', 'product')->get();
-    $total = $this->cart->price;
+    $shipping = $this->cart->shippingarea;
+    $total = $this->cart->price + $this->cart->shippingarea->price;
     $payment_link = $this->cart->CreatePayment();
+
     $title = "my carro - pago";
-    return view('checkout.proceed', compact('items', 'total', 'payment_link', 'title'));
+    return view('checkout.proceed', compact('items', 'total', 'payment_link', 'title', 'shipping'));
   }
 
   public function update(Request $request) {

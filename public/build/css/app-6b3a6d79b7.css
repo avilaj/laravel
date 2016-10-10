@@ -650,6 +650,10 @@ body {
     clear: both;
     content: "";
     display: table; }
+  .checkout-page__shipping {
+    font-size: 1rem; }
+  .checkout-page__shipping-cost {
+    font-size: 1.5rem; }
   .checkout-page__nice-message {
     font-weight: normal;
     font-size: 1.5rem;

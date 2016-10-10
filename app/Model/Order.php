@@ -36,10 +36,19 @@ class Order extends Model
                            'price',
                            'payment_status',
                            'created_at',
+                           'city',
+                           'state',
+                           'postal',
+                           'address',
+                           'shipping_area_id',
                            'updated_at'];
 
     public function user() {
         return $this->belongsTo('App\Model\User', 'customer_id');
+    }
+
+    public function shippingarea() {
+        return $this->belongsTo('App\Model\ShippingArea', 'shipping_area_id');
     }
 
     public function items() {
@@ -77,8 +86,14 @@ class Order extends Model
                               'reference_id');
     }
 
-    public function updatePrice() {
+    public function updatePrice()
+    {
       $total = $this->items()->sum(\DB::raw('price*qty'));
+
+      if ($this->shippingarea) {
+        $total += $this->shippingarea->price;
+      }
+
       $this->price = $total;
       $this->save();
     }
@@ -108,9 +123,8 @@ class Order extends Model
 
 
     public function CreatePayment() {
-      $products = [];
-      foreach($this->items as $item) {
-        $products[] = [
+      $products = $this->items->map(function ($item) {
+        return [
           'id' => $item->id,
           'title' => $item->product->title,
           'picture_url' => $item->product->thumbnail,
@@ -119,7 +133,15 @@ class Order extends Model
           'quantity' => $item->qty,
           'unit_price' => $item->price
         ];
-      }
+      });
+      $shipping = $this->shippingarea;
+
+      $products[] = [
+        'id' => $shipping->id,
+        'title' => 'Envío: '.$shipping->name,
+        'quantity' => 1,
+        'unit_price' => $shipping->price
+      ];
 
       $mp = new \MP(config('mercadopago.client'), config('mercadopago.secret'));
       $mp->sandbox_mode(FALSE);
@@ -136,6 +158,7 @@ class Order extends Model
           "error" => route('cart.payment-status'),
         ]
       ]);
+
       return $reference['response']['init_point'];
     }
 }
