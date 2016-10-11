@@ -55,7 +55,6 @@ AdminSection::registerModel(Order::class, function (ModelConfiguration $model) {
     // Create And Edit
     $model->onCreateAndEdit(function() {
         $form = AdminForm::form()->setItems([
-
             AdminFormElement::select('status', 'Estado del envio')
                                     ->setOptions([
                                       NULL => '0 - En checkout',
@@ -64,6 +63,13 @@ AdminSection::registerModel(Order::class, function (ModelConfiguration $model) {
                                       'ENVIADO'=>'3 - Enviado',
                                       'ENTREGADO'=>'4 - Entregado'])
                                     ->setDefaultValue('PROCESANDO'),
+            AdminFormElement::text('address', 'Dirección'),
+            AdminFormElement::text('postal', 'Código postal'),
+            AdminFormElement::text('city', 'Ciudad'),
+            AdminFormElement::select('shipping_area_id', 'Area de envio')
+                                    ->setModelForOptions('App\Model\ShippingArea')
+                                    ->setDisplay('name')
+                                    ->setDefaultValue(Request::input('shipping_area_id')),
             AdminFormElement::select('payment_status', 'Estado del pago')
                                     ->setOptions([
                                       NULL => '0 - En checkout',

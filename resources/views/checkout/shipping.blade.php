@@ -1,7 +1,8 @@
 @extends('layouts.app')
 @section('content')
 <div class="checkout-page">
-  <form class="" action="{{ route('cart.shipping.save') }}" method="post">
+  <h2>Configuración de envío (paso 2 de 3)</h2>
+  <form class="shipping-form" action="{{ route('cart.shipping.save') }}" method="post">
     {{ csrf_field() }}
     <input type="text" name="address" value="{{$address or ''}}" placeholder="Dirección">
     <input type="text" name="postal" value="{{$postal or ''}}" placeholder="Código postal">
@@ -24,7 +25,7 @@
       @endforeach
       @endif
     </select>
-    <button type="submit" name="button">Siguiente</button>
+    <button type="submit" class="mk-btn mk-btn--primary mk-full-width" name="button">Siguiente</button>
   </form>
 </div>
 @endsection

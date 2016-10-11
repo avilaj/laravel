@@ -721,6 +721,15 @@ body {
       .checkout-page__product__properties strong {
         text-transform: capitalize; }
 
+.shipping-form button,
+.shipping-form input,
+.shipping-form select {
+  width: 100%;
+  max-width: 370px;
+  display: block;
+  padding: .5rem 1rem;
+  margin-bottom: .5rem; }
+
 .spinner {
   width: 40px;
   height: 40px;

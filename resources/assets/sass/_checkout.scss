@@ -73,3 +73,15 @@
     }
   }
 }
+
+.shipping-form {
+  button,
+  input,
+  select {
+    width: 100%;
+    max-width: 370px;
+    display: block;
+    padding: .5rem 1rem;
+    margin-bottom: .5rem;
+  }
+}

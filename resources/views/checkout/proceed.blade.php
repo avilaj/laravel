@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div class="checkout-page">
+  <h2>Finalizar compra (paso 3 de 3)</h2>
   <table class="checkout-page__summary">
     <colgroup>
       <col class="checkout-page__summary__product"></col>
@@ -52,7 +53,7 @@
     </span>
     <br>
     <br>
-    <a href="{!! $payment_link !!}" class="mk-btn mk-btn--primary mk-full-width" name="MP-Checkout" mp-mode="redirect">Pagar</a>
+    <a href="{!! $payment_link !!}" class="mk-btn mk-btn--primary mk-full-width" name="MP-Checkout" mp-mode="redirect">Seleccionar medio de pago</a>
   </div>
 
 </div>

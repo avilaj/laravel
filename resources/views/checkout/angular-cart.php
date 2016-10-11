@@ -61,7 +61,7 @@
       </span>
       <br>
       <br>
-      <a href="<?php echo route('cart.shipping') ?>" class="mk-btn mk-btn--primary mk-full-width">Siguiente</a>
+      <a href="<?php echo route('cart.shipping') ?>" class="mk-btn mk-btn--primary mk-full-width">Ir a configuración de envío</a>
     </div>
   </div>
 </div>
