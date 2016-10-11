@@ -14,7 +14,7 @@ AdminSection::registerModel(Order::class, function (ModelConfiguration $model) {
     $model->setAlias('orders');
     $model->onDisplay(function () {
         $display = AdminDisplay::datatables();
-        $display->with('user');
+        $display->with('user', 'shippingarea');
         $display->setApply(function($query) {
             $query->orderBy('created_at', 'desc');
         });
@@ -26,6 +26,7 @@ AdminSection::registerModel(Order::class, function (ModelConfiguration $model) {
             AdminColumn::text('price')->setLabel('Total'),
             AdminColumn::text('status')->setLabel('Estado de Envío'),
             AdminColumn::text('payment_status')->setLabel('Estado de Pago'),
+            AdminColumn::text('shippingarea.name')->setLabel('Area de entrega'),
             AdminColumn::custom()
                 ->setLabel("Productos")
                 ->setCallback(function ($instance) {
