@@ -5,10 +5,11 @@
     </h3>
     <p>
       Llénalo con algunos de
-      <a href="<?php route('products.list') ?>">nuestros productos</a>.
+      <a ng-href="<?php echo route('products.list') ?>">nuestros productos</a>.
     </p>
   </div>
   <div ng-if="cart.items().length">
+    <h2>Mi orden actual (paso 1 de 3)</h2>
     <table class="checkout-page__summary">
       <colgroup>
         <col class="checkout-page__summary__product"></col>
