@@ -20,7 +20,7 @@ class SidebarComposer
       'filters' => $this->filters->getAll(),
       'prices' => $this->prices->getAll(),
       'categories' => Category::all(),
-      'brands' => Brand::all()
+      'brands' => Brand::all()->orderBy('name', 'ASC')
     ]);
   }
 }

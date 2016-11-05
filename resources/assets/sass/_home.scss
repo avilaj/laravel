@@ -1,6 +1,11 @@
 .home {
   position: relative;
   z-index: 1;
+  .owl-item {
+    img {
+      text-align: center;
+    }
+  }
   &-section {
     @include outer-container;
   }
@@ -9,13 +14,15 @@
     @include outer-container(70%);
     border-top: 1px solid $light-gray;
     border-bottom: 1px solid $light-gray;
-    &__item {
-      @include span-columns(12/9);
+    .owl-item:nth-of-type(2n+1) .home-brands__item {
       border-left: 1px solid $light-gray;
+      border-right: 1px solid $light-gray;
+
+    }
+
+    &__item {
       padding: .25rem;
-      &:first-child {
-        border-left: none;
-      }
+      flex: 1;
       img {
         line-height: 0;
         width: 100%;
@@ -59,6 +66,10 @@
     }
     .post-box__date {
       display: none;
+    }
+    .owl-item {
+      padding: 0 5px;
+      box-sizing: border-box;
     }
     .owl-carousel {
       background: white;

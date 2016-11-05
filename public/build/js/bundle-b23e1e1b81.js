@@ -16822,7 +16822,7 @@ $(document).ready(function () {
   var Slider = function Slider(selector, responsive) {
     var element = $(selector);
     element.owlCarousel({
-      margin: 10,
+      margin: 0,
       nav: true,
       navClass: ['owl-prev fa fa-angle-left', 'owl-next fa fa-angle-right'],
       navText: false,
@@ -16834,6 +16834,12 @@ $(document).ready(function () {
   Slider("#news-slider", {
     0: { items: 2 },
     1000: { items: 4 }
+  });
+
+  Slider("#home-brand-slider", {
+    0: { items: 3 },
+    600: { items: 6 },
+    1000: { items: 9 }
   });
 
   Slider(".home-product-slider", {

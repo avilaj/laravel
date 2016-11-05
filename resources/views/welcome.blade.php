@@ -16,15 +16,17 @@
   @endif
 
     <section class="home-section home-brands">
-      @foreach($brands as $brand)
-        <div class="home-brands__item">
+      <div id="home-brand-slider" class="owl-carousel">
+        @foreach($brands as $brand)
+        <div class="home-brands__item item">
           <a href="{{$brand->url}}">
             <img
-            src="{{ $brand->image->small or '' }}"
+            src="/{{ $brand->image->small or '' }}"
             alt="{{$brand->name}}">
           </a>
         </div>
-      @endforeach
+        @endforeach
+      </div>
     </section>
     <section class="home-section home-products">
         <h3 class="home-section__title"><span>Productos destacados</span></h3>

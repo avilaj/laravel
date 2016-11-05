@@ -6,7 +6,7 @@ $(document).ready( ()=> {
   let Slider = (selector, responsive) => {
     let element = $(selector);
     element.owlCarousel({
-      margin: 10,
+      margin: 0,
       nav: true,
       navClass: ['owl-prev fa fa-angle-left', 'owl-next fa fa-angle-right'],
       navText: false,
@@ -19,6 +19,12 @@ $(document).ready( ()=> {
     0:{items: 2},
     1000: {items: 4}
   });
+
+  Slider("#home-brand-slider", {
+    0: {items: 3},
+    600: { items: 6},
+    1000: { items: 9}
+  })
 
   Slider(".home-product-slider", {
     0: { items: 1 },
