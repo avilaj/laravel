@@ -8,6 +8,7 @@ class Color extends Model
 {
 
     protected $table = 'colors';
+    public $timestamps = false;
     protected $fillable = ['name',
                            'hex',
                            'created_at',
