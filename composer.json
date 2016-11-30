@@ -12,7 +12,8 @@
         "mercadopago/sdk": "0.5.2",
         "intervention/image": "^2.3",
         "laravel/socialite": "^2.0",
-        "maatwebsite/excel": "^2.1"
+        "maatwebsite/excel": "^2.1",
+        "baum/baum": "^1.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

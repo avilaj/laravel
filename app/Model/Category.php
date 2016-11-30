@@ -4,15 +4,17 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 use SleepingOwl\Admin\Traits\OrderableModel;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Baum\Node;
 
-class Category extends Model
+class Category extends node
 {
     use OrderableModel;
     use Sluggable;
 
 
     protected $table = 'categories';
-    protected $fillable = ['name', 'banner','order', 'description', 'slug'];
+    protected $fillable = ['name', 'slug'];
+    protected $orderColumn = 'name';
     public $timestamps = false;
 
     public function sluggable () {

@@ -543,9 +543,7 @@ body {
       display: table; }
   .sidebar li {
     text-transform: uppercase;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.25); }
-    .sidebar li:last-child {
-      border-bottom: 0; }
+    border-top: 1px solid rgba(255, 255, 255, 0.25); }
     .sidebar li a {
       color: #919191;
       text-decoration: none;
@@ -577,6 +575,8 @@ body {
     .sidebar__brand img {
       width: 100%;
       height: auto; }
+  .sidebar_categories ul li {
+    padding-left: 20px; }
 
 .mk-catalog {
   max-width: 1200px;

@@ -19,8 +19,8 @@ class SidebarComposer
     $view->with([
       'filters' => $this->filters->getAll(),
       'prices' => $this->prices->getAll(),
-      'categories' => Category::all(),
-      'brands' => Brand::all()->orderBy('name', 'ASC')
+      'categories' => Category::all()->toHierarchy(),
+      'brands' => Brand::orderBy('name', 'ASC')->get(),
     ]);
   }
 }

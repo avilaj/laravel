@@ -19,10 +19,7 @@
   }
   li {
     text-transform: uppercase;
-    border-bottom: 1px solid rgba(white, 0.25);
-    &:last-child {
-      border-bottom: 0;
-    }
+    border-top: 1px solid rgba(white, 0.25);
     a {
       color: $light-gray;
       &:hover {
@@ -51,6 +48,11 @@
     img {
       width: 100%;
       height: auto;
+    }
+  }
+  &_categories {
+    ul li{
+      padding-left: 20px;
     }
   }
 }

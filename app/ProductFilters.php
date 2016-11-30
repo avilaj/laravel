@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Builder;
+use App\Model\Category;
 
 class ProductFilters extends QueryFilters
 {
@@ -11,7 +12,9 @@ class ProductFilters extends QueryFilters
   }
 
   public function category($id) {
-    return $this->builder->ofCategory($id);
+    $category = Category::find($id)->getDescendantsAndSelf();
+    $ids = $category->pluck('id');
+    return $this->builder->whereIn('id', $ids);
   }
 
   public function price($priceRange) {

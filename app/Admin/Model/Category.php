@@ -11,25 +11,13 @@ AdminSection::registerModel(Category::class, function (ModelConfiguration $model
     $model->setTitle("Categorías");
     $model->setAlias('categories');
     $model->onDisplay(function () {
-        $display = AdminDisplay::table();
-        $display->setApply(function($query) {
-            $query->orderBy('order', 'asc');
-        });
-        $display->setColumns([
-            AdminColumn::text('id')->setLabel('#')->setWidth('50px'),
-            AdminColumn::text('name')->setLabel('Categoría'),
-            AdminColumn::order()->setLabel('Orden'),
-        ]);
-        $display->paginate(15);
-        return $display;
+        return AdminDisplay::tree()->setValue('name');
     });
 
     // Create And Edit
     $model->onCreateAndEdit(function($id = null) {
         $form = AdminForm::form()->setItems([
-            AdminFormElement::text('name', 'Nombre')->required(),
-            AdminFormElement::image('banner', 'Banner')->required(),
-            AdminFormElement::textarea('description', 'Descripción')
+            AdminFormElement::text('name', 'Nombre')->required()
         ]);
         $form->getButtons()
             ->setSaveButtonText('Guardar')

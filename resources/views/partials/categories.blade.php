@@ -14,15 +14,8 @@
   @endif
     @if (isset($categories))
     <h3 class="sidebar__subtitle">Categorías</h3>
-    <ul>
-        @foreach($categories as $category)
-        <li>
-            <a href="{{ $category->url }}"
-               title="{{$category->name}}">
-               {{$category->name}}
-            </a>
-        </li>
-        @endforeach
+    <ul class="sidebar_categories">
+        @each('partials.category-tree', $categories, 'category')
     </ul>
     @endif
     @if (isset($brands))
